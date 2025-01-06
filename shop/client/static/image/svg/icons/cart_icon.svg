@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="cartIcon"
+   class="right openCart"
+   viewBox="0 0 20 20"
+   version="1.1"
+   sodipodi:docname="cart_icon.svg"
+   width="20"
+   height="20"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9046" />
+  <sodipodi:namedview
+     id="namedview9044"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="18.416667"
+     inkscape:cx="12"
+     inkscape:cy="12.081448"
+     inkscape:window-width="1280"
+     inkscape:window-height="607"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="cartIcon" />
+  <path
+     d="m 6.3051709,15.086696 c -0.9726148,0 -1.7595485,0.777889 -1.7595485,1.728645 0,0.950755 0.7869337,1.728646 1.7595485,1.728646 0.9726146,0 1.7683904,-0.777891 1.7683904,-1.728646 0,-0.950756 -0.7957758,-1.728645 -1.7683904,-1.728645 z M 1,1.2575289 V 2.9861747 H 2.7683903 L 5.9514929,9.5463852 4.7578294,11.663976 c -0.1414712,0.242011 -0.2210488,0.527237 -0.2210488,0.82975 0,0.950755 0.7957755,1.728646 1.7683903,1.728646 H 16.915513 V 12.493726 H 6.6765329 c -0.1237874,0 -0.2210488,-0.09507 -0.2210488,-0.216081 l 0.026526,-0.103717 0.7957756,-1.408847 h 6.5872533 c 0.663149,0 1.246715,-0.354372 1.547342,-0.8902521 L 18.5778,4.2653757 c 0.07073,-0.1210052 0.106103,-0.2679401 0.106103,-0.414875 0,-0.4753776 -0.397888,-0.8643228 -0.884196,-0.8643228 H 4.7224616 L 3.891318,1.2575289 Z M 15.147123,15.086696 c -0.972616,0 -1.75955,0.777889 -1.75955,1.728645 0,0.950755 0.786934,1.728646 1.75955,1.728646 0.972615,0 1.76839,-0.777891 1.76839,-1.728646 0,-0.950756 -0.795775,-1.728645 -1.76839,-1.728645 z"
+     id="path9039"
+     style="stroke-width:0.874201" />
+  <path
+     d="M 0,0 H 24 V 24 H 0 Z"
+     fill="none"
+     id="path9041" />
+</svg>

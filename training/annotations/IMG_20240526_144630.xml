@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>IMG_20240526_144630.jpg</filename>
+	<path>/home/dd/Documents/shop-dev/training/images/IMG_20240526_144630.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2088</width>
+		<height>4640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>rechnung</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1</xmin>
+			<ymin>1924</ymin>
+			<xmax>1829</xmax>
+			<ymax>2561</ymax>
+		</bndbox>
+	</object>
+</annotation>

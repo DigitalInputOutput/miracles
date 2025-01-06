@@ -1,0 +1,187 @@
+/* depends on: main/main.css */
+
+/* critical */
+.navigation {
+	background-color: #fff;
+	transition: all 0.3s ease;
+	border-bottom: 1px solid #eee;
+}
+
+.navigation.active {
+	padding-bottom: 63px;
+}
+
+.navigation_toggle {
+	font-size: 14px;
+	font-family: Bold;
+	background-color: #43abd7;
+	color: #fff;
+	padding: 9px;
+	border-radius: 0 0 5px 5px;
+	margin-right: 20px;
+	box-shadow: 0px 2px 9px #ddd;
+}
+
+.navigation .head {
+	text-align: center;
+	font-size: 24px;
+	padding-top: 15px;
+	padding-bottom: 27px;
+}
+
+.navigation .navCategories {
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	overflow: hidden;
+	grid-column-gap: 2px;
+	padding-left: 3%;
+}
+
+.navigation .navCategories > div {
+	display: flex;
+	min-height: 124px;
+	flex-grow: 1;
+	place-content: start;
+	flex-wrap: wrap;
+	width: 33%;
+	text-align: center;
+	margin-bottom: 47px;
+}
+
+.navigation .navCategories.grid > div {
+    margin-bottom: 47px;
+    width: 33%;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+#main .navigation .navCategories > div.back {
+	width: 12% !important;
+}
+
+.navigation .navCategories > div.back {
+	position: absolute;
+	z-index: 3;
+	left: 0;
+	font-size: 43px;
+	color: #82c9e6;
+	display: none;
+	width: 12%;
+	place-content: center;
+	background-color: #fff;
+	top: 0;
+	bottom: 0;
+	margin-bottom: 0;
+}
+
+.navigation .navCategories > div.back i {
+	position: absolute;
+}
+
+.navigation .navCategories > div.back.active {
+	display: flex;
+}
+
+.navigation .navCategories .image {
+	height: 90px;
+	width: 90px;
+	margin: auto;
+	border: 1px solid #eee;
+	border-radius: 14px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	display: flex;
+	background-color: #acb3bc;
+	justify-content: center;
+	align-items: center;
+}
+
+.navigation .navCategories img {
+	max-width: 90%;
+	max-height: 70%;
+	display: block;
+	margin: auto;
+}
+
+.navigation .nav-bg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+	background: #fff;
+	display: none;
+}
+
+.navigation .nav-bg.active {
+	display: block;
+}
+
+.navigation .sub {
+	display: flex;
+	position: absolute;
+	left: 100%;
+	background-color: #fff;
+	width: 90%;
+	opacity: 0.99;
+	flex-wrap: wrap;
+	top: 0;
+	transition: all 0.3s ease;
+	z-index: 2;
+}
+
+.navigation .sub.active {
+	left: 10%;
+}
+
+.navigation .sub > div {
+	min-height: 101px;
+	border-radius: 4px;
+	margin-top: 0;
+	margin-left: 10px;
+	display: flex;
+	width: 100%;
+}
+
+.navigation .grid .sub > div {
+	width: 43%;
+	min-height: 133px;
+	padding-bottom: 17px;
+	margin: 0 auto 0 10px;
+	display: block;
+	margin-right: auto;
+}
+
+.navigation a {
+	display: block;
+	text-decoration: none;
+	padding-top: 9%;
+	font-size: 16px;
+	padding-right: 3%;
+	flex: 1;
+	padding-left: 5%;
+	width: 79%;
+	margin: auto auto 0;
+	font-size: 13px;
+	flex: auto;
+}
+
+.navigation .sub a {
+	padding-top: 9%;
+	padding-left: 5%;
+}
+
+.navigation .grid a {
+	width: 79%;
+	margin: auto auto 0;
+	font-size: 13px;
+	flex: auto;
+}
+
+.navigation .grid .sub a {
+	padding-top: 5%;
+}
+/* endcritical */

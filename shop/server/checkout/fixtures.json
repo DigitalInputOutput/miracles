@@ -1,0 +1,130 @@
+[
+    {
+        "model":"checkout.department",
+        "pk":1,
+        "fields": {
+            "name": "Нова Пошта",
+            "image": "image/delivery/np"
+        }
+    },
+    {
+        "model":"checkout.department",
+        "pk":2,
+        "fields": {
+            "name": "Delivery",
+            "image": "image/delivery/delivery"
+        }
+    },
+    {
+        "model":"checkout.department",
+        "pk":3,
+        "fields": {
+            "name": "УкрПошта",
+            "image": "image/delivery/ua"
+        }
+    },
+    {
+        "model":"checkout.department",
+        "pk":4,
+        "fields": {
+            "name": "Самовивіз",
+            "image": "image/delivery/carryself"
+        }
+    },
+    {
+        "model":"checkout.department",
+        "pk":5,
+        "fields": {
+            "name": "Кур'єрська Доставка",
+            "image": "image/delivery/courier"
+        }
+    },
+    {
+        "model":"checkout.payment",
+        "pk":1,
+        "fields": {
+            "name": "Готівка при отриманні",
+            "image": "image/payment/cash"
+        }
+    },
+    {
+        "model":"checkout.payment",
+        "pk":2,
+        "fields": {
+            "name": "Privat24",
+            "image": "image/payment/card"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":1,
+        "fields": {
+            "name": "Новий",
+            "image": "image/status/new"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":2,
+        "fields": {
+            "name": "Сплачено",
+            "image": "image/status/paid"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":3,
+        "fields": {
+            "name": "Платіж картою",
+            "image": "image/status/card"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":4,
+        "fields": {
+            "name": "Скасовано",
+            "image": "image/status/canceled"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":5,
+        "fields": {
+            "name": "Очікуємо на товар",
+            "image": "image/status/wait"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":6,
+        "fields": {
+            "name": "На відправку",
+            "image": "image/status/send"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":7,
+        "fields": {
+            "name": "Відправлений",
+            "image": "image/status/sent"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":8,
+        "fields": {
+            "name": "Нема зв'язку",
+            "image": "image/status/noconnection"
+        }
+    },
+    {
+        "model":"checkout.status",
+        "pk":9,
+        "fields": {
+            "name": "Закритий",
+            "image": "image/status/closed"
+        }
+    }
+]

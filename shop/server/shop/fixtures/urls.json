@@ -1,0 +1,13 @@
+[
+    {
+        "model": "shop.url",
+        "pk": 1,
+        "fields": {
+            "string": "/",
+            "model_id": 1,
+            "model": "Info",
+            "view": "main.views.home.HomeView",
+            "language_id": 1
+        }
+    }
+]
