@@ -1,0 +1,362 @@
+[
+    {
+        "model": "catalog.category",
+        "pk": 1,
+        "fields": {
+            "cached": false,
+            "url": "електроніка",
+            "image": "category_image/електроніка.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": null,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [1]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 9,
+        "fields": {
+            "cached": false,
+            "url": "телевізори",
+            "image": "category_image/телевізори.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 1,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [9]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 10,
+        "fields": {
+            "cached": false,
+            "url": "консолі",
+            "image": "category_image/консолі.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 1,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [10]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 11,
+        "fields": {
+            "cached": false,
+            "url": "комп'ютери",
+            "image": "category_image/комп'ютери.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 1,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [11]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 12,
+        "fields": {
+            "cached": false,
+            "url": "побутова_техніка",
+            "image": "category_image/побутова_техніка.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 1,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [12]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 2,
+        "fields": {
+            "cached": false,
+            "url": "будинок",
+            "image": "category_image/будинок.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": null,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [2]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 13,
+        "fields": {
+            "cached": false,
+            "url": "ванна_кімната",
+            "image": "category_image/ванна_кімната.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 2,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [13]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 14,
+        "fields": {
+            "cached": false,
+            "url": "спальня",
+            "image": "category_image/спальня.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 2,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [14]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 15,
+        "fields": {
+            "cached": false,
+            "url": "кухня",
+            "image": "category_image/кухня.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 2,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [15]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 3,
+        "fields": {
+            "cached": false,
+            "url": "їжа",
+            "image": "category_image/їжа.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": null,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [3]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 16,
+        "fields": {
+            "cached": false,
+            "url": "під_замовлення",
+            "image": "category_image/під_замовлення.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 3,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [16]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 17,
+        "fields": {
+            "cached": false,
+            "url": "готова_їжа",
+            "image": "category_image/готова_їжа.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 3,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [17]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 4,
+        "fields": {
+            "cached": false,
+            "url": "будівництво",
+            "image": "category_image/будівництво.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": null,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [4]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 18,
+        "fields": {
+            "cached": false,
+            "url": "суміші",
+            "image": "category_image/суміші.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 4,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [18]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 19,
+        "fields": {
+            "cached": false,
+            "url": "інструменти",
+            "image": "category_image/інструменти.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 4,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [19]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 20,
+        "fields": {
+            "cached": false,
+            "url": "електроінструмент",
+            "image": "category_image/електроінструмент.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": 19,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [20]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 5,
+        "fields": {
+            "cached": false,
+            "url": "тварини",
+            "image": "category_image/тварини.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": null,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [5]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 6,
+        "fields": {
+            "cached": false,
+            "url": "транспорт",
+            "image": "category_image/транспорт.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": null,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [6]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 7,
+        "fields": {
+            "cached": false,
+            "url": "акції",
+            "image": "category_image/акції.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": null,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [7]
+        }
+    },
+    {
+        "model": "catalog.category",
+        "pk": 8,
+        "fields": {
+            "cached": false,
+            "url": "Спорт",
+            "image": "category_image/спорт.jpg",
+            "last_modified": "2024-08-25T10:30:00Z",
+            "active": true,
+            "bgcolor": "#FFFFFF",
+            "parent": null,
+            "lft": 1,
+            "rght": 10,
+            "tree_id": 1,
+            "level": 0,
+            "description": [8]
+        }
+    }
+]

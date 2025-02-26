@@ -1,0 +1,69 @@
+[
+    {
+        "model":"main.task",
+        "pk":1,
+        "fields": {
+            "name": "Google Merchant",
+            "function":"google_merchant",
+            "link":"google_feed.txt"
+        }
+    },
+    {
+        "model":"main.task",
+        "pk":2,
+        "fields": {
+            "name": "Facebook Merchant",
+            "function":"facebook merchant"
+        }
+    },
+    {
+        "model":"main.task",
+        "pk":3,
+        "fields": {
+            "name": "Перерахунок валют",
+            "function":"currency_prices"
+        }
+    },
+    {
+        "model":"main.task",
+        "pk":4,
+        "fields": {
+            "name": "Синх залишків",
+            "function":"stock"
+        }
+    },
+    {
+        "model":"main.task",
+        "pk":5,
+        "fields": {
+            "name": "Синх цін",
+            "function":"prices"
+        }
+    },
+    {
+        "model":"main.task",
+        "pk":6,
+        "fields": {
+            "name": "Rozetka.ua",
+            "function":"rozetka",
+            "link":"export.xml"
+        }
+    },
+    {
+        "model":"main.task",
+        "pk":7,
+        "fields": {
+            "name": "Hotline.ua",
+            "function":"hotline",
+            "link":"export1.xml"
+        }
+    },
+    {
+        "model":"main.task",
+        "pk":8,
+        "fields": {
+            "name": "Синх. відділень Нова Пошта",
+            "function":"np"
+        }
+    }
+]

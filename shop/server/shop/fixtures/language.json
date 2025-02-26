@@ -1,0 +1,35 @@
+[
+    {
+        "model": "shop.language",
+        "pk": 1,
+        "fields": {
+            "code": "uk",
+            "image": "lang/uk.jpg",
+            "name": "Українська",
+            "path": "uk",
+            "ISOcode": "uk_UA"
+        }
+    },
+    {
+        "model": "shop.language",
+        "pk": 2,
+        "fields": {
+            "code": "de",
+            "image": "lang/de.jpg",
+            "name": "Deutsch",
+            "path": "de",
+            "ISOcode": "de_DE"
+        }
+    },
+    {
+        "model": "shop.language",
+        "pk": 3,
+        "fields": {
+            "code": "en",
+            "image": "lang/en.jpg",
+            "name": "English",
+            "path": "en",
+            "ISOcode": "en_UK"
+        }
+    }
+]

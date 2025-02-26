@@ -1,0 +1,228 @@
+{% load i18n %}
+{% load translate %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{lang_code}}">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{title}}</title>
+	<meta name="description" content="{{meta_description}}">
+	<meta name="keywords" content="{{meta_keywords}}">
+	<meta property="og:description" content="{{meta_description}}"/>
+	<meta property="og:title" content='{{title}}' >
+	<meta property="og:type" content="website" >
+	<meta property="og:url" content="{{request.build_absolute_uri}}">
+	<meta property="og:image" content="{{image}}" >
+	<meta property="og:site_name" content='{{host}}'>
+	<link rel="icon" type="image/png" href="{{favicon}}" />
+	<link type="text/css" rel="stylesheet" href="/static/css/mobile/main/{{CSS_VERSION}}/main_min_critical.css">
+	<meta name="google-site-verification" content="{{GOOGLE_SITE_VERIFICATION}}" />
+	{%include 'main/mobile/sprite.svg'%}
+	<link href="/static/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+	<link href="/static/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+	<template id="selectTemplate">
+		<div class="select-selected"></div>
+		<div class="select-items"></div>
+	</template>
+	<header>
+		<div id="menu-button" class="categories-button">
+			<div class="burger">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div id="searchButton">
+			<i class="fa fa-search searchIcon"></i>
+		</div>
+		<div class="phones">
+			<div id="attention">{{attention_message|default_if_none:''}}</div>
+			{%for phone in PHONES%}
+				<a href="tel:{{phone}}">{{phone}}</a>
+			{%endfor%}
+		</div>
+		<div id="logo">
+			<div>
+				<a href="{{lang_url}}/" title="{% trans 'Головна'%}"><svg><use xlink:href="#logoIcon"></use></svg></a>
+			</div>
+		</div>
+		<div id="cart-button" class="cart">
+			<!-- <svg><use xlink:href="#cartIcon" fill="#fff"></use></svg> -->
+			<i class="fas fa-shopping-cart"></i>
+			<span class="items_qty"></span>
+		</div>
+		<form id='search' action="{{language}}/search" class="blue">
+			<div class="field">
+				<input type="text" placeholder='{% trans "Пошук"%}' name="q" value="{{request.session.search_query}}" id="query">
+				<label class="deep_blue">
+					<input type="submit">
+					<i class="fa fa-search searchIcon"></i>
+				</label>
+			</div>
+			<div id="result" class="autocomplete"></div>
+		</form>
+	</header>
+	<div id="content">
+		{% include 'main/mobile/menu.html' %}
+		<div id="main">
+			<main>
+				<div class="container">
+					{%block breadcrumbs%}
+					{%endblock%}
+					{%block main%}
+						{{content|safe}}
+					{%endblock%}
+				</div>
+			</main>
+			<aside>
+				<div class='info-block delivery'>
+					<h3>
+						<svg><use xlink:href="#buyInfoDelivery"></use></svg>
+						{% trans 'Доставка'%}
+					</h3>
+					<ul>
+						<li>
+							<span>{% trans 'Самовивіз з магазину'%}:</span>
+							{% trans 'бесплатно'%}
+						</li>
+						<li>
+							<span>{% trans "Доставка кур'єром"%}:</span>
+							{% trans 'від'%} 80 грн.
+						</li>
+						<li>
+							<span>{% trans 'Доставка Новою Поштою'%}:</span>
+							{% trans 'від'%} 40 грн.
+						</li>
+						<li>
+							{%block freeDelivery%}
+								<span>{% trans 'Доставка Делівери чи Укрпоштою'%}:</span>
+								{% trans 'від'%} 35 грн.
+							{%endblock%}
+						</li>
+					</ul>
+				</div>
+				<div class='info-block payment'>
+					<h3>
+						<svg><use xlink:href="#buyInfoPayment"></use></svg>
+						{% trans 'Оплата'%}
+					</h3>
+					<ul>
+						<li>
+							<span>{% trans 'Готівкою при отриманні замовлення (тільки Новою Поштою)'%}</span>
+						</li>
+						<li><span>{% trans 'Безготівкова оплата'%}</span></li>
+						<li><span>{% trans 'Оплата платіжною карткою'%}</span></li>
+						<li><span>{% trans 'Готівкою в магазині'%}</span></li>
+					</ul>
+				</div>
+				<div class='info-block returns-exchange'>
+					<h3>
+						<svg><use xlink:href="#buyInfoReturn"></use></svg>
+						{% trans 'Обмін'%}
+					</h3>
+					<ul>
+						<li><span>{% trans "Обмін чи повернення товару здійснюється на протязі 14 днів після покупки, згідно закону України “Про захист прав споживачив України”"%}</span></li>
+					</ul>
+				</div>
+			</aside>
+			<footer>
+				{%if IOS_APP%}
+					<div id="download">
+						<a href="https://itunes.apple.com/in/app/igroteka/id1450140814?mt=8">
+							<svg><use xlink:href="#appstoreIcon"></use></svg>
+						</a>
+					</div>
+				{%endif%}
+				<div class="content">
+					<div class="nav-bottom">
+						<div class="heading">{% trans 'Компанія'%}</div>
+						{%for item in footer_menu%}
+							<a href="{{language}}/{{item.slug}}">
+								{% translate item 'translate_name' lang_code %}
+							</a>
+						{%endfor%}
+					<div class="nav-bottom">
+						<div class="heading">{% trans 'Інші міста'%}</div>
+						{%for city in cities%}
+							<a class="link" href="{% translate city 'translate_url' lang_code %}" title="{% translate city 'translate_name' lang_code %}">{% translate city 'translate_name' lang_code %}</a>
+						{%endfor%}
+					</div>
+					</div>
+					<a class="email" href="mailto:info@{{BASE_URL}}">
+						<svg width="24" height="24"><use xlink:href="#emailIcon"></use></svg>
+						info@{{BASE_URL}}
+					</a>
+					<div class="phones">
+						<svg width="24" height="24"><use xlink:href="#cellIcon"></use></svg>
+						{%for phone in PHONES%}
+							<a href="tel:{{phone}}">{{phone}}</a>
+						{%endfor%}
+					</div>
+					<div class="container" id="footer-privacy">
+						<div class="mid">
+							<div id="copyright">© 2024 {{BASE_URL|upper}} {% trans 'Україна'%}</div>
+						</div>
+						<div id="site-by">
+							Site By
+							<svg><use xlink:href="#miraclesLogo"></use></svg>
+						</div>
+						<a id="privacy" href="/privacy_policy">Політика конфіденційності</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<div>
+		<div id="form"></div>
+		<div id="scroll-up"></div>
+		<div id="loading"></div>
+		<div id="bg"></div>
+		<div id="add-cart" class="message">
+			<div>
+				{% trans 'Ви додали'%}:
+				<span class="name"></span>
+			</div>
+		</div>
+	</div>
+	<link type="text/css" rel="stylesheet" href="/static/css/mobile/main/{{CSS_VERSION}}/main_min.css">
+	{%block CSS%}
+	{%endblock%}
+	<div id="token">
+		{%csrf_token%}
+	</div>
+	<script type="text/javascript" src="{{JS_URL}}"></script>
+	<script>
+		var pageObject = new Page();
+		{%if view%}
+			var view = eval('new {{view|safe}}()');
+		{%else%}
+			var view = new Default();
+		{%endif%}
+
+		{%if language%}
+			var language = '{{language}}';
+		{%else%}
+			var language = '';
+		{%endif%}
+
+		var csrf_token = getCookie('csrftoken');
+		if(!csrf_token)
+			csrf_token = Dom.query('#token input')[0].value;
+	</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id={{GOOGLE_TAG}}"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', '{{GOOGLE_TAG}}');
+	  gtag('config', '{{GOOGLE_ADWORDS}}');
+	</script> -->
+	{%block JS%}
+	{%endblock%}
+</body>
+</html>

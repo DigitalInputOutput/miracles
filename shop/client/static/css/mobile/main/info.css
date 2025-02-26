@@ -1,0 +1,49 @@
+/* critical */
+.info-block {
+	margin-bottom: 10px;
+	border-top: 9px solid #2fa3d4;
+	border-bottom: 9px solid #3cacdb;
+	background: #50bae6;
+	color: #fff;
+	font-size: 14px;
+}
+
+.info-block h3{
+	margin: 0;
+	background-color: #3eaedd;
+	background-repeat: no-repeat;
+	font-size: 34px;
+	font-weight: 100;
+	text-transform: uppercase;
+	min-height: 51px;
+	line-height: 51px;
+	padding-left: 11px;
+}
+
+.info-block svg {
+	fill: #3eaedd;
+	background-color: #fff;
+	border-radius: 24px;
+	position: relative;
+	top: 6px;
+	width: 39px;
+	height: 39px;
+}
+
+.info-block ul {
+	margin: 0;
+	padding: 0 20px 0 44px;
+}
+
+.info-block li {
+	padding-top: 22px;
+}
+
+.info-block li:last-child {
+	padding-bottom: 34px;
+}
+
+.info-block li span {
+	font-weight: 600;
+}
+/* endcritical */

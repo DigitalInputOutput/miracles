@@ -1,0 +1,65 @@
+/* depends on: main/main.css */
+
+/* critical */
+footer {
+	padding-bottom: 60px;
+	background: #d8edf7;
+	font-size: 16px;
+	font-weight: 100;
+	overflow: hidden;
+}
+
+footer .heading {
+	font-size: 26px;
+	font-family: Bold;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+footer .email {
+	font-size: 18px;
+	position: relative;
+	padding-left: 28px;
+}
+
+footer .phones {
+	width: 330px;
+}
+
+footer .phones>a {
+	display: inline-block;
+	width: 140px;
+	margin: 6px 0;
+}
+
+footer .phones {
+	margin-top: 22px;
+	padding-left: 28px;
+	position: relative;
+}
+
+footer .content svg {
+	fill: #1d97ca;
+	position: absolute;
+	left: 0;
+	top: 2px;
+}
+
+footer .email svg {
+	top: -3px;
+}
+/* endcritical */
+
+#site-by {
+	padding: 27px 0;
+}
+
+#site-by svg {
+	position: static;
+	width: 84px;
+	height: 23px;
+}
+
+#footer-privacy {
+	padding: 67px 0px 20px;
+}
