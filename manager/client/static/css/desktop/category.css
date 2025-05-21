@@ -1,3 +1,4 @@
+/* depends on: main.css */
 #proms{
 	display: grid;
 	grid-template-columns: 1fr 1fr;

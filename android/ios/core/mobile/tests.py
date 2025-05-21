@@ -5,7 +5,7 @@ from datetime import datetime
 from base64 import b64encode
 from json import dumps
 
-base_url = 'http://m.igroteka.ua'
+base_url = ''
 s = session()
 def parse(response):
     try:
@@ -15,7 +15,7 @@ def parse(response):
         log(response.text)
 
 def log(text):
-    with open('/home/core/shop/igroteka.ua/static/test.html','w') as f:
+    with open('/home/core/shop/miracles.site/static/test.html','w') as f:
         f.write(text)
 
 def GET(url,headers={}):

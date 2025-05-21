@@ -1,3 +1,4 @@
+/* depends on: main.css */
 #item-menu {
     height: 39px;
     line-height: 39px;
@@ -264,6 +265,8 @@
 	background-color: #fff;
 	cursor: pointer;
 	text-align: center;
+	display: grid;
+	align-content: center;
 }
 #images .remove, .image .remove {
 	position: absolute;
@@ -271,6 +274,10 @@
 	top: 8px;
 	margin-top: 0;
 	height: 23px;
+	display: none;
+}
+#images .remove.active, .image .remove.active{
+	display: block;
 }
 #images .state, .image .state{
 	background-color: #aaa;

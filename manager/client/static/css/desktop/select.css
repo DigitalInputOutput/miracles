@@ -1,3 +1,4 @@
+/* depends on: main.css */
 /* The container must be positioned relative: */
 .custom-select,.birthdaySelect {
   position: relative;

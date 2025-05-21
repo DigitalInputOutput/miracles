@@ -1,18 +1,19 @@
+{%load i18n%}
 <form action="javascript: void(0)" method="post" id="filters">
-    <!-- <input type="text" name="search" value="" placeholder="Поиск"> -->
+    <!-- <input type="text" name="search" value="" placeholder="{% trans 'Search' %}"> -->
     <div class="select">
         <select name="is_available" id="is_available">
-            <option value="" selected>Наличие</option>
-            <option value="True">В наличии</option>
-            <option value="False">Нет в наличии</option>
+            <option value="" selected>{% trans 'Availability' %}</option>
+            <option value="True">{% trans 'Is available' %}</option>
+            <option value="False">{% trans 'Not available' %}</option>
         </select>
     </div>
     <div class="autocomplete" id="brand">
-        <input type="text" name="brand__description__name__icontains" value="" placeholder="Производитель" autocomplete="off">
+        <input type="text" name="brand__description__name__icontains" value="" placeholder="{% trans 'Manufacturer' %}" autocomplete="off">
         <div class="variants"></div>
     </div>
     <div class="autocomplete" id="category">
-        <input type="text" name="category__description__name__icontains" value="" placeholder="Категория" autocomplete="off">
+        <input type="text" name="category__description__name__icontains" value="" placeholder="{% trans 'Category' %}" autocomplete="off">
         <div class="variants"></div>
     </div>
 </form>

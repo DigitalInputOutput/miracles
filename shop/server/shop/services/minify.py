@@ -10,10 +10,10 @@ class MinifyService:
     devices = ["desktop", "mobile"]
 
     @staticmethod
-    def get_css_and_js_versions(type="shop"):
-        static_files_versions = StaticFiles.objects.filter(type=type).first()
+    def get_css_and_js_versions(website="shop"):
+        static_files_versions = StaticFiles.objects.filter(type=website).first()
         if not static_files_versions:
-            static_files_versions = StaticFiles.objects.create(type=type)
+            static_files_versions = StaticFiles.objects.create(type=website)
 
         # Increase files version
         static_files_versions.css += 1
@@ -52,6 +52,7 @@ class MinifyService:
                 return dependencies_map[current_file]
 
             # Read the content and look for dependencies
+            print(current_file)
             with open(current_file, 'r') as f:
                 content = f.read()
 
@@ -157,17 +158,16 @@ class MinifyService:
         shutil.copytree(files_to_cope, cache_root, dirs_exist_ok=True)
 
     @staticmethod
-    def handle_command(type, kwargs):
+    def handle_command(kwargs):
         # Get CSS and JS versions for unique naming
-        css_version, js_version = MinifyService.get_css_and_js_versions(type=type)
+        css_version, js_version = MinifyService.get_css_and_js_versions(website=kwargs.get('website')[0])
 
-        print(kwargs)
-
+        type_value = kwargs.get("type")
         # Determine which minification type to run based on kwargs
-        if kwargs.get("type") == "css":
+        if type_value and type_value[0] == "css":
             MinifyService.minify("css", css_version, kwargs, css_minify)
             print("CSS files have been minified, versioned, and cleaned up successfully.")
-        elif kwargs.get("type") == "js":
+        elif type_value and type_value[0] == "js":
             # MinifyService.minify("js", js_version, kwargs, jsmin)
             MinifyService.copy_js_files(kwargs)
             print("JS files have been minified, versioned, and cleaned up successfully.")

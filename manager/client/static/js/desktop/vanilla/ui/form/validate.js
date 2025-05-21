@@ -1,190 +1,182 @@
 import { Dom } from '/static/js/desktop/vanilla/ui/dom.js';
-import { POST } from '/static/js/desktop/vanilla/http/method.js';
+import { POST } from '/static/js/desktop/vanilla/http/navigation.js';
 
-export class Validator{
-	constructor(form,rules){
-		this.valid = [];
-		this.invalid = [];
+export class Validator {
+	constructor(form, rules) {
+		this.valid = new Set();
+		this.invalid = new Set();
 		this.form = form;
 		this.rules = rules;
-		this.form.validateSubmit = this.form.find('#submit');
+		this.submitButton = this.form.find('#submit');
 		this.form.valid = false;
 
-		if(this.form.validateSubmit)
-			this.form.on('submit',this.submit.bind(this));
+		if (this.submitButton) {
+			this.form.on('submit', this.submit.bind(this));
+		}
 
-		for(let[key,rulesList] of Object.entries(rules)){
-			this.listenRules(this.form.find(`[name=${key}]`)[0],rulesList);
+		for (let [field, rulesList] of Object.entries(rules)) {
+			const element = this.getElement(field);
+			if (element) this.listenRules(element, rulesList);
 		}
 	}
-	listenRules(elem,rule){
-		elem.on(rule['event'] ? rule['event'] : 'paste keydown focusout',function(event){
-			let elem = event.target;
 
-			if(elem.timeout)
-				clearTimeout(elem.timeout);
+	getElement(name) {
+		return this.form.find(`[name=${name}]`)[0] || null;
+	}
 
-			if(event.type == 'focusout'){
-				if(!elem.value && rule['required'])
-					this.error(elem,rule['errors']['required']);
-				else if(elem.invalid){
-					return false;
-				}
+	listenRules(elem, rule) {
+		const eventTypes = rule.event || 'paste keydown focusout';
+		elem.on(eventTypes, (event) => this.handleValidation(event, elem, rule));
+	}
+
+	handleValidation(event, elem, rule) {
+		if (elem.timeout) clearTimeout(elem.timeout);
+
+		if (event.type === 'focusout') {
+			if (!elem.value && rule.required) {
+				this.error(elem, [rule.errors.required]);
+				return;
+			} else if (elem.invalid) {
+				return false;
 			}
+		}
 
-			elem.removeError();
-			elem.invalid = false;
+		this.clearError(elem);
 
-			if(!event.metaKey && event.keyCode != 8 && event.keyCode != 9){
-				if(rule['rules']['max_length'] && elem.value.length >= rule['rules']['max_length']){
-					if(elem.selectionEnd == elem.selectionStart){
-						event.stopPropagation();
-						event.preventDefault();
-						return false;
-					}
-				}
-				if(event.key && rule['rules']['allow_symbols'] && !event.key.match(rule['rules']['allow_symbols'])){
-					event.stopPropagation();
+		if (!event.metaKey && ![8, 9].includes(event.keyCode)) {
+			if (rule.rules.max_length && elem.value.length >= rule.rules.max_length) {
+				if (elem.selectionEnd === elem.selectionStart) {
 					event.preventDefault();
 					return false;
 				}
 			}
-
-			let that = this;
-			elem.timeout = setTimeout(function(){
-				if(!elem.value && !rule.required)
-					return;
-				that.cleanWhitespaces(elem);
-				that.validate(elem,rule);
-				if(!elem.invalid && rule['unique'])
-					that.unique(elem,rule['errors']['unique']);
-			},rule['timeout'] ? rule['timeout'] : 1500);
-
-			event.stopPropagation();
-			return false;
-		}.bind(this));
-	}
-	validate(elem,rules){
-		for(let[key,rule] of Object.entries(rules['rules'])){
-			let result = this[key](elem,rule);
-			if(result){
-				this.pop(elem);
-				if(rules['handler'])
-					rules.handler(elem);
-				if(!this.invalid.length)
-					this.form.triggerValid();
-			}else{
-				this.error(elem,rules['errors'][key]);
+			if (event.key && rule.rules.allow_symbols && !event.key.match(rule.rules.allow_symbols)) {
+				event.preventDefault();
+				return false;
 			}
 		}
+
+		elem.timeout = setTimeout(() => {
+			if (!elem.value && !rule.required) return;
+			this.cleanWhitespaces(elem);
+			this.validate(elem, rule);
+			if (!elem.invalid && rule.unique) this.unique(elem, rule.errors.unique);
+		}, rule.timeout || 1000);
+
+		event.stopPropagation();
+		return false;
 	}
-	allow_symbols(){
+
+	validate(elem, rules) {
+		let errorMsg = [];
+		for (let [rule, constraint] of Object.entries(rules.rules)) {
+			const isValid = this[rule](elem, constraint);
+			isValid ? this.markValid(elem, rules) : errorMsg.push(rules.errors[rule]);
+		}
+
+		if(errorMsg.length)
+			this.error(elem, errorMsg);
+	}
+
+	is_valid() {
+		for (let [key, rule] of Object.entries(this.rules)) {
+			let elem = this.getElement(key);
+			if (elem) this.validate(elem, rule);
+		}
+
+		if (this.invalid.size) {
+			this.invalid.values().next().value.focus();
+			return false;
+		}
 		return true;
 	}
-	is_valid(){
-		for(let[key,rule] of Object.entries(this.rules)){
-			let elem = this.form.find(`[name=${key}]`)[0];
-			this.validate(elem,rule);
+
+	submit(event) {
+		for (let [key, rule] of Object.entries(this.rules)) {
+			let elem = this.getElement(key);
+			if (elem) {
+				this.validate(elem, rule);
+				if (!elem.invalid && rule.unique) this.unique(elem, rule.errors.unique);
+			}
 		}
-		if(this.invalid.length){
-			this.invalid[0].focus();
-			return false;
-		}else{
-			return true;
-		}
-	}
-	submit(event){
-		for(let[key,rule] of Object.entries(this.rules)){
-			let elem = this.form.find(`[name=${key}]`)[0];
-			this.validate(elem,rule);
-			if(!elem.invalid && rule['unique'])
-				this.unique(elem,rule['errors']['unique']);
-		}
-		if(!Array.isArray(Dom.query("#g-recaptcha-response")) && !Dom.query("#g-recaptcha-response").value){
+
+		const recaptcha = Dom.query("#g-recaptcha-response");
+		if (!Array.isArray(recaptcha) && !recaptcha.value) {
 			event.preventDefault();
-			event.stopPropagation();
 			return false;
 		}
 
-		if(this.invalid.length){
-			this.invalid[0].focus();
+		if (this.invalid.size) {
+			this.invalid.values().next().value.focus();
 			event.preventDefault();
-			event.stopPropagation();
 			return false;
 		}
 	}
-	cleanWhitespaces(elem){
-		elem.value = elem.value.replace(/(^\s+|\s+$)/g, '');
+
+	cleanWhitespaces(elem) {
+		elem.value = elem.value.trim();
 	}
-	checked(elem,rule){
-		if(!elem.checked)
-			return false;
-		return true;
+
+	checked(elem) {
+		return elem.checked;
 	}
-	radio(elem,rule){
-		if(!Dom.query(`[name="${elem.name}"]:checked`)[0])
-			return false;
-		return true;
+
+	radio(elem) {
+		return !!Dom.query(`[name="${elem.name}"]:checked`)[0];
 	}
-	equal(elem,rule){
-		if(elem.value != this.form.find(`[name=${rule}]`)[0].value)
-			return false;
-		return true;
+
+	equal(elem, rule) {
+		return elem.value === this.getElement(rule).value;
 	}
-	min_length(elem,rule){
-		if(elem.value.length < rule)
-			return false;
-		return true;
+
+	min_length(elem, rule) {
+		return elem.value.length >= rule;
 	}
-	max_length(elem,rule){
-		if(elem.value.length > rule)
-			return false;
-		return true;
+
+	max_length(elem, rule) {
+		return elem.value.length <= rule;
 	}
-	min(elem,rule){
-		if(elem.value < rule)
-			return false;
-		return true;
+
+	min(elem, rule) {
+		return parseFloat(elem.value) >= rule;
 	}
-	max(elem,rule){
-		if(elem.value > rule)
-			return false;
-		return true;
+
+	max(elem, rule) {
+		return parseFloat(elem.value) <= rule;
 	}
-	regex(elem,rule){
-		let match = elem.value.match(rule);
-		if(!match)
-			return false;
-		return true;
+
+	regex(elem, rule) {
+		return rule.test(elem.value);
 	}
-	unique(elem,error){
-		POST('/match/user', {
-			"data": { phone:elem.value },
-			"success": (response) => {
-				if(response.json && !response.json.result){
-					this.error(elem,error);
-					if(!this.invalid.length)
-						this.form.triggerValid();
+
+	unique(elem, error) {
+		POST(`/match/${this.Model}`, {
+			data: { phone: elem.value },
+			success: (response) => {
+				if (response && !response.result) {
+					this.error(elem, [error]);
 				}
 			},
 		});
 	}
-	push(elem){
-		if(!this.invalid.includes(elem))
-			this.invalid.push(elem);
-		if(this.valid.includes(elem))
-			this.valid.pop(elem);
+
+	markValid(elem, rules) {
+		this.invalid.delete(elem);
+		this.valid.add(elem);
+		elem.invalid = false;
+		if (!this.invalid.size) this.form.triggerValid();
+	}
+
+	error(elem, errorMsg) {
+		elem.triggerError(errorMsg);
+		this.invalid.add(elem);
+		this.valid.delete(elem);
 		elem.invalid = true;
 	}
-	pop(elem){
-		if(!this.valid.includes(elem))
-			this.valid.push(elem);
-		if(this.invalid.includes(elem))
-			this.invalid.pop(elem);
+
+	clearError(elem) {
+		elem.removeError();
+		this.invalid.delete(elem);
 		elem.invalid = false;
-	}
-	error(elem,error){
-		elem.triggerError(error);
-		this.push(elem);
 	}
 }

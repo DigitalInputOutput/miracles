@@ -1,7 +1,7 @@
 {%load i18n%}
-<div class="autocomplete fgk {{model}}" model="{{model}}">
+<div class="autocomplete fgk {{AdminModel}}" model="{{AdminModel}}">
 	<div>
-		<input type="text" autocomplete="off" placeholder="{%trans 'Введите текст для поиска'%}">
+		<input type="text" autocomplete="off" placeholder="{%trans 'Enter searcg text'%}">
 		<div class="variants"></div>
 
 		<input autocomplete="off" type="hidden" name="{{ widget.name }}"{% if widget.value != None %} value="{{widget.value.id}}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
@@ -10,8 +10,8 @@
 		<div class="values">
 			{%if widget.value%}
 				<div class="value">
-					<div class="remove" value="{{widget.value.id}}"><i class="fas fa-times"></i></div>
-					<a href="/{{Model}}/{{widget.id}}">{{widget.value}}</a>
+					<div class="remove" value="{{widget.value.id}}"><i class="ti ti-x"></i></div>
+					<a href="/{{AdminModel}}/{{widget.id}}">{{widget.value}}</a>
 				</div>
 			{%endif%}
 		</div>

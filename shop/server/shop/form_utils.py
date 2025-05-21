@@ -202,7 +202,7 @@ class BetterBaseForm(object):
     ``BoundField``, depending on whether the field is required.
     There is no automatic inheritance of ``row_attrs``.
     The fieldsets declaration is a list of two-tuples very similar to
-    the ``fieldsets`` option on a ModelAdmin class in
+    the ``fieldsets`` option on a AdminModel class in
     ``django.contrib.admin``.
     The first item in each two-tuple is a name for the fieldset, and
     the second is a dictionary of fieldset options.

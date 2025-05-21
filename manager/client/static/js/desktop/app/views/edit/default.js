@@ -2,7 +2,7 @@ import { OneToOne } from "./fgk.js";
 import { Edit } from "/static/js/desktop/vanilla/ui/view/edit.js";
 
 export class AttributeEdit extends OneToOne{
-	static block = 'main';
+	static container = 'main';
 
 	constructor(context){
 		context.field = 'value';

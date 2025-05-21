@@ -6,6 +6,7 @@ class Language(models.Model):
     name = models.CharField(max_length=20,null=True)
     path = models.CharField(max_length=255,null=True)
     ISOcode = models.CharField(max_length=5,null=True)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.name} {self.code}"
@@ -15,8 +16,12 @@ class Language(models.Model):
         try:
             return self.image.url
         except:
-            return '/media/data/no_image_new.jpg'
+            return '/media/no_image.jpg_new.jpg'
 
     @property
     def admin_image(self):
         return f"<img src='{self.image_url}'>"
+    
+    @property
+    def is_active(self):
+        return f'<div class="clickable bool {str(self.active).lower()}"></div>'

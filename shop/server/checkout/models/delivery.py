@@ -3,7 +3,7 @@ from django.utils import timezone
 from shop.models import Language
 from django.utils.translation import gettext_lazy as _
 
-__all__ = ['City','Address','Department','Payment','Status','Delivery']
+__all__ = ['City','Address','Department','Payment','Delivery']
 
 class City(models.Model): 
     name = models.CharField(max_length = 255)
@@ -48,24 +48,17 @@ class Department(models.Model):
         super().save()
 
 class Delivery(models.Model): 
-    department = models.ForeignKey(Department,verbose_name=_('Відділення'),null=True, on_delete=models.SET_NULL)
+    department = models.ForeignKey(Department,verbose_name=_('Department'),null=True, on_delete=models.SET_NULL)
     ttn_link = models.CharField(max_length=255,null=True,blank=True,verbose_name='TTH URL')
     ttn_code = models.CharField(max_length=255,null=True,blank=True,verbose_name='TTH Number')
-    ttn_created_date = models.DateTimeField(null=True,verbose_name=_('Дата відправки'))
+    ttn_created_date = models.DateTimeField(null=True,verbose_name=_('Date when sent'))
 
     class Meta:
-        verbose_name = _("Доставка")
+        verbose_name = _("Delivery")
 
 class Payment(models.Model): 
     name = models.CharField(max_length = 255)
     image = models.CharField(max_length = 255)
 
     class Meta:
-        verbose_name = _("Тип оплати")
-
-class Status(models.Model): 
-    name = models.CharField(max_length = 255)
-    image = models.CharField(max_length = 255)
-
-    class Meta:
-        verbose_name = _("Статус замовлення")
+        verbose_name = _("Payment type")

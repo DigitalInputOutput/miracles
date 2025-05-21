@@ -4,8 +4,8 @@
         "pk": 1,
         "fields": {
             "code": "uk",
-            "image": "lang/uk.jpg",
-            "name": "Українська",
+            "image": "lang/AAACFCAIAAACR.jpg",
+            "name": "мова",
             "path": "uk",
             "ISOcode": "uk_UA"
         }
@@ -15,8 +15,8 @@
         "pk": 2,
         "fields": {
             "code": "de",
-            "image": "lang/de.jpg",
-            "name": "Deutsch",
+            "image": "lang/AAAB4CAYAAAC3kr.jpg",
+            "name": "de",
             "path": "de",
             "ISOcode": "de_DE"
         }
@@ -26,8 +26,8 @@
         "pk": 3,
         "fields": {
             "code": "en",
-            "image": "lang/en.jpg",
-            "name": "English",
+            "image": "lang/AAAB4CAMAAACATE.jpg",
+            "name": "en",
             "path": "en",
             "ISOcode": "en_UK"
         }

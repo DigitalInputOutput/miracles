@@ -1,4 +1,4 @@
-import { GET } from "/static/js/desktop/vanilla/http/method.js";
+import { GET } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { Autocomplete } from "/static/js/desktop/vanilla/ui/form/autocomplete.js";
 
@@ -6,7 +6,7 @@ export class Cart{
 	constructor(context){
 		Dom.query('.remove').on('click',this.remove.bind(this));
 		Dom.query('#add-product').on('click',this.add.bind(this));
-		Dom.query('#order .buttons .fas.fa-expand').on('click',this.expand.bind(this));
+		Dom.query('#order .buttons #expand').on('click',this.expand.bind(this));
 		Dom.query('input[name="qty"], input[name="price"]').on('change',this.calculate_item.bind(this));
 		this.total = Dom.query('#total .sum')[0];
 		this.totalSum = parseInt(this.total.text());
@@ -81,22 +81,21 @@ export class Cart{
 		Dom.query('#save').removeAttr('disabled');
 	}
 	add(event){
-		var template = Dom.render(Dom.query('#order-item'));
-		template = this.items_container.append(template);
+		let container = Dom.render('#order-item', this.items_container);
 		this.items_container.scrollTop = this.items_container.scrollHeight;
 
-		template = Dom.query('#order-search #items .order-item:last-child')[0];
+		container = Dom.query('#order-search #items .order-item:last-child')[0];
 
-		template.find('.remove').on('click',function(event){
+		container.find('.remove').on('click',function(event){
 			this.parent().parent().remove();
 			event.stopPropagation();
 			return false;
 		});
 
 		new Autocomplete({
-			template:template,
+			container:container,
 			Model:'Product',
-			View:this.pick.bind(this)
+			success:this.pick.bind(this)
 		});
 
 		event.stopPropagation();
@@ -120,10 +119,10 @@ export class Cart{
 		}else{
 			GET(`/api/Product/${product_id}/?format=json`,{
 				View:function(response){
-					var template = Dom.render(Dom.query('#order-item'),response.json);
+					let template = Dom.render('#order-item', response);
 					that.items_container.replace(template,parent);
 
-					var item = Dom.query(`.order-item[product-id="${response.json.id}"]`)[0];
+					let item = Dom.query(`.order-item[product-id="${response.id}"]`)[0];
 					item.find('.remove').on('click',that.remove.bind(that));
 				}
 			});

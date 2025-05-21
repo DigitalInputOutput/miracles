@@ -29,7 +29,7 @@ export class AutocompleteF{
 		that.timeout = setTimeout(function(){
 			GET(`/autocomplete/${that.Model}/${e.target.value}`,{
 				View:function(response){
-					that.variants.html(templates.autocomplete(response.json.items));
+					that.variants.html(templates.autocomplete(response.items));
 					that.container.find(`.variant`).on('click',that.add.bind(that));
 					that.variants.show();
 				}

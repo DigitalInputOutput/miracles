@@ -4,7 +4,7 @@ export class Menu {
     constructor({ container, titleText, prev, delay = 0, toggleButton, left = 0, choice }) {
         if (!container || Array.isArray(container)) return;
 
-        this.container = Dom.query(container);
+        this.container = container;
         this.title = Dom.query(titleText);
         this.prevButton = Dom.query(prev);
         this.left = left;
@@ -57,8 +57,8 @@ export class Menu {
 
     // Navigate to the next menu level
     next(event) {
-        const target = Dom.query(event.target);
-        if (event.target.tagName === 'SPAN') {
+        const target = event.target;
+        if (target.tagName === 'SPAN') {
             target.parent().click();
             return;
         }
@@ -69,7 +69,7 @@ export class Menu {
             this.title.text(target.find('span').text());
         }, this.delay);
 
-        this.prevButton.show('flex');
+        this.prevButton.show('grid');
         event.stopPropagation();
         event.preventDefault();
         return false;

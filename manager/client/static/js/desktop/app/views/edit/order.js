@@ -1,7 +1,7 @@
 import { Edit } from "/static/js/desktop/vanilla/ui/view/edit.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { Cart } from "./cart.js";
-import { GET, POST, PUT } from "/static/js/desktop/vanilla/http/method.js";
+import { GET, POST, PUT } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
 // import { templates } from "/static/js/desktop/vanilla/ui/form/templates.js";
 import { Alert } from "/static/js/desktop/vanilla/ui/alert.js";
@@ -93,14 +93,14 @@ export class OrderEdit extends Edit{
 		});
 	}
 	addSeat(){
-		var seat = Dom.render(Dom.query('#seat'));
-		this.seats.append(seat);
+		let seat = Dom.render('#seat', this.seats);
+		let name;
 		this.calculateSeatCost();
 		this.seats.find('.remove').on('click',this.removeSeat.bind(this));
 		if(this.product_names[this.index])
-			var name = this.product_names[this.index];
+			name = this.product_names[this.index];
 		else{
-			var name = this.product_names[0];
+			name = this.product_names[0];
 		}
 		Dom.query('#seats .seat input[name="description"]').last().value = name;
 		Dom.query('#seats .seat input[name="weight"]').on('change',function(e){
@@ -203,13 +203,13 @@ export class OrderEdit extends Edit{
 					View:function(response){
 						Dom.query('#city').show();
 						Dom.query('#city .variants')[0].clear();
-						Dom.query('#city .variants')[0].html(templates.variants(response.json));
+						Dom.query('#city .variants')[0].html(templates.variants(response));
 						Dom.query('#city .variant').on('click',function(e){
 							Dom.query('#id_city').value = e.target.text();
 							Dom.query('input[name="city"]')[0].value = e.target.get('value');
 							that.departament(type, e.target.get('value'));
 						});
-						for(var item of response.json){
+						for(var item of response){
 							if(item.address == Dom.query('#id_city').value && !click){
 								Dom.query('input[name="city"]')[0].value = item.id;
 								that.departament(type, item.id);
@@ -234,7 +234,7 @@ export class OrderEdit extends Edit{
 					Dom.query('#departament').show();
 					Dom.query('#departament .variants')[0].clear();
 					Dom.query('#departament .variants')[0].show();
-					Dom.query('#departament .variants')[0].html(templates.variants(response.json));
+					Dom.query('#departament .variants')[0].html(templates.variants(response));
 					Dom.query('#departament .variant').on('click',function(e){
 						Dom.query('#id_departament').value = e.target.text();
 						Dom.query('input[name="departament"]')[0].value = e.target.get('value');
@@ -259,20 +259,20 @@ export class OrderEdit extends Edit{
 
 		let that = this;
 		context.View = function(response){
-			if(response.json.result){
+			if(response.result){
 				that.cart.removeList = [];
-				if(response.json.href){
-					GET(response.json.href);
+				if(response.href){
+					GET(response.href);
 				}else{
-					response.alert('Сохранен успешно.',3000);
+					Alert.popMessage('Сохранен успешно.',3000);
 				}
-			}else if(response.json.errors){
+			}else if(response.errors){
 				let errors = '';
-				for(let error in response.json.errors){
-					errors += error + '<br>' + response.json.errors[error] + '<br>';
+				for(let error in response.errors){
+					errors += error + '<br>' + response.errors[error] + '<br>';
 				}
-				errors += response.json.nonferrs + '<br>';
-				response.alert(errors,7000);
+				errors += response.nonferrs + '<br>';
+				Alert.popMessage(errors,7000);
 			}
 		};
 
@@ -290,13 +290,13 @@ export class OrderEdit extends Edit{
 		context.data.total = Dom.query('#total .sum').text();
 
 		context.View = function(response){
-			if(response.json.ref){
+			if(response.ref){
 				/*win = window.open("https://my.novaposhta.ua/orders/printDocument/orders[]/"+http.json.ref+"/type/html/apiKey/a5d31efa7bc0f7b138a06a130d8e5327",'_blank');
 				win.focus();
 				win.print();*/
 				Dom.query('#id_status').value = 8;
-				response.alert('TTH создана');
-			}else if(response.json && response.json.errors){
+				Alert.popMessage('TTH создана');
+			}else if(response && response.errors){
 				response.Dom.Errors();
 			}
 		};
@@ -325,8 +325,8 @@ export class OrderEdit extends Edit{
 
 		var context = {};
 		context.View = function(response){
-			if(response.json.result){
-				response.alert('Отправлена.');
+			if(response.result){
+				Alert.popMessage('Отправлена.');
 			}
 		};
 		if(summ)
@@ -338,7 +338,7 @@ export class OrderEdit extends Edit{
 	track(){
 		GET(`/order/track/${this.id}`,{
 			View:function(response){
-				response.alert(JSON.stringify(response.json));
+				Alert.popMessage(JSON.stringify(response));
 			}
 		});
 	}

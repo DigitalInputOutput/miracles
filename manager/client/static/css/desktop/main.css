@@ -40,7 +40,40 @@ header .welcome{
 	line-height: 42px;
 	margin-left: 40px;
 }
-
+#lang-button{
+	padding-top: 39px;
+	text-align: center;
+	position: relative;
+	cursor: pointer;
+}
+#lang-button i{
+	font-size: 26px;
+}
+#lang {
+	font-size: 12px;
+	color: #787878;
+	text-transform: lowercase;
+	border-radius: 0 0 7px 3px;
+	padding-top: 14px;
+	display: none;
+}
+#lang.active{
+	display: block;
+}
+#lang a.active {
+	color: #fff;
+	cursor: default;
+	background-color: #afafafa1;
+	border-radius: 4px;
+}
+#lang a {
+	text-decoration: none;
+	display: block;
+	width: 82%;
+	height: 37px;
+	margin: auto;
+	padding: 9px 5px;
+}
 .red{
 	color: red;
 }
@@ -69,8 +102,8 @@ header .welcome{
 }
 #left .burger{
 	cursor: pointer;
-	width: 19px;
-	font-size: 21px;
+	text-align: center;
+	font-size: 22px;
 }
 #left #menu-mini .burger{
 	margin: 17% auto 57%;
@@ -106,8 +139,9 @@ header .welcome{
 	display: block;
 }
 #left #nav #top{
-	display: flex;
+	display: grid;
 	padding: 7% 1%;
+	grid-template-columns: 1fr 2fr;
 }
 #left #nav.active{
 	min-width: 15%;
@@ -116,11 +150,10 @@ header .welcome{
 }
 #left #shop{
 	text-decoration: none;
-	width: 83%;
-	height: 37px;
+	height: 31px;
 	display: block;
 	padding: 0;
-	text-align: left;
+	padding-right: 12px;
 }
 #left svg{
 	max-height: 100%;
@@ -419,7 +452,7 @@ main .right{
 	width: 45px;
 	height: 45px;
 	cursor: pointer;
-	margin-top: 7px;
+	margin-top: 47px;
 	font-size: 23px;
 	display: flex;
 }
@@ -472,6 +505,9 @@ main .right{
 	right: 6px;
 	cursor: pointer;
 	background-position: -311px 0px;
+}
+#http-alert-message{
+	word-wrap: break-word;
 }
 #orders {
 	width: 275px;
@@ -643,25 +679,43 @@ select:focus{
 	opacity: 0;
 	visibility: hidden;
 }
-.errors{
-	margin: 8px 0;
-	padding: 10px 36px;
-	background-color: #FE7D7D;
-	position: relative;
-	text-align: left;
-	display: none;
-	color: #fff;
+
+/* Error block styles */
+.errors {
+    display: none; /* Hidden by default */
+    color: #d32f2f; /* Red error text */
+    background: #ffebee; /* Light red background */
+    border: 1px solid #d32f2f; /* Subtle border */
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-top: 5px;
+    max-width: 100%;
+    word-wrap: break-word;
 }
-.errors::before{
-	display: block;
-	content: " ";
-	width: 0px;
-	height: 0px;
-	position: absolute;
-	top: -7px;
-	left: 0px;
-	border-bottom: 8px solid #FE7D7D;
-	border-right: 10px solid transparent;
+
+/* When visible */
+.errors.show {
+    display: block; /* Show when needed */
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Input fields with errors */
+input.error {
+    border-color: #d32f2f !important;
+    background: #ffebee;
+}
+
+/* Shake animation (optional) for invalid fields */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+}
+
+input.error.shake {
+    animation: shake 0.3s ease-in-out;
 }
 
 .overlay_container{
@@ -701,3 +755,4 @@ select:focus{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+

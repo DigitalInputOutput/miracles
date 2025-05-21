@@ -99,7 +99,7 @@ templates = {
 %s грн.""",
             'card':"""5218 5722 2069 6830 Шинаков Виталий Александрович 
 %s грн.""",
-            'order':"""Заказ %s igroteka.ua (096)443-47-58"""
+            'order':"""Заказ %s miracles.site (096)443-47-58"""
             }
 
 
@@ -109,7 +109,7 @@ templates = {
 def mass_sms(request):
     orders = Order.objects.filter(status=8)
     if orders:
-        connection = pymysql.connect(host='94.249.146.189',user='igroteka',password='JB8-GMT-ELg-dzE',db='users',charset='utf8')
+        connection = pymysql.connect(host='94.249.146.189',user='miracles',password='JB8-GMT-ELg-dzE',db='users',charset='utf8')
         try:
             with connection.cursor() as cursor:
                 query = "SET NAMES utf8"
@@ -119,7 +119,7 @@ def mass_sms(request):
                     phone = order.user.phone
                     if not "38" in phone[:2]:
                         phone = '38%s' % phone
-                    query = """INSERT INTO igroteka (sign,number,message) VALUES("Igroteka","{}","{}")""".format(phone,templates.get('ttn') % data)
+                    query = """INSERT INTO miracles (sign,number,message) VALUES("miracles","{}","{}")""".format(phone,templates.get('ttn') % data)
                     cursor.execute(query)
                     order.status = 6
                     order.save()
@@ -144,12 +144,12 @@ def sms(request,id,type,summ = None):
         data = summ
     else:
         data = order.cart.total
-    connection = pymysql.connect(host='94.249.146.189',user='igroteka',password='JB8-GMT-ELg-dzE',db='users',charset='utf8')
+    connection = pymysql.connect(host='94.249.146.189',user='miracles',password='JB8-GMT-ELg-dzE',db='users',charset='utf8')
     try:
         with connection.cursor() as cursor:
             query = "SET NAMES utf8"
             cursor.execute(query)
-            query = """INSERT INTO igroteka (sign,number,message) VALUES("Igroteka","{}","{}")""".format(phone,templates.get(type) % data)
+            query = """INSERT INTO miracles (sign,number,message) VALUES("miracles","{}","{}")""".format(phone,templates.get(type) % data)
             cursor.execute(query)
 
         connection.commit()

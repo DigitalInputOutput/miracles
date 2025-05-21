@@ -6,4 +6,4 @@ class Command(BaseCommand):
     devices = ["desktop", "mobile"]
 
     def handle(self, *args, **kwargs):
-        MinifyService.handle_command("shop", kwargs)
+        MinifyService.handle_command(kwargs)

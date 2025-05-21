@@ -1,12 +1,12 @@
 {%load i18n%}
 {%load export_status%}
 <div id="toggleProductInfo" class="edit-panel-icon toggle-panel">
-    <i class="fas fa-cog"></i>
+    <i class="ti ti-settings"></i>
 </div>
 <div id="panel-menu">
     <div id="search">
         <div class="toggle-panel panel-icon action">
-            <i class="fas fa-hamburger"></i>
+            <i class="ti ti-menu"></i>
         </div>
     </div>
     <div id="panel">
@@ -16,7 +16,7 @@
                     <div class="heading">{{export.name}}</div>
                     <div class="field">
                         <label class="custom-radio">
-                            {% trans 'Так'%}
+                            {% trans 'Yes'%}
                             <input value="true" type="radio" autocomplete="off" name="{{export.id}}"{%export_status_checked item export True%}>
                             <span class="checkmark">
                                 <span class="inside"></span>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="field">
                         <label class="custom-radio">
-                            {% trans 'Ні'%}
+                            {% trans 'No'%}
                             <input value="false" type="radio" autocomplete="off" name="{{export.id}}"{%export_status_checked item export False%}>
                             <span class="checkmark">
                                 <span class="inside"></span>
@@ -35,7 +35,7 @@
                     {%if export.has_meta%}
                         <div class="meta">
                             <div class="input">
-                                <input type="text" name="export-name" autocomplete="off" placeholder="{% trans 'Назва'%}" value="{% export_status item export 'name' %}">
+                                <input type="text" name="export-name" autocomplete="off" placeholder="{% trans 'Name'%}" value="{% export_status item export 'name' %}">
                             </div>
                             <div class="input">
                                 <textarea name="text" autocomplete="off" placeholder="{% trans 'Опис'%}" id="export-text">

@@ -9,8 +9,8 @@ class Command(BaseCommand):
     help = 'Google CSV'
 
     def handle(self, *args, **options):
-        DOMAIN = 'https://igroteka.ua/'
-        DOMAIN_IMAGE = 'https://igroteka.ua'
+        DOMAIN = 'https://miracles.site/'
+        DOMAIN_IMAGE = 'https://miracles.site'
         with open(BASE_DIR + '/static/google_feed.txt','w') as f:
             f.write('id\ttitle\tdescription\tlink\timage_link\tavailability\tprice\tbrand\tgoogle product category')
             f.write('\n')

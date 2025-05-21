@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-DOMAIN = 'https://m.igroteka.ua'
+DOMAIN = 'https://m.miracles.site'
 
-ADMIN_BASE_URL = 'http://manager.igroteka.ua'
+ADMIN_BASE_URL = 'http://manager.miracles.site'
 
 import os, pymysql, sys
 pymysql.install_as_MySQLdb()
@@ -34,8 +34,8 @@ SECRET_KEY = '7fqe!*lzrarw&hht2f3^*9=mc$h9x_qb&@)2j@8d!!p-z*&y!k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['m.igroteka.ua']
-BASE_URL = 'm.igroteka.ua'
+ALLOWED_HOSTS = ['m.miracles.site']
+BASE_URL = 'm.miracles.site'
 PROTOCOL = 'https'
 
 sys.path.append('/home/core/shop/core')
@@ -100,8 +100,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '127.0.0.1',
-        'NAME': 'igroteka_db',
-        'USER': 'igroteka_user',
+        'NAME': 'miracles_db',
+        'USER': 'miracles_user',
         'PASSWORD': 'S53zpC9zHseSKczw',
         'OPTIONS': {
             'sql_mode': 'STRICT_TRANS_TABLES',
@@ -166,7 +166,7 @@ LANGUAGE_SESSION_KEY = 'lang'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_ROOT = '/home/petrov/igroteka.ua/static/'
+STATIC_ROOT = '/home/petrov/miracles.site/static/'
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = '/hdd/media/'
@@ -175,10 +175,10 @@ MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'mobile.User'
 WATERMARK = STATIC_ROOT + 'wotermark1.png'
 
-CACHE_FOLDER = '/home/core/cache/igroteka.ua/'
-HOME_DIR = '/home/core/mobile/igroteka.ua/'
+CACHE_FOLDER = ''
+HOME_DIR = ''
 
-NO_IMAGE_PLACEHOLDER = '/media/data/no_image.jpg'
+NO_IMAGE_PLACEHOLDER = '/media/no_image.jpg'
 
 CSS_BUILD = 42
 JS_BUILD = 42

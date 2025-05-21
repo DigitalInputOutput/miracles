@@ -1,168 +1,110 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import JsonResponse,Http404
-from json import loads,dumps
 from django.views.generic import View
-from django.db.models.fields.files import ImageFieldFile
-from shop.models import Language,DefaultMetaData
-from system.settings import COMPANY_NAME, PHONES
+from django.http import JsonResponse
+from json import loads,dumps
+from django.forms.models import model_to_dict
+from django.utils.translation import gettext as _
+from .meta import MetaView
+from manager.utils import update_object
 
-class EditViewSimple(View): 
+class EditView(View, MetaView): 
     def get(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        item = get_object_or_404(Model.objects,pk=kwargs.get('id'))
-
-        initial = item.__dict__
-        form = Model.form(initial=initial,instance=item)
+        AdminModel = request.AdminModel
+        item = get_object_or_404(AdminModel.objects,pk=kwargs.get('id'))
+        form = AdminModel.form(initial=model_to_dict(item),instance=item)
 
         context = {
             'item':item,
             'form':form,
-            'Model':Model,
-            '%s_id' % Model:item.pk,
+            'AdminModel':AdminModel,
+            f'{AdminModel.__name__}_id': item.pk,
             'context':{
-                'title':Model.title(item)
-            }
+                'title':AdminModel.title(item)
+            },
         }
-        context = Model.extraContext(context)
+        AdminModel.extraContext(context)
 
-        context['context'] = dumps(dumps(context['context']))
+        context['context'] = dumps(context['context'])
 
-        return render(request,Model.editTemplate,context)
+        if AdminModel.uses_slug():
+            self.add_meta_forms(context, AdminModel, item)
+
+        return render(request, AdminModel.editTemplate, context)
 
     def post(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        item = get_object_or_404(Model.objects,pk=kwargs.get('id'))
-        json = loads(request.body.decode('utf8'))
+        AdminModel = request.AdminModel
 
-        updated = 0
-        for field,value in json.items():
-            if Model.update_field(item,field,value):
-                updated += 1
+        item = get_object_or_404(AdminModel.objects,pk=kwargs.get('id'))
 
-        if updated:
-            item.save()
-            return JsonResponse({'result':True,'updated':updated})
+        try:
+            json = loads(request.body.decode('utf8'))
+        except Exception:
+            return JsonResponse({'result': False, 'error': 'Invalid JSON'}, status=400)
 
-        return JsonResponse({'result':False,'updated':updated})
+        updated, errors = update_object(item, json)
+
+        if errors:
+            return JsonResponse({'result': False, 'errors': errors}, status=400)
+
+        return JsonResponse({'result':bool(updated),'updated':updated})
 
     def put(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        item = get_object_or_404(Model.objects,pk=kwargs.get('id'))
-        json = loads(request.body.decode('utf8'))
+        AdminModel = request.AdminModel
+        item = get_object_or_404(AdminModel.objects,pk=kwargs.get('id'))
 
-        initial = item.__dict__
-        form = Model.form(json,instance=item,initial=initial)
+        try:
+            json = loads(request.body.decode('utf8'))
+        except Exception:
+            return JsonResponse({
+                    'result': False,
+                    'error': 'Invalid JSON'
+                },status=400)
 
-        if form.is_valid():
-            item = form.save(commit=False)
-            item.save()
-            form.save_m2m()
-            Model.saveExtras(json,item)
-
-            return JsonResponse({'result':True})
-        else:
-            return JsonResponse({'result':False,'errors':form.errors,'nonferrs':form.non_field_errors()})
-
-class EditView(EditViewSimple): 
-    def get(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        if Model.editTemplate != 'main/slug.html':
-            return super().get(request,*args,**kwargs)
-
-        item = get_object_or_404(Model.objects,pk=kwargs.get('id'))
-
-        initial = item.__dict__
-        form = Model.form(initial=initial,instance=item)
-
-        context = {
-            'item':item,
-            'form':form,
-            'Model':Model,
-            '%s_id' % Model:item.pk,
-            'context':{
-                'title':Model.title(item)
-            }
+        form_kwargs = {
+            'data': json,
+            'instance': item,
+            'initial': model_to_dict(item),
         }
-        context['meta'] = []
-        for lang in Language.objects.all():
 
-            try:
-                meta = Model.meta(instance=item.description.get(language=lang),initial={'lang':lang})
-            except:
-                meta = Model.meta(initial={'lang':lang,'name':item.name},item=item)
+        if AdminModel.uses_slug():
+            metaM2M = self.validate_meta(json, str(AdminModel), item)
 
-            context['meta'].append(meta)
-        context = Model.extraContext(context)
+            if (not item.title or not item.meta_description) and not metaM2M:
+                return JsonResponse({
+                    'nonferrs':_('Set title or fill <a href="/meta/list">Meta</a>-template.')
+                })
 
-        context['context'] = dumps(dumps(context['context']))
+            form_kwargs['name'] = metaM2M[0].name
 
-        return render(request,Model.editTemplate,context)
+        form = AdminModel.form(**form_kwargs)
 
-    def put(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        if Model.editTemplate != 'main/slug.html':
-            return super().put(request,*args,**kwargs)
+        if not form.is_valid():
+            return JsonResponse({
+                'errors':form.errors,
+                'nonferrs':form.non_field_errors()
+            })
+    
+        item = form.save(commit=False)
 
-        item = get_object_or_404(Model.objects,pk=kwargs.get('id'))
-        json = loads(request.body.decode('utf8'))
-        initial = item.__dict__
+        item.save()
 
-        metaM2M = []
-        json['description'] = []
-        for lang in Language.objects.all():
-            try:
-                currentMeta = item.description.get(language=lang)
-                metaForm = Model.meta(json,instance=currentMeta,initial=currentMeta.__dict__,prefix=lang.code)
-            except Exception as e:
-                metaForm = Model.meta(json,item=item,initial={'lang':lang,'name':item.name},prefix=lang.code)
+        form.save_m2m()
+        AdminModel.saveExtras(json,item)
 
-            if metaForm.is_valid():
-                meta = metaForm.save(commit=False)
-
-                template = Meta.objects.filter(language=meta.language,model=list(dict(Meta.model_choices).values()).index(Model.form._meta.model.__name__)).first()
-                if template:
-                    meta.title = meta.title or template.title.format(**{'obj':meta,'COMPANY_NAME':COMPANY_NAME})
-                    meta.meta_description = meta.meta_description or template.meta_description.format(**{'obj':meta,'COMPANY_NAME':COMPANY_NAME,'PHONES':' '.join(PHONES)})[:255]
-                    meta.meta_keywords = meta.meta_keywords or template.meta_keywords.format(**{'obj':meta,'COMPANY_NAME':COMPANY_NAME,'PHONES':' '.join(PHONES)})[:255]
-
-                if not meta.title and not template:
-                    return JsonResponse({'nonferrs':'Укажите title или заполните <a href="/meta/list">Meta</a>-шаблон.'})
-
-                if not meta.meta_description and not template:
-                    return JsonResponse({'nonferrs':'Укажите meta_description или заполните <a href="/meta/list">Meta</a>-шаблон.'})
-
-                metaM2M.append(meta)
-            else:
-                return JsonResponse({'errors':metaForm.errors,'nonferrs':metaForm.non_field_errors()})
-
-        form = Model.form(json,instance=item,initial=initial,name=metaM2M[0].name)
-
-        if form.is_valid():
-            item = form.save(commit=False)
-
-            if item.customView == 'City':
-                item.customView = 'Home'
-
-            item.save()
-
-            form.save_m2m()
-            Model.saveExtras(json,item)
-
+        if AdminModel.uses_slug():
             for meta in metaM2M:
                 meta.save()
                 item.description.add(meta)
 
-            context = {
-                'result':True
-            }
-            context.update(Model.context(item))
+        context = {
+            'result':True
+        }
+        context.update(AdminModel.context(item))
 
-            return JsonResponse(context)
+        return JsonResponse(context)
 
-        return JsonResponse({'errors':form.errors,'nonferrs':form.non_field_errors()})
-
-    def delete(self,request,Model,*args,**kwargs):
-        item = get_object_or_404(Model.objects,pk=kwargs.get('id'))
+    def delete(self,request,AdminModel,*args,**kwargs):
+        item = get_object_or_404(AdminModel.objects,pk=kwargs.get('id'))
         item.delete()
 
         return JsonResponse({'result':True})

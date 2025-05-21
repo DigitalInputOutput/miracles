@@ -1,17 +1,18 @@
-import { GET } from "/static/js/desktop/vanilla/http/method.js";
+import { GET } from "/static/js/desktop/vanilla/http/navigation.js";
 
 export class Autocomplete{
     constructor(context){
-        this.View = context.View;
+        console.log(context);
+        this.success = context.success;
         this.Model = context.Model;
         this.timeout = undefined;
-        this.container = context.template;
+        this.container = context.container;
 
         this.textInput = this.container.find('.name input[type="text"]')[0];
 
         this.textInput.on('paste keydown click',this.change.bind(this));
 
-        if(!this.View){
+        if(!this.success){
             this.hiddenInput = this.container.find('.name input[type="hidden"]')[0];
             this.values = eval(this.hiddenInput.value);
 
@@ -86,10 +87,10 @@ export class Autocomplete{
         this.timeout = setTimeout(function() {
             if(input.value && input.value.length >= 3){
                 GET(`/autocomplete/${that.Model}/${input.value}`,{
-                    View:function(response){
-                        that.result_container.html(templates.autocomplete(response.json.items));
+                    success:(response) => {
+                        Dom.render("#variants",that.result_container,response.items);
                         that.result_container.show();
-                        that.result_container.find('div').on('click',that.View ? that.View : that.pick.bind(that));
+                        that.result_container.find('div').on('click',that.View ? that.success : that.pick.bind(that));
                     },
                 });
             }
@@ -100,7 +101,7 @@ export class Autocomplete{
         if(item){
             e = {};
             e.target = item;
-            this.View(e);
+            this.success(e);
         }
     }
     press_down(e){

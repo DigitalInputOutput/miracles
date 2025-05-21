@@ -115,7 +115,6 @@ class ContextBuilder:
                     self.context.update({
                         'title': description.title,
                         'meta_description': description.meta_description,
-                        'meta_keywords': description.meta_keywords,
                         'url': obj.get_url,
                         'h1': description.name,
                         'image': f"https://{self.request.get_host()}{obj.meta_image}",
@@ -131,8 +130,7 @@ class ContextBuilder:
                 else:
                     self.context.update({
                         'title': getattr(obj, 'title', getattr(obj, 'name', '')),
-                        'meta_description': getattr(obj, 'meta_description', ''),
-                        'meta_keywords': getattr(obj, 'meta_keywords', '')
+                        'meta_description': getattr(obj, 'meta_description', '')
                     })
 
                 # Admin edit link and city exclusion for City instances

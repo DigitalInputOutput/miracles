@@ -1,31 +1,8 @@
 from django.db import models
-from catalog.models import Product,Brand,Category,AbstractGallery
-from django.utils import timezone
+from catalog.models import Product
 from math import ceil
 from django.utils.translation import gettext_lazy as _
 from bs4 import BeautifulSoup
-
-from tasks import prices,stock,google_merchant,facebook_merchant,np
-
-try:
-    from tasks import clone_stock
-except:
-    pass
-
-try:
-    from tasks import rozetka
-except:
-    pass
-
-try:
-    from tasks import hotline
-except:
-    pass
-
-try:
-    from tasks import currency_prices
-except:
-    pass
 
 class Task(models.Model): 
     name = models.CharField(max_length=100,null=True,unique=True)
@@ -123,7 +100,7 @@ class GoogleFeed(models.Model):
     def __str__(self):
         return self.product.__str__()
 
-class Price(models.Model): 
+class PriceFrmTo(models.Model): 
     frm = models.PositiveIntegerField()
     to = models.PositiveIntegerField()
 
@@ -131,7 +108,7 @@ class Price(models.Model):
         return "%s - %s" % (self.frm,self.to)
 
 class Percent(models.Model): 
-    price = models.ForeignKey(Price,null=True,on_delete=models.CASCADE)
+    price = models.ForeignKey(PriceFrmTo,null=True,on_delete=models.CASCADE)
     percent = models.FloatField(verbose_name=_('Процентна націнка'))
     additional = models.PositiveIntegerField(null=True,default=0)
 
@@ -206,38 +183,3 @@ class Storage(AbstractStorage):
         verbose_name = _('Нові товари')
         verbose_name_plural = _('Нові товари')
         ordering = ['-active']
-
-# class Tigres(AbstractStorage):
-#     retail_price = models.PositiveIntegerField()
-#     big_opt_price = models.PositiveIntegerField()
-#     brand = models.ForeignKey(Brand,on_delete=models.CASCADE)
-#     category = models.ForeignKey(Category,related_name='tigres_product',null=True,on_delete=models.CASCADE)
-
-#     @property
-#     def image(self):
-#         gallery = self.gallery.first()
-#         return gallery if gallery else None
-
-#     @property
-#     def admin_image(self):
-#         if self.image:
-#             return "<img src='/media/%s'>" % self.image.image
-#         else:
-#             return "<img src='/media/data/no_image_new.jpg'>"
-
-#     class Meta:
-#         verbose_name = _('Тегро')
-#         verbose_name_plural = _('Тегро')
-#         ordering = ['-active']
-
-# class TigresGallery(AbstractGallery):
-#     product = models.ForeignKey(Tigres,related_name="gallery",on_delete=models.CASCADE)
-
-#     def save(self,*args,**kwargs):
-#         self.last_modified = timezone.now()
-
-#         models.Model.save(self,*args,**kwargs)
-
-#     class Meta:
-#         verbose_name = _('Зображення Тегро')
-#         verbose_name_plural = _('Зображення Тегро')

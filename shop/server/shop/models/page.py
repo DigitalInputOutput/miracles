@@ -62,10 +62,6 @@ class Page(Model):
     def meta_description(self):
         return self.__str__()
 
-    @property
-    def meta_keywords(self):
-        return self.__str__()
-
     def name(self,lang = LANGUAGE_CODE):
         return self.description.filter(language__code=lang).name
 
@@ -185,15 +181,6 @@ class Page(Model):
         dst.save()
 
         self.description.add(dst)
-
-    def template_meta(self):
-        for d in self.description.all():
-            d.title = ''
-            d.meta_description = ''
-            d.meta_keywords = ''
-
-            d.save()
-
 
     def add_redirect(self,old_string,new_string):
         if old_string != new_string:

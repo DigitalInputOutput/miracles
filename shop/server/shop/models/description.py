@@ -6,12 +6,11 @@ from system.settings import COMPANY_NAME, PHONES
 
 __all__ = ['Description','DefaultMetaData']
 
-class DefaultMetaData(models.Model): 
+class DefaultMetaData(models.Model):
     language = models.ForeignKey(Language,null=True,on_delete=models.SET_NULL)
     model = models.CharField(max_length=20)
     title = models.CharField(max_length=100)
     meta_description = models.CharField(max_length=255)
-    meta_keywords = models.CharField(max_length=255)
 
     class Meta:
         unique_together = ('language','model')
@@ -23,7 +22,6 @@ class Description(models.Model):
     json_text = models.TextField(max_length=20000,null=True)
     title = models.CharField(max_length=255,null=True)
     meta_description = models.CharField(max_length=255,null=True)
-    meta_keywords = models.CharField(max_length=255,null=True)
     last_modified = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -43,14 +41,25 @@ class Description(models.Model):
 
         super().save(*args,**kwargs)
 
-    def format_meta_data(self):
+    @classmethod
+    def format_meta_data(obj, model_name, item):
+        template = DefaultMetaData.objects.filter(
+            language=item.language,
+            model=model_name,
+            ).first()
+    
+        if not template:
+            return None
 
-        template = DefaultMetaData.objects.filter(language=self.language,model=list(dict(Meta.model_choices).values()).index(self.obj.model.__name__)).first()
-        
-        if template:
-            self.title = self.title or template.title.format(**{'obj':self,'COMPANY_NAME':COMPANY_NAME})
-            self.meta_description = self.meta_description or template.meta_description.format(**{'obj':self,'COMPANY_NAME':COMPANY_NAME,'PHONES':' '.join(PHONES)})[:255]
-            self.meta_keywords = self.meta_keywords or template.meta_keywords.format(**{'obj':self,'COMPANY_NAME':COMPANY_NAME,'PHONES':' '.join(PHONES)})[:255]
+        item.title = item.title or template.title.format(**{
+            'obj':item,'COMPANY_NAME':COMPANY_NAME
+        })
+
+        item.meta_description = item.meta_description or template.meta_description.format(**{
+            'obj':item,'COMPANY_NAME':COMPANY_NAME,'PHONES':' '.join(PHONES)
+        })[:255]
+
+        return item
 
     def __str__(self):
         return self.name or ''

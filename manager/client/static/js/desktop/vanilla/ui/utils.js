@@ -1,3 +1,25 @@
+export const debounce = (fn, delay) => {
+    let timer;
+    return function() {
+        let context = this, args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(context, args), delay);
+    };
+};
+
+export function loadScripts(){
+    // Extract and execute scripts from the new content
+    Dom.query('script').each((script) => {
+        const newScript = document.createElement("script");
+        if (script.src) {
+            newScript.src = script.src;  // Reload external scripts
+        } else {
+            newScript.textContent = script.textContent;  // Re-execute inline scripts
+        }
+        document.body.appendChild(newScript);
+    });
+}
+
 (function() {
     'use strict';
 
@@ -7,6 +29,14 @@
         });
         await asyncFunc();
     };
+    function toBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
 
     const mapData = {
         'P':'paragraph',

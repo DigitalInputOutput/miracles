@@ -4,13 +4,13 @@
         <div class="box">
             <div class="custom-select">
                 <select name="task" id="tasks-select" autocomplete="off">
-                    <option value="">{%trans 'Оберіть завдання'%}</option>
+                    <option value="">{%trans 'Pick task'%}</option>
                     {%for task in tasks%}
                         <option value="{{task.id}}">{{task.name}}</option>
                     {%endfor%}
                 </select>
             </div>
-            <i class="fas fa-cog"></i>
+            <i class="ti ti-settings"></i>
         </div>
         {%for task in tasks%}
             <div class="task_status">

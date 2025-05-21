@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-10 15:31-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: forms.py:17
+msgid "нагадайте свій номер телефону"
+msgstr ""
+
+#: forms.py:23
+msgid "Новий пароль"
+msgstr ""
+
+#: forms.py:23
+msgid "Новий пароль*"
+msgstr ""
+
+#: forms.py:24
+msgid "Ще раз"
+msgstr ""
+
+#: forms.py:24
+msgid "Ще раз*"
+msgstr ""
+
+#: forms.py:32 forms.py:51
+msgid "Паролі не співпадають"
+msgstr ""
+
+#: forms.py:36
+msgid "Пароль*"
+msgstr ""
+
+#: forms.py:37
+msgid "Пароль ще раз*"
+msgstr ""
+
+#: forms.py:38
+msgid "ФИО*"
+msgstr ""
+
+#: forms.py:38
+msgid "ПІП*"
+msgstr ""
+
+#: forms.py:39
+msgid "Email-адрес"
+msgstr ""
+
+#: forms.py:39
+msgid "Email адреса"
+msgstr ""
+
+#: forms.py:40 forms.py:68 forms.py:82
+msgid "Номер телефону:"
+msgstr "Phone number:"
+
+#: forms.py:40 forms.py:68 forms.py:82 forms.py:103 models.py:31
+msgid "Номер телефону"
+msgstr "Phone number"
+
+#: forms.py:41
+msgid "Підписатися на розсилку"
+msgstr ""
+
+#: forms.py:94
+msgid "Неправильний номер(приклад 0971112233)"
+msgstr ""
+
+#: forms.py:103
+msgid "Номер телефону або логін*:"
+msgstr "Phonenumber or login*:"
+
+#: forms.py:104
+msgid "Пароль*:"
+msgstr "Password*:"
+
+#: forms.py:104
+msgid "Пароль"
+msgstr "Password"
+
+#: managers.py:7
+msgid "The Device ID must be set"
+msgstr ""
+
+#: managers.py:18
+msgid "Superuser must have is_staff=True."
+msgstr ""
+
+#: managers.py:20
+msgid "Superuser must have is_admin=True."
+msgstr ""
+
+#: models.py:13
+msgid "Вкажіть HOST, EMAIL та EMAIL_TITLE в settngs"
+msgstr ""
+
+#: models.py:20
+msgid "Код"
+msgstr ""
+
+#: models.py:27
+msgid "Email підтверджено"
+msgstr ""
+
+#: models.py:28
+msgid "Ім'я"
+msgstr ""
+
+#: models.py:29
+msgid "Призвище"
+msgstr ""
+
+#: models.py:30
+msgid "По батькові"
+msgstr ""
+
+#: models.py:33
+msgid "Активен"
+msgstr ""
+
+#: models.py:35
+msgid "Статус користувача"
+msgstr ""
+
+#: models.py:36
+msgid "Підписати пошту"
+msgstr ""
+
+#: models.py:37
+msgid "Востаннє в мережі"
+msgstr ""
+
+#: models.py:38
+msgid "Дата реєстрації"
+msgstr ""
+
+#: models.py:77
+msgid "Відновлення паролю"
+msgstr ""
+
+#: models.py:115 models.py:116
+msgid "Користувачи"
+msgstr ""
+
+#: views/compare.py:10
+msgid "Порівняння товарів"
+msgstr ""
+
+#: views/favorite.py:10
+msgid "Обрані товари"
+msgstr ""
+
+#: views/forget_pass.py:22
+msgid "Пользователь не найден."
+msgstr ""
+
+#: views/forget_pass.py:44
+msgid "Не сошлись данные пароля"
+msgstr ""
+
+#: views/forget_pass.py:46
+msgid "Не сошлись данные"
+msgstr ""
+
+#: views/forget_pass.py:49 views/forget_pass.py:61
+msgid "Смена пароля"
+msgstr ""
+
+#: views/forget_pass.py:70
+msgid "Пароль изменен успешно."
+msgstr ""
+
+#: views/profile.py:161
+msgid "Информации нет"
+msgstr ""
+
+#: views/profile.py:183
+msgid "Личный кабинет"
+msgstr ""
+
+#: views/signin.py:63 views/signin.py:66
+msgid "Пароль не подошел"
+msgstr ""
+
+#: views/signup.py:50
+msgid "Регистрация"
+msgstr ""
+
+#: views/signup.py:74
+msgid "С полями формы что то не так."
+msgstr ""

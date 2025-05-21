@@ -1,10 +1,11 @@
 {%load value%}
+{%load i18n%}
 {%for item in items%}
     <div class="item column">
         <input type="checkbox" value="{{item.pk}}" name="delete">
-        {%for field in Model|value:item%}
+        {%for field in AdminModel|value:item%}
             {%if forloop.counter == 2%}
-                <a class="item-column" href="/{{Model}}/{{item.pk}}">{{field}}</a>
+                <a class="item-column" href="/{{AdminModel}}/{{item.pk}}">{{field}}</a>
             {%else%}
                 <div class="item-column">{{field|default_if_none:''|safe}}</div>
             {%endif%}
@@ -15,7 +16,7 @@
     <div id="pagination">
         <span class="step-links">
             {% if items.has_previous and items.previous_page_number > 1%}
-                <a class='prevPage' href="?page={{items.previous_page_number}}"> < Пред.</a>
+                <a class='prevPage' href="?page={{items.previous_page_number}}"> < {% trans 'Prev'%}.</a>
             {% endif %}
             {%for page in items.paginator.page_range%}
                 {%if page == items.number%}
@@ -27,18 +28,18 @@
                 {%endif%}
             {%endfor%}
             {% if items.has_next %}
-                <a class='nextPage' href="?page={{items.next_page_number}}"> След. > </a>
+                <a class='nextPage' href="?page={{items.next_page_number}}"> {% trans 'Next.'%} > </a>
             {% endif %}
         </span>
         <div class="pagi-info">
             {%if items.paginator.per_page%}
-                <span class="search-count">{{items.paginator.per_page}} на странице</span>
+                <span class="search-count">{{items.paginator.per_page}} {% trans 'on the page'%}</span>
             {%endif%}
             {%if count%}
-                <span class="search-count">{{count}} всего</span>
+                <span class="search-count">{{count}} {% trans 'total'%}</span>
             {%endif%}
             {% if items.has_next %}
-                <a id="list-all">Показать все</a>
+                <a id="list-all">{% trans 'Show all'%}</a>
             {% endif %}
         </div>
     </div>

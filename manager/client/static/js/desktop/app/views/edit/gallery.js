@@ -75,7 +75,7 @@ export class Gallery extends OneToOne{
 		reader.onload = function(e){
 			let div = Dom.create('div');
 			div.set('class','image ui-sortable-handle');
-			div.html('<div class="remove"><i class="fas fa-times"></i></div>');
+			div.html('<div class="remove"><i class="ti ti-cross"></i></div>');
 			div.find('.remove')[0].on('click',that.remove);
 			let image = Dom.create('img');
 			image.src = e.target.result;

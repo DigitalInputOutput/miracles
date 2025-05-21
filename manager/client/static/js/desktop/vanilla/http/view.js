@@ -9,25 +9,26 @@ export class View {
     }
 
     static render(context){
-        let view = context.View;
+        let requested_view = context.View;
         let model = context.Model || '';
 
-        if (typeof view === "string") {
-            /* Convert string to class/function dynamically */
-            view = View.resolve(`${model}${view}`);
+        if (typeof requested_view === "string") {
+            try{
+                requested_view = View.resolve(`${model}${requested_view}`);
+            } catch(e) {
+                requested_view = View.resolve(context.defaultView);
+            }
         }
 
-        if (view.prototype?.constructor) {
-            new view(context); /* Class-based view */
-        } else if (typeof view === "function") {
-            view(context); /* Functional view */
+        if (requested_view.prototype?.constructor) {
+            return new requested_view(context); /* Class-based view */
+        } else if (typeof requested_view === "function") {
+            return requested_view(context); /* Functional view */
         // } else if (typeof view === 'object') {
         //     View.render(context); /* Handle custom object-based Views */
         } else {
             throw new Error("Invalid View type");
         }
-
-        throw new Error("No matching view found for the current URL");
     }
 
     static resolve(viewName) {

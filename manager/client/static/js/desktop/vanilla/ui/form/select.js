@@ -11,7 +11,7 @@ export class Select{
         this.id = this.select.id;
         this.select.indexOf = {};
 
-        let template = Dom.render(Dom.query('#selectTemplate'));
+        let template = Dom.getTemplate('#selectTemplate');
         this.selectOptions = template.querySelector('.select-items');
         this.textContainer = template.querySelector('.select-selected');
         this.wrapper = this.selectOptions.querySelector('.sel-items-wrapper');
@@ -134,19 +134,20 @@ export class Select{
                 select.container.removeClass('active');
         }
     }
-    static customizeSelect(parameters){
+    static customize(parameters){
+        let containers;
         if(parameters && parameters.items)
-            var containers = parameters.items;
+            containers = parameters.items;
         else{
-            var containers = Dom.query('.custom-select');
+            containers = Dom.query('.custom-select');
         }
-    
-        var result = {};
+
+        let result = {};
         for(let container of containers){
             let select = new Select({container:container});
             result[select.id] = select;
         }
-    
+
         return result;
     }
 }

@@ -1,20 +1,19 @@
 from django import forms
 
-from shop.models import Info,InfoDescription,Description,CityDescription,Url, \
+from shop.models import Info,InfoDescription,CityDescription,Url, \
     Currency,City,DefaultMetaData,Robots,Redirect,Language,Settings, \
     Slider,Sms
 from catalog.models import ProductDescription,CategoryDescription, \
 BrandDescription,TagDescription,Popular,Category, \
-Featured,Product,Brand,Special,Gallery,Offer, \
+Featured,Product,Brand,Special,Offer, \
 Special,Attribute,Value,Brand,Product,Tag
 
 from manager.widgets import *
 from manager.translit import translit as slugify
 from manager.fields import AutocompleteSelectField,AutocompleteSelectMultipleField,ImageField
 from user.models import User
-from manager.models import Task,Site,GoogleFeed,Storage,Percent,Price,Export
-from json import loads
-from checkout.models import Department,Seat,Cart,Item
+from manager.models import Task,Site,GoogleFeed,Percent,PriceFrmTo,Export
+from checkout.models import Seat,Cart,Item
 from system.settings import STORAGE_CHOICES,BASE_URL
 import re
 from requests import get
@@ -25,6 +24,8 @@ from html import unescape
 from bs4 import BeautifulSoup as parser
 
 from django.utils.translation import gettext_lazy as _
+import base64
+from django.core.files.base import ContentFile
 
 __all__ = ['PageDescriptionForm','CityDescriptionForm','CategoryDescriptionForm',
             'BrandDescriptionForm','ProductDescriptionForm','TagDescriptionForm',
@@ -36,10 +37,45 @@ __all__ = ['PageDescriptionForm','CityDescriptionForm','CategoryDescriptionForm'
             'TagForm','RedirectForm','CurrencyForm','SeatForm','ExportForm','TaskForm'
         ]
 
-from checkout.forms import CheckoutForm
-from .widgets import SelectInputWidget
 from django import forms
 from checkout.models import Order
+
+class Base64Form(BetterModelForm):
+    image = forms.CharField(
+        widget=ImageWidget(),
+        label='',
+        required=False
+    )  # Store Base64 string
+
+    def clean_image(self):
+        """ Convert Base64 to an image file """
+        image_data = self.cleaned_data.get("image")
+        if image_data:
+            # Remove metadata (e.g., "data:image/png;base64,")
+            image_data = re.sub(r'data:image/[a-z]+;base64,', '', image_data)
+            image_binary = base64.b64decode(image_data)
+
+            # Generate a filename
+            filename = f"{re.search(r'[a-z0-9A-Z]+', image_data[27:42])[0]}.jpg"
+
+            # Create Django file object
+            return ContentFile(image_binary, name=filename)
+        return None
+
+    # def save(self, commit=True):
+    #     """ Override save method to handle Base64 images """
+    #     instance = super().save(commit=False)
+    #     base64_file = self.cleaned_data.get("image")
+
+    #     if base64_file:
+    #         instance.image.save(base64_file.name, base64_file, save=False)
+
+    #     if commit:
+    #         instance.save()
+    #     return instance
+
+    class Meta:
+        abstract = True
 
 class TaskForm(BetterModelForm): 
     class Meta:
@@ -75,21 +111,21 @@ class SliderForm(BetterModelForm):
         fields = '__all__'
         fieldsets = [
                     ('main', {'fields':['name','path','position'],'legend':''}),
-                    ('image', {'fields':['image'],'legend':_('Зображення')}),
+                    ('image', {'fields':['image'],'legend':_('Images')}),
                 ]
 
 class PercentForm(BetterModelForm): 
     frm = forms.IntegerField(
-        label=_('Від'))
+        label=_('From'))
     to = forms.IntegerField(
-        label=_('До'))
+        label=_('To'))
     price = forms.ModelChoiceField(
         label='',
-        widget=forms.HiddenInput(),queryset=Price.objects.all())
+        widget=forms.HiddenInput(),queryset=PriceFrmTo.objects.all())
 
     def save(self,*args,**kwargs):
         percent = super().save(*args,**kwargs)
-        price = percent.price or Price()
+        price = percent.price or PriceFrmTo()
         price.frm = self.cleaned_data.get('frm')
         price.to = self.cleaned_data.get('to')
         price.save()
@@ -110,11 +146,11 @@ class PercentForm(BetterModelForm):
         model = Percent
         fields = '__all__'
         fieldsets = [
-                    ('main', {'fields':['frm','to','percent','price','additional'],'legend':_('Загальне')}),
+                    ('main', {'fields':['frm','to','percent','price','additional'],'legend':_('General')}),
                 ]
 
-class UrlForm(BetterModelForm): 
-    slug = forms.CharField(
+class PageForm(BetterModelForm): 
+    url = forms.CharField(
             widget=forms.TextInput(
                 attrs={'placeholder': 'URL','autocomplete':'off'}),
             label='URL:',
@@ -137,16 +173,16 @@ class UrlForm(BetterModelForm):
             string = ''
 
         elif not string and customView != 'Main':
-            string = re.sub(r'[^a-z0-9-]+','',slugify(self.name,'uk').lower().replace('\\',''))
+            string = re.sub(r'[^a-z0-9-]+','',slugify(self.name,'en').lower().replace('\\',''))
 
         if Url.objects.filter(string=string).exclude(model=self.instance.modelName,model_id=self.instance.id).exists():
-            raise forms.ValidationError(_('URL вже існує.'))
+            raise forms.ValidationError(_('URL already exists.'))
 
         data['string'] = string
 
         return data
 
-class CityForm(UrlForm): 
+class CityForm(PageForm): 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self.fields['description'].required = False
@@ -155,10 +191,10 @@ class CityForm(UrlForm):
         model = City
         fields = '__all__'
         fieldsets = [
-                    ('main', {'fields':['slug'],'legend':''}),
+                    ('main', {'fields':['string'],'legend':''}),
                 ]
 
-# class ArticleForm(UrlForm):
+# class ArticleForm(PageForm):
 #     products = AutocompleteSelectMultipleField(model=Product,label=_('Товар'))
 
 #     def __init__(self,*args,**kwargs):
@@ -169,7 +205,7 @@ class CityForm(UrlForm):
 #         model = Article
 #         fields = '__all__'
 #         fieldsets = [
-#                     ('main', {'fields':['slug','active'],'legend':''}),
+#                     ('main', {'fields':['string','active'],'legend':''}),
 #                     ('products',{'fields':['products'],'legend':_('Товари')})
 #                 ]
 
@@ -320,9 +356,9 @@ class OrderForm(forms.ModelForm):
         self.fields['lname'].required = False
         self.fields['sname'].required = False
         self.fields['cart'].required = False
-        self.fields['city'].required = False
+        # self.fields['city'].required = False
         self.fields['delivery'].required = False
-        self.fields['ttn'].required = False
+        # self.fields['ttn'].required = False
         if kwargs.get('initial'):
             self.cart_id = kwargs.get('initial').get('cart_id')
         else:
@@ -373,7 +409,7 @@ class SettingsForm(BetterModelForm):
         fieldsets = [
                     ('main', 
                         {'fields':['logo','wotermark','attention_message','video_banner','video_url'],
-                        'legend':_('Загальне')}
+                        'legend':_('General')}
                     ),
                     ('google', 
                         {'fields':['google_analytics','google_adwords','google_tag','google_conversion','google_verification','facebook_id'],
@@ -419,7 +455,7 @@ class SmsForm(BetterModelForm):
 class UrlForm(BetterModelForm): 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['slug'].required = False
+        self.fields['string'].required = False
 
     class Meta:
         model = Url
@@ -453,7 +489,7 @@ class GoogleFeedForm(BetterModelForm):
         model = GoogleFeed
         fields = '__all__'
 
-class TagForm(UrlForm): 
+class TagForm(PageForm): 
     image = forms.CharField(
         widget=ImageWidget(),
         label='',
@@ -463,17 +499,17 @@ class TagForm(UrlForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['image'].widget.model = self.instance
-        self.fields['slug'].required = False
+        self.fields['string'].required = False
         self.fields['description'].required = False
 
     class Meta:
         model = Tag
         fields = '__all__'
         fieldsets = [
-                    ('main', {'fields':['slug','image'],'legend':_('Загальне')}),
+                    ('main', {'fields':['string','image'],'legend':_('General')}),
                 ]
 
-class BrandForm(UrlForm): 
+class BrandForm(PageForm): 
     image = ImageField(
         widget=ImageWidget(),
         label='',
@@ -489,16 +525,10 @@ class BrandForm(UrlForm):
         model = Brand
         fields = '__all__'
         fieldsets = [
-                    ('main', {'fields':['slug','country','active','h1','image'],'legend':_('Загальне')})
+                    ('main', {'fields':['string','country','active','h1','image'],'legend':_('General')})
                 ]
 
-class LanguageForm(BetterModelForm): 
-    image = forms.CharField(
-        widget=ImageWidget(),
-        label='',
-        required=False
-        )
-
+class LanguageForm(Base64Form): 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         self.fields['image'].widget.model = self.instance
@@ -508,8 +538,8 @@ class LanguageForm(BetterModelForm):
         fields = '__all__'
         fieldsets = [
                     ('main', 
-                        {'fields':['name','code','ISOcode','path','image'],
-                        'legend':_('Загальне')}
+                        {'fields':['name','code','ISOcode','path','image','active'],
+                        'legend':_('General')}
                     ),
                 ]
 
@@ -518,7 +548,7 @@ class SpecialForm(BetterModelForm):
         model = Special
         fields = ('product','price')
         fieldsets = [
-                    ('main', {'fields':['product','price'],'legend':_('Загальне')}),
+                    ('main', {'fields':['product','price'],'legend':_('General')}),
                 ]
     product = AutocompleteSelectField(model=Product,help_text=None,
         label='Товар')
@@ -528,7 +558,7 @@ class FeaturedForm(BetterModelForm):
         model = Featured
         fields = ('products','category')
         fieldsets = [
-                    ('main', {'fields':['products','category'],'legend':_('Загальне')}),
+                    ('main', {'fields':['products','category'],'legend':_('General')}),
                 ]
     products = AutocompleteSelectMultipleField(model=Product,help_text=None,
         label='Товары')
@@ -540,7 +570,7 @@ class OfferForm(BetterModelForm):
         fields = ('product',)
         model = Offer
         fieldsets = [
-                    ('main', {'fields':['product',],'legend':_('Загальне')}),
+                    ('main', {'fields':['product',],'legend':_('General')}),
                 ]
     product = AutocompleteSelectField(model=Product,help_text=None,
         label='Товар')
@@ -550,7 +580,7 @@ class PopularForm(BetterModelForm):
         fields = ('product',)
         model = Popular
         fieldsets = [
-                    ('main', {'fields':['product',],'legend':_('Загальне')}),
+                    ('main', {'fields':['product',],'legend':_('General')}),
                 ]
     product = AutocompleteSelectField(model=Product,help_text=None,
         label='Товар')
@@ -651,12 +681,6 @@ class DescriptionForm(BetterModelForm):
             label='Meta_Description:',
             required=False
         )
-    meta_keywords = forms.CharField(
-            widget=forms.TextInput(
-                attrs={'placeholder': 'Meta_Keywords','autocomplete':'off'}),
-            label='Meta_Keywords:',
-            required=False
-        )
 
     def __init__(self, *args, **kwargs):
         if not kwargs.get('instance') and kwargs.get('item'):
@@ -725,7 +749,7 @@ class DescriptionForm(BetterModelForm):
 
     class Meta:
         fieldsets = [
-                    ('main',{'fields':['name','title','meta_description','meta_keywords']}),
+                    ('main',{'fields':['name','title','meta_description']}),
                     ('description', {'fields':['text','json_text'],'legend':_('Опис'),'classes':['description']})
         ]
 
@@ -767,10 +791,10 @@ class InfoDescriptionForm(DescriptionForm):
 #         model = ArticleDescription
 #         fields = '__all__'
 
-class InfoForm(UrlForm): 
+class InfoForm(PageForm): 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.fields['slug'].required = False
+        self.fields['string'].required = False
         self.fields['description'].required = False
         self.fields['position'].required = False
 
@@ -778,69 +802,69 @@ class InfoForm(UrlForm):
         model = Info
         fields = '__all__'
         fieldsets = [
-                    ('main', {'fields':['slug','customView','position'],'legend':''}),
+                    ('main', {'fields':['string','customView','position'],'legend':''}),
                 ]
 
-class ProductForm(UrlForm): 
+class ProductForm(PageForm): 
     height = forms.CharField(
         widget=forms.TextInput(
-            attrs={'placeholder': _('Висота')}),
-        label=_('Висота'),
+            attrs={'placeholder': _('Height')}),
+        label=_('Height'),
         required=False
         )
     width = forms.CharField(
         widget=forms.TextInput(
-            attrs={'placeholder': _('Ширина')}),
-        label=_('Ширина'),
+            attrs={'placeholder': _('Width')}),
+        label=_('Width'),
         required=False
         )
     length = forms.CharField(
         widget=forms.TextInput(
-            attrs={'placeholder': _('Довжина')}),
-        label=_('Довжина'),
+            attrs={'placeholder': _('Length')}),
+        label=_('Length'),
         required=False
         )
     counter = forms.CharField(
         widget=forms.TextInput(
-            attrs={'placeholder': _('Од. виміру')}),
-        label=_('Од. виміру'),
+            attrs={'placeholder': _('Measur. Unit')}),
+        label=_('Measur. Unit'),
         required=False
         )
     category = AutocompleteSelectMultipleField(model=Category,help_text=None,
-        label=_('Категорії'),
+        label=_('Categories'),
         required=False
         )
     tags = AutocompleteSelectMultipleField(model=Tag,help_text=None,
-        label=_('Теги'),
+        label=_('Tags'),
         required=False
         )
     is_available = forms.BooleanField(
-        label=_('В наявності'),
+        label=_('Is available'),
         widget=SwitcherWidget(),
         required=False
         )
     featured = AutocompleteSelectMultipleField(model=Product,help_text=None,
-        label=_('Схожі товари'),
+        label=_('Featured products'),
         required=False
         )
     model = forms.CharField(
         widget=forms.TextInput(
-            attrs={'placeholder': _('Артикул')}),
-        label=_('Артикул'))
+            attrs={'placeholder': _('')}),
+        label=_(''))
     retail_price = forms.FloatField(
-        label=_('Роздрібна'),
+        label=_('Retail price'),
         required=False
         )
     big_opt_price = forms.FloatField(
-        label=_('Оптова'),
+        label=_('Wholesale price'),
         required=False
         )
     special = forms.IntegerField(
-        label=_('Спец.ціна'),
+        label=_('Sopecial price'),
         required=False
         )
     brand = AutocompleteSelectField(model=Brand,help_text=None,
-        label=_('Виробник'),
+        label=_('Manufacturer'),
         required=False
         )
     gallery = forms.CharField(
@@ -850,7 +874,7 @@ class ProductForm(UrlForm):
         )
     add_model = forms.CharField(
         widget=FgkWidget(),
-        label=_('Дод.артикули'),
+        label=_('Add. Art'),
         required=False
         )
 
@@ -858,7 +882,7 @@ class ProductForm(UrlForm):
 
     storage = forms.ChoiceField(
         choices=storage_choices,
-        label=_('Склад'),
+        label=_('Storage'),
         widget=CustomSelectWidget(),
         required=True
         )
@@ -866,12 +890,12 @@ class ProductForm(UrlForm):
         widget=AttributesWidget(),label="",
         required=False
         )
-    price_fixed = forms.BooleanField(label=_("Фікс. ціна"),
+    price_fixed = forms.BooleanField(label=_("Fixed price"),
         widget=SwitcherWidget(),
         required=False,
         initial=False
         )
-    is_top = forms.BooleanField(label=_("Підняти в топ?"),
+    is_top = forms.BooleanField(label=_("Top product?"),
         widget=SwitcherWidget(),
         required=False,
         initial=False
@@ -883,7 +907,7 @@ class ProductForm(UrlForm):
         (2,'USD')
     )
     currency = forms.ChoiceField(choices=currency_choices,
-        label=_('Валюта'),
+        label=_('Currency'),
         widget=CustomSelectWidget(),required=True)
 
     class Meta:
@@ -891,17 +915,17 @@ class ProductForm(UrlForm):
         fields = '__all__'
         widgets = {
             'big_opt_price': forms.TextInput(
-                attrs={'placeholder':_('Биг-опт.')}),
+                attrs={'placeholder':_('Wholesale price')}),
             'purchase_price': forms.TextInput(
-                attrs={'placeholder':_('Закуп.')}),
+                attrs={'placeholder':_('Retail price')}),
         }
         fieldsets = [
-                    ('main', {'fields':['slug','model','is_available','storage','last_modified'],'legend':_('Загальне'),'icon':'envelope-open-text'}),
-                    ('prices', {'fields':['retail_price','big_opt_price','special','price_fixed','purchase_price','currency','counter'],'legend':_(_('Ціни')),'icon':'dollar-sign','classes':['prices']}),
-                    ('related', {'fields':['category','brand','featured','add_model','tags'],'legend':_("Зв'язки"),'icon':'infinity'}),
-                    ('attributes', {'fields':['attributes'],'legend':_('Атрибути'),'classes':['attributes'],'description':'dynamic','icon':'align-left'}),
-                    ('parameters', {'fields':['height','width','length'],'legend':_('Параметри'),'classes':['parameters'],'icon':'paragraph'}),
-                    ('gallery', {'fields':['gallery'],'legend':_('Зображення'),'classes':['gallery'],'icon':'images','description':'dynamic'}),
+                    ('main', {'fields':['string','model','is_available','storage','last_modified'],'legend':_('General'),'icon':'envelope-open-text'}),
+                    ('prices', {'fields':['retail_price','big_opt_price','special','price_fixed','purchase_price','currency','counter'],'legend':_(_('Prices')),'icon':'dollar-sign','classes':['prices']}),
+                    ('related', {'fields':['category','brand','featured','add_model','tags'],'legend':_("Relations"),'icon':'infinity'}),
+                    ('attributes', {'fields':['attributes'],'legend':_('Attributes'),'classes':['attributes'],'description':'dynamic','icon':'align-left'}),
+                    ('parameters', {'fields':['height','width','length'],'legend':_('Parameters'),'classes':['parameters'],'icon':'paragraph'}),
+                    ('gallery', {'fields':['gallery'],'legend':_('Images'),'classes':['gallery'],'icon':'images','description':'dynamic'}),
                 ]
 
     def __str__(self):
@@ -909,16 +933,20 @@ class ProductForm(UrlForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        obj = getattr(self, 'instance', None)
-        if obj and hasattr(obj,'special'):
-            self.fields['special'].initial = obj.special.price
-        self.fields['gallery'].widget.model = self.instance
-        self.fields['add_model'].widget.instance = self.instance
+
+        instance = getattr(self, 'instance', None)
+
+        self.fields['add_model'].widget.instance = instance
         self.fields['add_model'].widget.related_name = 'add_model'
         self.fields['add_model'].widget.model = 'add_model'
         self.fields['add_model'].widget.field = 'model'
-        self.fields['storage'].widget.model = self.instance
-        self.fields['attributes'].widget.instance = self.instance
+
+        if instance and hasattr(instance,'special'):
+            self.fields['special'].initial = instance.special.price
+
+        self.fields['gallery'].widget.instance = instance
+        self.fields['storage'].widget.instance = instance
+        self.fields['attributes'].widget.instance = instance
         self.fields['rating'].required = False
         self.fields['qty'].required = False
         self.fields['description'].required = False
@@ -940,7 +968,7 @@ class ProductForm(UrlForm):
 
 class StorageForm(ProductForm): 
     price_fixed = forms.BooleanField(
-            label=_("Фікс. ціна"),
+            label=_("Fixed price"),
             widget=SwitcherWidget(),
             required=False,
             initial=False
@@ -977,15 +1005,15 @@ class StorageForm(ProductForm):
         fields = '__all__'
         widgets = {
             'big_opt_price': forms.TextInput(
-                attrs={'placeholder':_('Опт.')}),
+                attrs={'placeholder':_('Wholesale price')}),
         }
         fieldsets = [
-                    ('main', {'fields':['slug','model','is_available','storage'],'legend':_('Загальне')}),
-                    ('prices', {'fields':['retail_price','big_opt_price','purchase_price','special','price_fixed','currency'],'legend':_('Ціни'),'classes':['prices']}),
-                    ('related', {'fields':['category','brand','featured','add_model','tags'],'legend':_("Зв'язки")}),
-                    ('attributes', {'fields':['attributes'],'legend':_('Атрибути'),'classes':['attributes'],'description':'dynamic'}),
-                    ('parameters', {'fields':['height','width','length'],'legend':_('Параметри'),'classes':['parameters']}),
-                    ('gallery', {'fields':['gallery'],'legend':_('Зображення'),'classes':['gallery']}),
+                    ('main', {'fields':['string','model','is_available','storage'],'legend':_('General')}),
+                    ('prices', {'fields':['retail_price','big_opt_price','purchase_price','special','price_fixed','currency'],'legend':_('Prices'),'classes':['prices']}),
+                    ('related', {'fields':['category','brand','featured','add_model','tags'],'legend':_("Relations")}),
+                    ('attributes', {'fields':['attributes'],'legend':_('Attributes'),'classes':['attributes'],'description':'dynamic'}),
+                    ('parameters', {'fields':['height','width','length'],'legend':_('Parameters'),'classes':['parameters']}),
+                    ('gallery', {'fields':['gallery'],'legend':_('Images'),'classes':['gallery']}),
                 ]
 
 class TigresForm(StorageForm): 
@@ -997,10 +1025,10 @@ class TigresForm(StorageForm):
                 attrs={'placeholder':_('Опт.')}),
         }
         fieldsets = [
-                    ('main', {'fields':['slug','model','is_available','storage'],'legend':_('Загальне')}),
-                    ('prices', {'fields':['retail_price','big_opt_price','special','price_fixed'],'legend':_('Ціни'),'classes':['prices']}),
-                    ('related', {'fields':['category','brand','featured','add_model','tags'],'legend':_("Зв'язки")}),
-                    ('attributes', {'fields':['attributes'],'legend':_('Атрибути'),'classes':['attributes'],'description':'dynamic'}),
-                    ('parameters', {'fields':['height','width','length'],'legend':_('Параметри'),'classes':['parameters']}),
-                    ('gallery', {'fields':['gallery'],'legend':_('Зображення'),'classes':['gallery']}),
+                    ('main', {'fields':['string','model','is_available','storage'],'legend':_('General')}),
+                    ('prices', {'fields':['retail_price','big_opt_price','special','price_fixed'],'legend':_('Prices'),'classes':['prices']}),
+                    ('related', {'fields':['category','brand','featured','add_model','tags'],'legend':_("Relations")}),
+                    ('attributes', {'fields':['attributes'],'legend':_('Attributes'),'classes':['attributes'],'description':'dynamic'}),
+                    ('parameters', {'fields':['height','width','length'],'legend':_('Parameters'),'classes':['parameters']}),
+                    ('gallery', {'fields':['gallery'],'legend':_('Images'),'classes':['gallery']}),
                 ]

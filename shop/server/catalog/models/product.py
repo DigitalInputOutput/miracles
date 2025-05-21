@@ -14,29 +14,29 @@ class ProductDescription(Description):
         db_table = 'product_description'
 
 class Product(Page): 
-    model = CharField(max_length=50,verbose_name=_('Артикул'),unique=True)
-    retail_price = FloatField(default=0,verbose_name=_('Ціна'))
-    purchase_price = FloatField(default=0,verbose_name=_('Закупівельна ціна'))
-    length = CharField(max_length=50,null=True,verbose_name=_('Довжина'))
-    width = CharField(max_length=50,null=True,verbose_name=_('Ширина'))
-    height = CharField(max_length=50,null=True,verbose_name=_('Висота'))
-    is_available = BooleanField(default=0,verbose_name=_('В наявності'))
-    category = ManyToManyField(Category,verbose_name=_('Категорія'),related_name='products')
-    brand = ForeignKey(Brand,null=True,verbose_name=_('Виробник'),related_name='product', on_delete=SET_NULL)
+    model = CharField(max_length=50,verbose_name=_('Article'),unique=True)
+    retail_price = FloatField(default=0,verbose_name=_('Price'))
+    purchase_price = FloatField(default=0,verbose_name=_('Purchase price'))
+    length = CharField(max_length=50,null=True,verbose_name=_('Lenght'))
+    width = CharField(max_length=50,null=True,verbose_name=_('Width'))
+    height = CharField(max_length=50,null=True,verbose_name=_('Height'))
+    is_available = BooleanField(default=0,verbose_name=_('Is available'))
+    category = ManyToManyField(Category,verbose_name=_('Category'),related_name='products')
+    brand = ForeignKey(Brand,null=True,verbose_name=_('Manufacturer'),related_name='product', on_delete=SET_NULL)
     last_modified = DateTimeField(auto_now_add=True)
-    price_fixed = BooleanField(default=0,verbose_name=_('Фіксована ціна'))
-    featured = ManyToManyField('self',verbose_name=_('Схожі товари'),blank=True)
+    price_fixed = BooleanField(default=0,verbose_name=_('Fixed price'))
+    featured = ManyToManyField('self',verbose_name=_('Featured products'),blank=True)
     storage_choices = (
-        (1, _("В наявності")),
-        (2, _("Під замовлення"))
+        (1, _("Available")),
+        (2, _("To order"))
     )
-    storage = PositiveIntegerField(choices=storage_choices,null=True,verbose_name=_("Склад"),default=1)
-    attributes = ManyToManyField(Value,verbose_name="Атрибуты",related_name="products")
-    tags = ManyToManyField(Tag,verbose_name=_("Теги"),related_name="products")
+    storage = PositiveIntegerField(choices=storage_choices,null=True,verbose_name=_("Storage"),default=1)
+    attributes = ManyToManyField(Value,verbose_name=_("Attributes"),related_name="products")
+    tags = ManyToManyField(Tag,verbose_name=_("Tags"),related_name="products")
     rating = PositiveIntegerField(default=5)
     qty = FloatField(default=0)
     currency = ForeignKey(Currency,on_delete=SET_NULL,null=True)
-    counter = CharField(max_length=10,default=_('шт.'))
+    counter = CharField(max_length=10,default=_('cnt.'))
     is_top = BooleanField(default=0)
     description = ManyToManyField(ProductDescription,related_name="obj")
 
@@ -329,8 +329,8 @@ class Product(Page):
 
     class Meta:
         ordering = ['-is_available','-last_modified','-is_top']
-        verbose_name = _('Товар')
-        verbose_name_plural = _('Товари')
+        verbose_name = _('Product')
+        verbose_name_plural = _('Products')
 
 class EmptyImage: 
     def __getattr__(self,name):
@@ -341,11 +341,11 @@ class EmptyImage:
 
 class Add_Model(Model): 
     product = ForeignKey(Product,related_name='add_model', on_delete=CASCADE)
-    model = CharField(max_length=255,verbose_name=_('Дод. Артикул'))
+    model = CharField(max_length=255,verbose_name=_('Additional Article'))
 
     def __str__(self):
         return self.model
 
     class Meta:
-        verbose_name = _('Дод. Артикул')
-        verbose_name_plural = _('Дод. Артикул')
+        verbose_name = _('Additional Article')
+        verbose_name_plural = _('Additional Articles')

@@ -29,13 +29,16 @@ class LocaleMiddleware(MiddlewareMixin):
         # if not language_from_path and i18n_patterns_used and not prefixed_default_language:
         #     language = settings.LANGUAGE_CODE
 
-        language = re.match(r'^/[a-z]{2}/',request.path)
-        if language:
-            language = language.group().replace('/','')
-        else:
-            language = translation.get_language_from_request(request, check_path=i18n_patterns_used) or 'ua'
+        # language = re.match(r'^/[a-z]{2}/',request.path)
+        language = request.GET.get('lang')
+        # if language:
+        #     language = language.group().replace('/','')
+        # else:
+        #     language = translation.get_language_from_request(request, check_path=i18n_patterns_used) or 'uk'
 
-        translation.activate(language)
+        if language:
+            translation.activate(language)
+
         request.LANGUAGE_CODE = translation.get_language()
 
     def process_response(self, request, response):
@@ -73,4 +76,7 @@ class LocaleMiddleware(MiddlewareMixin):
             patch_vary_headers(response, ('Accept-Language',))
         if 'Content-Language' not in response:
             response['Content-Language'] = language
+
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+
         return response

@@ -1,7 +1,7 @@
 {%load i18n%}
-<div class="autocomplete {{model}}" model="{{model}}">
+<div class="autocomplete {{AdminModel}}" model="{{AdminModel}}">
 	<div>
-		<input type="text" autocomplete="off" placeholder="{%trans 'Введите текст для поиска'%}">
+		<input type="text" autocomplete="off" placeholder="{%trans 'Enter search text'%}">
 		<div class="variants"></div>
 		<input autocomplete="off" type="hidden" name="{{ widget.name }}"{% if widget.values_list != None %} value="{{widget.values_list}}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
 	</div>
@@ -9,8 +9,8 @@
 		<div class="values">
 			{%for item in widget.value%}
 				<div class="value">
-					<div class="remove" value="{{item.id}}"><i class="fas fa-times"></i></div>
-					<a href="/{{Model}}/{{item.id}}">{{item}}</a>
+					<div class="remove" value="{{item.id}}"><i class="ti ti-x"></i></div>
+					<a href="/{{AdminModel}}/{{item.id}}">{{item}}</a>
 				</div>
 			{%endfor%}
 		</div>

@@ -1,11 +1,11 @@
-import imp,sys,os
+import importlib,sys,os
 from celery import Celery
 
 sys.path.append('/home/core/manager/core')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 
-app = Celery('igroteka',backend='redis://127.0.0.1',broker='redis://127.0.0.1:6379/1')
+app = Celery('miracles',backend='redis://127.0.0.1',broker='redis://127.0.0.1:6379/1')
 
 @app.task(bind=True)
 def google_merchant(self,task_id):
@@ -166,7 +166,7 @@ def prices(self):
     def retail_prices():
         products = Product.objects.filter(storage=1)
 
-        with open(BASE_DIR + '/igroteka.ua/static/retail_prices.txt','w') as f:
+        with open(BASE_DIR + '/miracles.site/static/retail_prices.txt','w') as f:
             for p in products:
                 f.write('%s\n' % p.model)
                 f.write('%s\n' % p.price)

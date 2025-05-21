@@ -13,8 +13,8 @@ class Url(models.Model):
 
     class Meta:
         unique_together = ('string','language')
-        verbose_name = _("Посилання")
-        verbose_name_plural = _("Посилання")
+        verbose_name = _("URL")
+        verbose_name_plural = _("URL")
 
     def __iter__(self):
         return self.string

@@ -5,8 +5,10 @@ class Command(BaseCommand):
     help = 'Create Minified JS and CSS'
 
     def add_arguments(self , parser):
-        parser.add_argument('type' , nargs='+' , type=str, 
+        parser.add_argument('website' , nargs='+' , type=str, 
+        help='specify the website of minification to be done')
+        parser.add_argument('type' , nargs='?' , type=str, 
         help='specify the type of minification to be done')
 
     def handle(self, *args, **kwargs):
-        MinifyService.handle_command("manager", kwargs)
+        MinifyService.handle_command(kwargs)

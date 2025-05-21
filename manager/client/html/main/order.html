@@ -5,7 +5,7 @@
         <div class="order-item autocomplete" product-id="{~id~}">
             <div class="remove-wrap">
                 <div class="remove" item-id="{~id~}">
-                    <i class="fas fa-times"></i>
+                    <i class="ti ti-x"></i>
                 </div>
             </div>
             <div class="info-block">
@@ -15,10 +15,10 @@
                 <div class="inputs">
                     <div>
                         <div>
-                            <input type="text" name="qty" value="1" placeholder="{% trans 'Кол-во'%}">
+                            <input type="text" name="qty" value="1" placeholder="{% trans 'Qua-ty'%}">
                         </div>
                         <div>
-                            <input type="text" name="price" opt='' value="{~price~}" placeholder="{% trans 'Ціна'%}">
+                            <input type="text" name="price" opt='' value="{~price~}" placeholder="{% trans 'Price'%}">
                         </div>
                     </div>
                     <div></div>
@@ -29,19 +29,19 @@
                 {?if name?}
                     <a href="http://{{SITE_URL}}/{~slug~}" target="_blank">{~name~}</a>
                 {?else?}
-                    <input type="text" class="search" placeholder="{% trans 'Введите текст'%}">
+                    <input type="text" class="search" placeholder="{% trans 'Enter text'%}">
                     <div class="variants"></div>
                 {?endif?}
             </div>
             <div class="total">
                 <div>
-                    <span class="title">{~price~}</span> грн.
+                    <span class="title">{~price~}</span> {% trans 'uah'%}.
                 </div>
                 <div class="icon">
                     {~storage_icon~}
                 </div>
                 <div>
-                    <span class="title">{~qty~}</span> шт.
+                    <span class="title">{~qty~}</span> {% trans 'qty'%}.
                 </div>
             </div>
         </div>
@@ -49,25 +49,25 @@
     <template id="seat">
         <div class="seat">
             <div class="remove">
-                <i class="fas fa-times"></i>
+                <i class="ti ti-x"></i>
             </div>
             <div class="field">
-                <input type="text" name="weight" placeholder="Вес">
+                <input type="text" name="weight" placeholder="{% trans 'Weight' %}">
             </div>
             <div class="field">
-                <input type="text" name="volumetricHeight" class="calculate" placeholder="Высота">
+                <input type="text" name="volumetricHeight" class="calculate" placeholder="{% trans 'Height' %}">
             </div>
             <div class="field">
-                <input type="text" name="volumetricWidth" class="calculate" placeholder="Ширина">
+                <input type="text" name="volumetricWidth" class="calculate" placeholder="{% trans 'Width' %}">
             </div>
             <div class="field">
-                <input type="text" name="volumetricLength" class="calculate" placeholder="Длина">
+                <input type="text" name="volumetricLength" class="calculate" placeholder="{% trans 'Lenght' %}">
             </div>
             <div class="field">
-                <input type="text" name="cost" placeholder="Цена">
+                <input type="text" name="cost" placeholder="{% trans 'Price' %}">
             </div>
             <div class="field description">
-                <input type="text" name="description" placeholder="Описание">
+                <input type="text" name="description" placeholder="{% trans 'Description' %}">
             </div>
         </div>
     </template>
@@ -82,30 +82,30 @@
                             {{form.ttn}}
                             <div class="icons">
                                 {%if item.link%}
-                                    <a class="icon" id="ttn_link" href="{{item.link}}" target="_blank"><i class="fas fa-file-invoice"></i></a>
+                                    <a class="icon" id="ttn_link" href="{{item.link}}" target="_blank"><i class="ti ti-file-invoice"></i></a>
                                 {%endif%}
                                 <div class="icon" id="track">
-                                    <i class="fas fa-cookie-bite"></i>
+                                    <i class="ti ti-cookie-off"></i>
                                 </div>
                             </div>
                         </div>
                     {%endif%}
                     <div class="field">{{form.lname}}
-                        <i id="copyFIO" class="fas fa-copy"></i>
+                        <i id="copyFIO" class="ti ti-copy"></i>
                     </div>
                     <div class="field">{{form.name}}</div>
                     <div class="field">{{form.sname}}</div>
                     <div class="field">{{form.email}}</div>
                     <div class="field">
                         {{form.phone}}
-                        <i class="fas fa-sms" id="sms"></i>
+                        <i class="ti ti-message" id="sms"></i>
                     </div>
                     <div id="sms-panel">
                         <div class="select-items">
                             <div class="sel-items-wrapper">
-                                <div id="ttn">ТТН</div>
-                                <div id="payment">Расч. счет</div>
-                                <div id="card">Номер карты</div>
+                                <div id="ttn">{% trans 'ТТН' %}</div>
+                                <div id="payment">{% trans 'In' %}. {% trans 'voice' %}</div>
+                                <div id="card">{% trans 'Card number' %}</div>
                             </div>
                         </div>
                     </div>
@@ -113,8 +113,8 @@
             </div>
             <div>
                 <div id="order-total" class="order-info">
-                    <div id="total">Итого: <span class="sum">{{item.cart.total}}</span> грн.</div>
-                    <div id="discount">Скидка: <span class="sum">{{item.cart.discount}}</span> грн.</div>
+                    <div id="total">{% trans 'Total' %}: <span class="sum">{{item.cart.total}}</span> {% trans 'uah' %}.</div>
+                    <div id="discount">{% trans 'Discount' %}: <span class="sum">{{item.cart.discount}}</span> {% trans 'uah' %}.</div>
                 </div>
                 <div id="order-info" class="order-column">
                     {%csrf_token%}
@@ -125,14 +125,14 @@
                     <div id="city">
                         <input type="hidden" name="city" value="{{item.city.id}}">
                         <div class="field">
-                            <input type="text" placeholder="Введите первые буквы" value="{{item.city}}" id="id_city" autocomplete="off">
+                            <input type="text" placeholder="{% trans 'Enter first letters' %}" value="{{item.city}}" id="id_city" autocomplete="off">
                             <div class="variants"></div>
                         </div>
                     </div>
                     <div id="departament">
                         <input type="hidden" name="departament" value="{{item.departament.id}}">
                         <div class="field">
-                            <input type="text" placeholder="Введите первые буквы" value="{{item.departament}}" id="id_departament" autocomplete="off">
+                            <input type="text" placeholder="{% trans 'Enter first letters' %}" value="{{item.departament}}" id="id_departament" autocomplete="off">
                             <div class="variants"></div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@
                                 <div class="order-item" product-id={{item.product.id}}>
                                     <div class="remove-wrap">
                                         <div class="remove" item-id="{{item.id}}">
-                                            <i class="fas fa-times"></i>
+                                            <i class="ti ti-x"></i>
                                         </div>
                                     </div>
                                     <div class="info-block">
@@ -174,7 +174,7 @@
                                     </div>
                                     <div class="total">
                                         <div>
-                                            <span class="title">{{item.total}}</span> грн.
+                                            <span class="title">{{item.total}}</span> {% trans 'uah' %}.
                                         </div>
                                         <div class="icon overlay_container">
                                             <img src="/static/icon/{{item.product.get_storage_display}}.jpg" alt="{{item.product.get_storage_display}}">
@@ -185,7 +185,7 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="title">{{item.product.qty|floatformat:"0"}}</span> шт.
+                                            <span class="title">{{item.product.qty|floatformat:"0"}}</span> {% trans 'qty' %}.
                                         </div>
                                     </div>
                                 </div>
@@ -194,15 +194,15 @@
                     </div>
 
                     <div class="buttons">
-                        <i class="fas fa-caret-square-down" id="add-product"></i>
-                        <i class="fas fa-expand"></i>
+                        <i class="ti ti-caret-down" id="add-product"></i>
+                        <i class="ti ti-arrows-maximize" id="expand"></i>
                     </div>
                 </div>
 
                 {%if form.delivery_type.value == 1%}
                     <div id="create-ttn" class="button">
-                        {%trans 'Оформить доставку'%}
-                        <i class="fas fa-truck"></i>
+                        {% trans 'Process the delivery' %}
+                        <i class="ti ti-truck"></i>
                     </div>
                 {%endif%}
             </div>
@@ -211,26 +211,26 @@
         </form>
         <form id="order-ttn" class="filters" action="javascript: void(0)">
             <div class="close">
-                <i class="fas fa-times"></i>
+                <i class="ti ti-x"></i>
             </div>
-            <label>Вес:<input value="0.1" type="text" name="weight" placeholder="Вес" required></label>
-            <label>Обьемный вес:<input value="0.1" type="text" name="volume" placeholder="Обьемный вес" required></label>
-            <label>Кол-во мест:<input value="1" type="text" name="seats" placeholder="Кол-во мест" required></label>
-            <label>Дата:<input value="{{date}}" type="date" name="date" placeholder="Дата в формате 00.00.0000" required autocomplete></label>
+            <label>{% trans 'Weight' %}:<input value="0.1" type="text" name="weight" placeholder="{% trans 'Вес' %}" required></label>
+            <label>{% trans 'Volumetric weight' %}:<input value="0.1" type="text" name="volume" placeholder="{% trans 'Volumetric weight' %}" required></label>
+            <label>{% trans 'Qty' %}-{% trans 'seats' %}:<input value="1" type="text" name="seats" placeholder="{% trans 'Qty' %}-{% trans 'seats' %}" required></label>
+            <label>{% trans 'Date' %}:<input value="{{date}}" type="date" name="date" placeholder="{% trans 'Date format' %} 00.00.0000" required autocomplete></label>
             <div id="add-seat">
-                <i class='fas fa-plus-circle'></i>
-                <span>место</span>
+                <i class='ti ti-plus-circle'></i>
+                <span>{% trans 'seat' %}</span>
             </div>
             <div id="seats"></div>
-            <button id="make-ttn">Давай</button>
+            <button id="make-ttn">{% trans 'Go' %}</button>
         </form>
         <div id="edit-panel-wrapper">
             <div id="edit-panel" class="active">
                 <div id="save" class="edit-panel-icon">
-                    <i class="fas fa-thumbs-up"></i>
+                    <i class="ti ti-thumb-up"></i>
                 </div>
                 <div id="delete">
-                    <i class="fas fa-trash-alt"></i>
+                    <i class="ti ti-trash"></i>
                 </div>
             </div>
         </div>

@@ -170,9 +170,11 @@
 				this.style.display = 'none';
 			}
 		},
-		addClass(name){
-			if(!this.className.includes(name))
-				this.classList.add(name);
+		addClass(classes){
+			classes.split(" ").forEach((name) => {
+				if(!this.className.includes(name))
+					this.classList.add(name);
+			})
 		},
 		removeClass(name){
 			this.classList.remove(name);
@@ -241,14 +243,16 @@
 		disable(){
 			this.set('disabled','');
 		},
-		triggerError(message){
+		triggerError(messages){
 			this.addClass('invalid');
 			let errorBlock = this.next();
 			if(!errorBlock.hasClass('errors')){
 				errorBlock = Dom.query(`.${this.name}.errors`)[0];
 			}
 			if(errorBlock){
-				errorBlock.html(message);
+				messages.forEach((message)=>{
+					errorBlock.html(message);
+				});
 				errorBlock.show();
 			}
 			if(this.form)
@@ -260,8 +264,10 @@
 			if(!errorBlock.hasClass('errors')){
 				errorBlock = Dom.query(`.${this.name}.errors`)[0];
 			}
-			if(errorBlock)
+			if(errorBlock){
+				errorBlock.clear();
 				errorBlock.hide();
+			}
 		},
 		triggerInvalid(){
 			this.addClass('invalid');
@@ -288,22 +294,6 @@
 			for(let i of ['input','select','textarea']){
 				for(let elem of this.find(i)){
 					switch(elem.type){
-						case 'text':
-						case 'hidden':
-						case 'password':
-						case 'button':
-						case 'reset':
-						case 'submit':
-						case 'number':
-						case 'date':
-							if(elem.value)
-								data[elem.name] = elem.value;
-							break;
-						case 'checkbox':
-						case 'radio':
-							if (elem.checked) 
-								data[elem.name] = elem.value;
-							break;
 						case 'select-one':
 							if(elem.value)
 								data[elem.name] = eval(elem.value);
@@ -314,6 +304,18 @@
 								if (elem.options[j].selected)
 									data[elem.name].append(elem.options[j].value);
 							}
+							break;
+						case 'file':
+							let b64Elem = elem.closer(`input[name="${elem.name}_b64"]`);
+							if (b64Elem) {
+								data[elem.name] = b64Elem.value;
+							}
+							break;
+						case 'hidden':
+							break;
+						default:
+							if(elem.value)
+								data[elem.name] = elem.value;
 							break;
 					}
 				}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-02 15:39+0100\n"
+"POT-Creation-Date: 2025-03-10 15:14-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,54 +17,645 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: user/models.py:23
-msgid "Код"
-msgstr "Code"
 
-#: user/models.py:30
-msgid "Email підтверджено"
-msgstr "Email confirmed"
+#: catalog/models/attribute.py:6 shop/models/description.py:21
+msgid "Назва"
+msgstr ""
 
-#: user/models.py:31
+#: catalog/models/attribute.py:13
+msgid "Атрибут"
+msgstr ""
+
+#: catalog/models/attribute.py:17 catalog/models/attribute.py:26
+msgid "Значення"
+msgstr ""
+
+#: catalog/models/brand.py:11
+msgid "Країна виробник"
+msgstr ""
+
+#: catalog/models/brand.py:12
+msgid "Зробити сторінкою?"
+msgstr ""
+
+#: catalog/models/brand.py:14 catalog/models/gallery.py:144
+#: catalog/models/gallery.py:145 catalog/models/image.py:18
+#: catalog/models/image.py:160 catalog/models/image.py:161
+msgid "Зображення"
+msgstr ""
+
+#: catalog/models/brand.py:29 catalog/models/brand.py:30
+msgid "Виробники"
+msgstr ""
+
+#: catalog/models/category.py:24
+msgid "Батьківська"
+msgstr ""
+
+#: catalog/models/category.py:25 catalog/models/gallery.py:18
+#: catalog/models/tag.py:12
+msgid "Картинка"
+msgstr ""
+
+#: catalog/models/category.py:27
+#, fuzzy
+#| msgid "Активен"
+msgid "Активна"
+msgstr "Active"
+
+#: catalog/models/category.py:167
+msgid "Категорії товарів"
+msgstr ""
+
+#: catalog/models/category.py:191 catalog/models/product.py:24
+msgid "Категорія"
+msgstr ""
+
+#: catalog/models/category.py:192
+msgid "Категорії"
+msgstr ""
+
+#: catalog/models/featured.py:20
+msgid "Комплектуючі"
+msgstr ""
+
+#: catalog/models/gallery.py:19
+msgid "Порядоковий номер"
+msgstr ""
+
+#: catalog/models/image.py:19
+msgid "Позіція в списку"
+msgstr ""
+
+#: catalog/models/image.py:170
+msgid "Мініатюра зображення"
+msgstr ""
+
+#: catalog/models/image.py:171
+msgid "Мініатюри зображення"
+msgstr ""
+
+#: catalog/models/product.py:9
+msgid "Нема в наявності"
+msgstr ""
+
+#: catalog/models/product.py:10
+msgid "<div>Нема в</div>"
+msgstr ""
+
+#: catalog/models/product.py:17
+msgid "Артикул"
+msgstr ""
+
+#: catalog/models/product.py:18 checkout/models/cart.py:78
+msgid "Ціна"
+msgstr ""
+
+#: catalog/models/product.py:19
+msgid "Закупівельна ціна"
+msgstr ""
+
+#: catalog/models/product.py:20 checkout/models/order.py:109
+msgid "Довжина"
+msgstr ""
+
+#: catalog/models/product.py:21 checkout/models/order.py:108
+msgid "Ширина"
+msgstr ""
+
+#: catalog/models/product.py:22 checkout/models/order.py:107
+msgid "Висота"
+msgstr ""
+
+#: catalog/models/product.py:23 catalog/models/product.py:30
+#: catalog/models/product.py:230
+msgid "В наявності"
+msgstr ""
+
+#: catalog/models/product.py:25
+msgid "Виробник"
+msgstr ""
+
+#: catalog/models/product.py:27
+msgid "Фіксована ціна"
+msgstr ""
+
+#: catalog/models/product.py:28
+msgid "Схожі товари"
+msgstr ""
+
+#: catalog/models/product.py:31
+#, fuzzy
+#| msgid "Відновлення паролю"
+msgid "Під замовлення"
+msgstr "Password restoration"
+
+#: catalog/models/product.py:33
+msgid "Склад"
+msgstr ""
+
+#: catalog/models/product.py:35 catalog/models/tag.py:17
+msgid "Теги"
+msgstr ""
+
+#: catalog/models/product.py:39
+msgid "шт."
+msgstr ""
+
+#: catalog/models/product.py:156
+msgid "Опис ще не додано"
+msgstr ""
+
+#: catalog/models/product.py:234
+msgid "Відсутній"
+msgstr ""
+
+#: catalog/models/product.py:240
+msgid "<span>В наявності</span>"
+msgstr ""
+
+#: catalog/models/product.py:244
+msgid "<span class=\"notaval\">В наявності</span>"
+msgstr ""
+
+#: catalog/models/product.py:250
+msgid "<span><i class=\"far fa-check-circle\"></i>В наявності</span>"
+msgstr ""
+
+#: catalog/models/product.py:254
+msgid ""
+"<span class=\"notaval\"><i class=\"fas fa-exclamation-circle\"></"
+"i>Відсутній</span>"
+msgstr ""
+
+#: catalog/models/product.py:332 catalog/models/special.py:34
+#: catalog/models/special.py:66
+msgid "Товар"
+msgstr ""
+
+#: catalog/models/product.py:333
+msgid "Товари"
+msgstr ""
+
+#: catalog/models/product.py:344 catalog/models/product.py:350
+#: catalog/models/product.py:351
+msgid "Дод. Артикул"
+msgstr ""
+
+#: catalog/models/special.py:26 catalog/models/special.py:27
+msgid "Популярні"
+msgstr ""
+
+#: catalog/models/special.py:37
+msgid "Спец.Ціна"
+msgstr ""
+
+#: catalog/models/special.py:58 catalog/models/special.py:59
+msgid "Акції"
+msgstr ""
+
+#: catalog/models/special.py:80 catalog/models/special.py:81
+msgid "Рекомендовані"
+msgstr ""
+
+#: catalog/models/tag.py:16
+msgid "Тег"
+msgstr ""
+
+#: checkout/forms.py:9
+#, fuzzy
+#| msgid "Номер телефону"
+msgid "Введите номер телефона:"
+msgstr "Mobile number"
+
+#: checkout/forms.py:9
+#, fuzzy
+#| msgid "Номер телефону"
+msgid "Номер телефона"
+msgstr "Mobile number"
+
+#: checkout/forms.py:14
+msgid "Неправильный телефон(пример +30971112233)"
+msgstr ""
+
+#: checkout/forms.py:27
+msgid "Самовывоз"
+msgstr ""
+
+#: checkout/forms.py:28
+msgid "Новая почта"
+msgstr ""
+
+#: checkout/forms.py:29
+msgid "Деливери"
+msgstr ""
+
+#: checkout/forms.py:30
+msgid "УкрПочта"
+msgstr ""
+
+#: checkout/forms.py:31
+msgid "Курьерская Доставка"
+msgstr ""
+
+#: checkout/forms.py:34
+msgid "Наличными при получении"
+msgstr ""
+
+#: checkout/forms.py:35
+msgid "Оплата картой"
+msgstr ""
+
+#: checkout/forms.py:37
+msgid "Способ доставки:"
+msgstr ""
+
+#: checkout/forms.py:38
+msgid "Способ оплаты:"
+msgstr ""
+
+#: checkout/forms.py:39
+msgid "Уточнения к заказу:"
+msgstr ""
+
+#: checkout/forms.py:40 checkout/forms.py:86
+msgid "Имя:"
+msgstr ""
+
+#: checkout/forms.py:40 checkout/forms.py:86
+#, fuzzy
+#| msgid "Ім'я"
+msgid "Имя"
+msgstr "Name"
+
+#: checkout/forms.py:41
+msgid "Фамилия:"
+msgstr ""
+
+#: checkout/forms.py:41
+msgid "Фамилия"
+msgstr ""
+
+#: checkout/forms.py:42
+msgid "Отчество:"
+msgstr ""
+
+#: checkout/forms.py:42
+msgid "Отчество"
+msgstr ""
+
+#: checkout/forms.py:44 checkout/forms.py:87
+#, fuzzy
+#| msgid "Номер телефону"
+msgid "Номер телефона:"
+msgstr "Mobile number"
+
+#: checkout/forms.py:44 checkout/models/order.py:20
+#, fuzzy
+#| msgid "Номер телефону"
+msgid "Телефон"
+msgstr "Mobile number"
+
+#: checkout/forms.py:45
+msgid "Адрес:"
+msgstr ""
+
+#: checkout/forms.py:45
+msgid "Адрес"
+msgstr ""
+
+#: checkout/forms.py:46
+msgid "Подписаться на рассылку"
+msgstr ""
+
+#: checkout/forms.py:59
+msgid "Неправильный телефон(пример 0971112233)"
+msgstr ""
+
+#: checkout/forms.py:69 checkout/forms.py:71 checkout/forms.py:74
+#: checkout/forms.py:77
+msgid "Обязательное поле"
+msgstr ""
+
+#: checkout/models/cart.py:79
+msgid "Кількість"
+msgstr ""
+
+#: checkout/models/cart.py:80
+msgid "Разом"
+msgstr ""
+
+#: checkout/models/cart.py:101
+msgid "Назва не існує"
+msgstr ""
+
+#: checkout/models/delivery.py:51
+#, fuzzy
+#| msgid "Відновлення паролю"
+msgid "Відділення"
+msgstr "Password restoration"
+
+#: checkout/models/delivery.py:54
+msgid "Дата відправки"
+msgstr ""
+
+#: checkout/models/delivery.py:57
+msgid "Доставка"
+msgstr ""
+
+#: checkout/models/delivery.py:64
+msgid "Тип оплати"
+msgstr ""
+
+#: checkout/models/delivery.py:71
+msgid "Статус замовлення"
+msgstr ""
+
+#: checkout/models/order.py:16 user/models.py:28
 msgid "Ім'я"
 msgstr "Name"
 
-#: user/models.py:32
+#: checkout/models/order.py:17 user/models.py:29
 msgid "Призвище"
 msgstr "Last Name"
 
-#: user/models.py:33
+#: checkout/models/order.py:18 user/models.py:30
 msgid "По батькові"
 msgstr "Surname"
 
-#: user/models.py:34
+#: checkout/models/order.py:21
+msgid "Кошик"
+msgstr ""
+
+#: checkout/models/order.py:24
+msgid "Дата додання"
+msgstr ""
+
+#: checkout/models/order.py:25
+msgid "Коментар до замовлення"
+msgstr ""
+
+#: checkout/models/order.py:97 checkout/models/order.py:98
+#, fuzzy
+#| msgid "Відновлення паролю"
+msgid "Замовлення"
+msgstr "Password restoration"
+
+#: checkout/models/order.py:106
+msgid "Вага"
+msgstr ""
+
+#: checkout/models/order.py:110
+msgid "Оціночна вартість"
+msgstr ""
+
+#: checkout/models/order.py:111 shop/models/description.py:22
+msgid "Опис"
+msgstr ""
+
+#: checkout/models/order.py:114
+msgid "Ні"
+msgstr ""
+
+#: checkout/models/order.py:115
+msgid "Так"
+msgstr ""
+
+#: checkout/models/order.py:132 checkout/models/order.py:133
+msgid "Займаємий простір"
+msgstr ""
+
+#: checkout/views/cart.py:25
+msgid "Корзина"
+msgstr ""
+
+#: checkout/views/cart.py:25 checkout/views/cart.py:43
+msgid "Ваша корзина пуста"
+msgstr ""
+
+#: shop/models/city.py:18 shop/models/city.py:19
+msgid "Міста"
+msgstr ""
+
+#: shop/models/info.py:22
+msgid "Звичайна сторінка"
+msgstr ""
+
+#: shop/models/info.py:23
+msgid "Звичайні сторінка"
+msgstr ""
+
+#: shop/models/url.py:16 shop/models/url.py:17
+msgid "Посилання"
+msgstr ""
+
+#: shop/services/context.py:127 shop/services/context.py:128
+#: shop/services/context.py:129
+msgid "Page"
+msgstr ""
+
+#: shop/services/url.py:14
+msgid ""
+"Не встановлено мови за замовчуванням. Встановіть командою python manage.py "
+"install"
+msgstr ""
+
+#: shop/services/url.py:30 shop/services/url.py:36
+msgid "Сторінка не існує."
+msgstr ""
+
+#: user/forms.py:17
+#, fuzzy
+#| msgid "Номер телефону"
+msgid "нагадайте свій номер телефону"
+msgstr "Mobile number"
+
+#: user/forms.py:23
+#, fuzzy
+#| msgid "Відновлення паролю"
+msgid "Новий пароль"
+msgstr "Password restoration"
+
+#: user/forms.py:23
+#, fuzzy
+#| msgid "Відновлення паролю"
+msgid "Новий пароль*"
+msgstr "Password restoration"
+
+#: user/forms.py:24
+msgid "Ще раз"
+msgstr ""
+
+#: user/forms.py:24
+msgid "Ще раз*"
+msgstr ""
+
+#: user/forms.py:32 user/forms.py:51
+msgid "Паролі не співпадають"
+msgstr ""
+
+#: user/forms.py:36
+msgid "Пароль*"
+msgstr ""
+
+#: user/forms.py:37
+msgid "Пароль ще раз*"
+msgstr ""
+
+#: user/forms.py:38
+msgid "ФИО*"
+msgstr ""
+
+#: user/forms.py:38
+msgid "ПІП*"
+msgstr ""
+
+#: user/forms.py:39
+msgid "Email-адрес"
+msgstr ""
+
+#: user/forms.py:39
+msgid "Email адреса"
+msgstr ""
+
+#: user/forms.py:40 user/forms.py:68 user/forms.py:82
+#, fuzzy
+#| msgid "Номер телефону"
+msgid "Номер телефону:"
+msgstr "Mobile number"
+
+#: user/forms.py:40 user/forms.py:68 user/forms.py:82 user/forms.py:103
+#: user/models.py:31
 msgid "Номер телефону"
 msgstr "Mobile number"
 
-#: user/models.py:36
+#: user/forms.py:41
+#, fuzzy
+#| msgid "Підписати пошту"
+msgid "Підписатися на розсилку"
+msgstr "Subscribe email"
+
+#: user/forms.py:94
+msgid "Неправильний номер(приклад 0971112233)"
+msgstr ""
+
+#: user/forms.py:103
+msgid "Номер телефону або логін*:"
+msgstr "Mobile number oder login*:"
+
+#: user/forms.py:104
+msgid "Пароль*:"
+msgstr "Password*:"
+
+#: user/forms.py:104
+msgid "Пароль"
+msgstr ""
+
+#: user/managers.py:7
+msgid "The Device ID must be set"
+msgstr ""
+
+#: user/managers.py:18
+msgid "Superuser must have is_staff=True."
+msgstr ""
+
+#: user/managers.py:20
+msgid "Superuser must have is_admin=True."
+msgstr ""
+
+#: user/models.py:13
+msgid "Вкажіть HOST, EMAIL та EMAIL_TITLE в settngs"
+msgstr ""
+
+#: user/models.py:20
+msgid "Код"
+msgstr "Code"
+
+#: user/models.py:27
+msgid "Email підтверджено"
+msgstr "Email confirmed"
+
+#: user/models.py:33
 msgid "Активен"
 msgstr "Active"
 
-#: user/models.py:38
+#: user/models.py:35
+#, fuzzy
+#| msgid "Користувачи"
+msgid "Статус користувача"
+msgstr "Users"
+
+#: user/models.py:36
 msgid "Підписати пошту"
 msgstr "Subscribe email"
 
-#: user/models.py:39
+#: user/models.py:37
 msgid "Востаннє в мережі"
 msgstr "Last online"
 
-#: user/models.py:40
+#: user/models.py:38
 msgid "Дата реєстрації"
 msgstr "Date registered"
 
-#: user/models.py:81
+#: user/models.py:77
 msgid "Відновлення паролю"
 msgstr "Password restoration"
 
-#: user/models.py:98
-msgid "-"
-msgstr "-"
-
-#: user/models.py:148 user/models.py:149
+#: user/models.py:115 user/models.py:116
 msgid "Користувачи"
 msgstr "Users"
+
+#: user/views/compare.py:10
+msgid "Порівняння товарів"
+msgstr ""
+
+#: user/views/favorite.py:10
+msgid "Обрані товари"
+msgstr ""
+
+#: user/views/forget_pass.py:22
+msgid "Пользователь не найден."
+msgstr ""
+
+#: user/views/forget_pass.py:44
+#, fuzzy
+#| msgid "Відновлення паролю"
+msgid "Не сошлись данные пароля"
+msgstr "Password restoration"
+
+#: user/views/forget_pass.py:46
+msgid "Не сошлись данные"
+msgstr ""
+
+#: user/views/forget_pass.py:49 user/views/forget_pass.py:61
+#, fuzzy
+#| msgid "Відновлення паролю"
+msgid "Смена пароля"
+msgstr "Password restoration"
+
+#: user/views/forget_pass.py:70
+msgid "Пароль изменен успешно."
+msgstr ""
+
+#: user/views/profile.py:161
+msgid "Информации нет"
+msgstr ""
+
+#: user/views/profile.py:183
+msgid "Личный кабинет"
+msgstr ""
+
+#: user/views/signin.py:63 user/views/signin.py:66
+msgid "Пароль не подошел"
+msgstr ""
+
+#: user/views/signup.py:50
+msgid "Регистрация"
+msgstr ""
+
+#: user/views/signup.py:74
+msgid "С полями формы что то не так."
+msgstr ""
+
+#~ msgid "-"
+#~ msgstr "-"

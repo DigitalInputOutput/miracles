@@ -43,7 +43,7 @@ SECRET_KEY = 'ph2$50f%khtwe-dbv_^cykc+(l7lbeg35e^9qf=#d#@s^gtw7p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['manager.miracles.site']
+ALLOWED_HOSTS = ['manager.miracles.site','t.manager.miracles.site']
 
 BASE_URL = 'miracles.site'
 
@@ -82,7 +82,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'manager.middleware.locale.LocaleMiddleware',
     'manager.middleware.login.Login',
-    'manager.middleware.view.ViewMiddleware',
+    'manager.middleware.admin_model.AdminModelMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
@@ -168,6 +168,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'uk'
+DEFAULT_LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'Europe/Kiev'
 
@@ -191,9 +192,15 @@ CACHE_URL = '/home/core/cache/miracles.site/'
 
 CACHE_DIR = '/home/core/manager'
 
-MEDIA_ROOT = '/home/core/media/miracles.site'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = HOME_DIR / f'media/{DOMAIN}'
+MEDIA_URL = f'/media/{DOMAIN}/'
+
 SESSION_SAVE_EVERY_REQUEST = True
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default session engine
+SESSION_COOKIE_AGE = 3600  # 1 hour
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Retain session after browser close
+SESSION_COOKIE_SECURE = False
+
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o777
 INTERNAL_IPS = []
@@ -234,7 +241,7 @@ AVAIL_LANGUAGES = {
 CSS_BUILD = 44
 JS_BUILD = 19
 
-NO_IMAGE_PLACEHOLDER = '/media/data/no_image.jpg'
+NO_IMAGE_PLACEHOLDER = '/media/no_image.jpg'
 
 LIQPAY_PUBLIC = ""
 LIQPAY_PRIVATE = ""

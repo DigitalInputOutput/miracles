@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from beles.models import Category
-from catalog.models import Category as Igroteka
+from catalog.models import Category as miracles
 from json import loads
 
 class Command(BaseCommand): 
@@ -20,8 +20,8 @@ class Command(BaseCommand):
 
                 # del item['category_igrushec_id']
                 # del item['setting_id']
-                # item['category_id'] = item['category_igroteka_id']
-                # del item['category_igroteka_id']
+                # item['category_id'] = item['category_miracles_id']
+                # del item['category_miracles_id']
 
                 # try:
                 #     Image.objects.get(id=item['id'])
@@ -40,7 +40,7 @@ class Command(BaseCommand):
                 # category.save()
 
                 product = Category.objects.get(id=item['beles_category_id'])
-                category = Igroteka.objects.get(id=item['category_igroteka_id'])
+                category = miracles.objects.get(id=item['category_miracles_id'])
                 product.category.add(category)
                 product.save()
 
@@ -53,16 +53,16 @@ class Command(BaseCommand):
 
                 # if 'description' in item:
                 #     del item['description']
-                # if "description_igroteka" in item:
-                #     if item['description_igroteka'] and item['description_igroteka'] != '<p><strong>':
-                #         item['description'] = item["description_igroteka"]
-                #     del item['description_igroteka']
+                # if "description_miracles" in item:
+                #     if item['description_miracles'] and item['description_miracles'] != '<p><strong>':
+                #         item['description'] = item["description_miracles"]
+                #     del item['description_miracles']
                 # if 'slug' in item:
                 #     del item['slug']
-                # if "slug_igroteka" in item:
-                #     if item['slug_igroteka']:
-                #         item['slug'] = item["slug_igroteka"]
-                #     del item['slug_igroteka']
+                # if "slug_miracles" in item:
+                #     if item['slug_miracles']:
+                #         item['slug'] = item["slug_miracles"]
+                #     del item['slug_miracles']
                 # if "iname" in item:
                 #     if item['iname']:
                 #         item['name'] = item["iname"]

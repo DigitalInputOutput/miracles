@@ -74,7 +74,7 @@ http.render_form = function(){
 Alert.popMessage = function(title, text){
 	if(!title && !text){
 		title = 'Ой!';
-		text = 'Что то пошло не так и кнопка не сработала. Попробуйте найти решение <a href="http://forum.igroteka.ua/ochistka-vremennyh-fajlov-v-obozrevatelebrauzere" alt="Форум Игротека">на форуме</a> или расскажите нам об этом по телефону.'
+		text = 'Что то пошло не так и кнопка не сработала. Попробуйте найти решение <a href="http://forum.miracles.site/ochistka-vremennyh-fajlov-v-obozrevatelebrauzere" alt="Форум Игротека">на форуме</a> или расскажите нам об этом по телефону.'
 	}
 	$.gritter.add({
 		title: title,

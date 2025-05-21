@@ -1,5 +1,5 @@
 {%load value%}
-<div id="list-{{model}}">
+<div id="list-{{AdminModel}}">
     <input type="checkbox" name="all" id="check-all">
     <div id="head">
         <div></div>
@@ -13,7 +13,7 @@
                 <input type="checkbox" value="{{item.id}}" name="delete">
                 {%for field in model|value:item%}
                     {%if forloop.counter == 2%}
-                        <a class="column" href="/{{model}}/edit/{{item.id}}" view="{{view}}">{{field}}</a>
+                        <a class="column" href="/{{AdminModel}}/edit/{{item.id}}" view="{{view}}">{{field}}</a>
                     {%else%}
                         <div class="column">{{field|safe}}</div>
                     {%endif%}
@@ -26,7 +26,7 @@
     <div id="pagination">
         <span class="step-links">
             {% if items.has_previous and items.previous_page_number > 1%}
-                <a view="list" class='prevPage' page="{{items.previous_page_number}}"> < Пред.</a>
+                <a view="list" class='prevPage' page="{{items.previous_page_number}}"> < {% trans "Prev" %}.</a>
             {% endif %}
             {%for page in items.paginator.page_range%}
                 {%if page == items.number%}
@@ -38,7 +38,7 @@
                 {%endif%}
             {%endfor%}
             {% if items.has_next %}
-                <a view="list" class='nextPage' page="{{items.next_page_number}}"> След. > </a>
+                <a view="list" class='nextPage' page="{{items.next_page_number}}"> {% trans "Next" %}. > </a>
             {% endif %}
         </span>
     </div>

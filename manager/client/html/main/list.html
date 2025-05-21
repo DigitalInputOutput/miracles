@@ -1,5 +1,6 @@
 {%extends extends%}
 {%load value%}
+{%load i18n%}
 {%block main%}
 	<div id="reload">
 		<div class="container">
@@ -8,13 +9,13 @@
 			</div>
 			<div id="head" class="column">
 				<div></div>
-				{%for field in Model.head%}
+				{%for field in AdminModel.head%}
 					<a ordering="{{field.1}}">{{field.0}}</a>
 				{%endfor%}
 			</div>
 			<div id="items-search" class="column">
 				<div></div>
-				{%for field in Model.head_search%}
+				{%for field in AdminModel.head_search%}
 					{%if field.1%}
 						<div class="search-text">
 							<input name="{{field.1}}" type="text" placeholder="{{field.0}}" value="{{filters|val:field.1}}" autocomplete="off">
@@ -33,7 +34,7 @@
 	<div id="panel-wrapper">
 		<div>
 			<div class="toggle-panel panel-icon action">
-				<i class="fas fa-hamburger"></i>
+				<i class="ti ti-menu"></i>
 			</div>
 		</div>
 		<div id="panel-shortcuts" class="active">
@@ -42,15 +43,15 @@
 	</div>
 	<div id="panel-menu">
 		<div id="search">
-			<input type="text" id="search-text" placeholder='Поиск' value="{{value}}">
+			<input type="text" id="search-text" placeholder='{% trans "Search" %}' value="{{value}}">
 			<div class="toggle-panel panel-icon action">
-				<i class="fas fa-hamburger"></i>
+				<i class="ti ti-menu"></i>
 			</div>
 		</div>
 		{%include panel%}
 	</div>
 	<script>
-		window.PAGE_CONTEXT = JSON.parse({{context|safe|default:"{}"}});
+		// window.PAGE_CONTEXT = JSON.parse({{context|safe|default:"{}"}});
 		if(!document.querySelector('menu')) location.reload();
 	</script>
 {%endblock%}

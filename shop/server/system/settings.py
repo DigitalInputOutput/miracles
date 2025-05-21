@@ -165,6 +165,27 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ('uk-UA', 'Українська'),
+    ('uk', 'Українська'),
+    ('ua', 'Українська'),
+    ('en', 'English'),
+    ('nl', 'Dutch'),
+    ('de', 'Deutsch'),
+)
+
+AVAIL_LANGUAGES = {
+    'ua':'ua',
+    'uk-ua':'ua',
+    'uk-UA':'ua',
+    'ua-UA':'ua',
+    'uk':'ua',
+    'en':'en',
+    'en-US':'en',
+    'nl':'nl',
+    'de':'de',
+    'de-DE':'de'
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -201,32 +222,12 @@ EMAIL_HOST_USER = 'info'
 EMAIL_HOST_PASSWORD = 'Портал'
 EMAIL_PORT = 25
 
-LANGUAGES = (
-    ('uk-UA', 'Українська'),
-    ('uk', 'Українська'),
-    ('ua', 'Українська'),
-    ('en', 'English'),
-    ('nl', 'Dutch'),
-    ('de', 'Deutsch'),
-)
 LOCALE_PATHS = (
     BASE_DIR / 'locale',
     HOME_DIR / 'client/locale',
 )
 LANGUAGE_SESSION_KEY = 'language'
 
-AVAIL_LANGUAGES = {
-    'ua':'ua',
-    'uk-ua':'ua',
-    'uk-UA':'ua',
-    'ua-UA':'ua',
-    'uk':'ua',
-    'en':'en',
-    'en-US':'en',
-    'nl':'nl',
-    'de':'de',
-    'de-DE':'de'
-}
 
 MEDIA_ROOT = f"{BASE_DIR}/media"
 

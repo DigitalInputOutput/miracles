@@ -14,14 +14,14 @@ class UserSocialForm(forms.ModelForm):
         fields = ('email','name','social_id','social_type')
 
 class ForgetPassForm(forms.Form): 
-    phone = forms.CharField(label=_("нагадайте свій номер телефону"),required=True)
+    phone = forms.CharField(label=_("remember your password number"),required=True)
 
     class Meta:
         fields = ('phone',)
 
 class ChangePasswordForm(forms.Form): 
-    password1 = forms.CharField(label=_('Новий пароль'),widget=forms.PasswordInput(attrs={'placeholder': _('Новий пароль*')}))
-    password2 = forms.CharField(label=_('Ще раз'),widget=forms.PasswordInput(attrs={'placeholder': _('Ще раз*')}))
+    password1 = forms.CharField(label=_('New password'),widget=forms.PasswordInput(attrs={'placeholder': _('New password*')}))
+    password2 = forms.CharField(label=_('Repeat'),widget=forms.PasswordInput(attrs={'placeholder': _('Repeat*')}))
     class Meta:
         fields = ('__all__',)
 
@@ -29,16 +29,16 @@ class ChangePasswordForm(forms.Form):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError(_("Паролі не співпадають"))
+            raise forms.ValidationError(_("Passwords do not match"))
         return password2
 
 class UserCreationForm(forms.ModelForm): 
     password1 = forms.CharField(label=_('Пароль*'),widget=forms.PasswordInput(attrs={'placeholder': _('Пароль*')}))
-    password2 = forms.CharField(label=_('Пароль ще раз*'),widget=forms.PasswordInput(attrs={'placeholder': _('Пароль ще раз*')}))
-    name = forms.CharField(max_length=30,label=_('ФИО*'),widget=forms.TextInput(attrs={'placeholder': _('ПІП*')}),required=False)
-    email = forms.EmailField(label=_("Email-адрес"),widget=forms.TextInput(attrs={'placeholder': _('Email адреса'),'autocomplete':'email'}),required=False)
-    phone = forms.CharField(max_length=16,label=_('Номер телефону:'),widget=forms.TextInput(attrs={'placeholder': _('Номер телефону')}),required=False)
-    subscription = forms.BooleanField(label=_('Підписатися на розсилку'),required=False,initial=True,label_suffix='')
+    password2 = forms.CharField(label=_('Password repeat*'),widget=forms.PasswordInput(attrs={'placeholder': _('Password repeat*')}))
+    name = forms.CharField(max_length=30,label=_('NLS*'),widget=forms.TextInput(attrs={'placeholder': _('NLS*')}),required=False)
+    email = forms.EmailField(label=_("Email"),widget=forms.TextInput(attrs={'placeholder': _('Email'),'autocomplete':'email'}),required=False)
+    phone = forms.CharField(max_length=16,label=_('Telephone:'),widget=forms.TextInput(attrs={'placeholder': _('Telephone')}),required=False)
+    subscription = forms.BooleanField(label=_('Subscribe for news'),required=False,initial=True,label_suffix='')
 
     class Meta:
         model = User
@@ -48,7 +48,7 @@ class UserCreationForm(forms.ModelForm):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError(_("Паролі не співпадають"))
+            raise forms.ValidationError(_("Passwords do not match"))
         return password2
 
     def clean_name(self):
@@ -65,7 +65,7 @@ class UserCreationForm(forms.ModelForm):
         return user
 
 class QuickOrderForm(forms.ModelForm): 
-    phone = forms.CharField(max_length=16,label=_('Номер телефону:'),widget=forms.TextInput(attrs={'placeholder': _('Номер телефону'),'autocomplete':'tel'}),required=True)
+    phone = forms.CharField(max_length=16,label=_('Telephone:'),widget=forms.TextInput(attrs={'placeholder': _('Telephone'),'autocomplete':'tel'}),required=True)
 
     class Meta:
         model = User
@@ -78,8 +78,8 @@ class QuickOrderForm(forms.ModelForm):
         return user
 
 class UserForm(forms.ModelForm): 
-    email = forms.EmailField(label="Email-адреса",widget=forms.TextInput(attrs={'placeholder': 'Email адреса'}),required=False)
-    phone = forms.CharField(max_length=16,label=_('Номер телефону:'),widget=forms.TextInput(attrs={'placeholder': _('Номер телефону'),}),required=True)
+    email = forms.EmailField(label="Email",widget=forms.TextInput(attrs={'placeholder': 'Email адреса'}),required=False)
+    phone = forms.CharField(max_length=16,label=_('Telephone:'),widget=forms.TextInput(attrs={'placeholder': _('Telephone'),}),required=True)
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
@@ -89,9 +89,9 @@ class UserForm(forms.ModelForm):
 
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
-        phone = re.sub('[^\d]','',phone)
+        phone = re.sub(r'[^\d]','',phone)
         if not re.match(r'[\d]{9,16}',phone):
-            raise forms.ValidationError(_('Неправильний номер(приклад 0971112233)'))
+            raise forms.ValidationError(_('Incorrect number(exmpl 0971112233)'))
 
         return phone
 
@@ -99,9 +99,9 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('fcm_token','sname','lname','name','phone','email','subscription','notifications')
 
-class SignInForm(forms.Form): 
-    phone = forms.CharField(max_length=16,label=_('Номер телефону або логін*:'),widget=forms.TextInput(attrs={'placeholder': _('Номер телефону'),'autocomplete':'tel'}),required=True)
-    password = forms.CharField(label=_('Пароль*:'),widget=forms.PasswordInput(attrs={'placeholder': _('Пароль'),'autocomplete':'password'}))
+class LogInForm(forms.Form): 
+    phone = forms.CharField(max_length=16,label=_('Telephon or login*:'),widget=forms.TextInput(attrs={'placeholder': _('Telephon'),'autocomplete':'tel'}),required=True)
+    password = forms.CharField(label=_('Password*:'),widget=forms.PasswordInput(attrs={'placeholder': _('Password'),'autocomplete':'password'}))
 
     class Meta:
         fields = "__all__"

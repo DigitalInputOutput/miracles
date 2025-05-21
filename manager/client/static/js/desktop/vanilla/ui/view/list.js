@@ -1,9 +1,6 @@
 import { BaseScreen } from './screen.js';
 import { Dom } from '/static/js/desktop/vanilla/ui/dom.js';
-import { GET, POST, DELETE } from '/static/js/desktop/vanilla/http/method.js';
-// import { Http } from '/vanilla/js/http/http.js';
-// import { timeout } from '/vanilla/js/utils.js';
-// import { view } from '/vanilla/js/view.js';
+import { GET, POST, DELETE } from '/static/js/desktop/vanilla/http/navigation.js';
 
 export class BaseList extends BaseScreen{
 	constructor(context){
@@ -90,8 +87,8 @@ export class BaseList extends BaseScreen{
 }
 
 export class List extends BaseList{
-	static block = 'main';
-	static limit = parseInt((window.screen.availHeight - (105 + 91)) / 58);
+	container = 'main';
+	limit = parseInt((window.screen.availHeight - (105 + 91)) / 58);
 
 	constructor(context){
 		super(context);
@@ -148,7 +145,7 @@ export class List extends BaseList{
     // Populate filters from URL search parameters
     populateFiltersFromURL() {
         try {
-            for (const [key, value] of view.url.searchParams.entries()) {
+            for (const [key, value] of this.url.searchParams.entries()) {
                 const filterElement = Dom.query(`#filters #${key}`);
                 if (filterElement.length) {
                     filterElement[0].value = value;
@@ -183,8 +180,8 @@ export class List extends BaseList{
 				update_data:update_data
 			},
 			View:(response) => {
-				if(response.json && response.json.result)
-					response.alert(`Оновлено: ${response.json.updated}`);
+				if(response && response.result)
+					Alert.popMessage(`Оновлено: ${response.updated}`);
 			}
 		};
 
@@ -273,7 +270,7 @@ export class List extends BaseList{
 			else if(confirm('Are U sure?')){
 				let context = {};
 				context.View = function(response){
-					if(response.json.result){
+					if(response.result){
 						for(i=0;i<checkboxes.length;i++){
 							checkboxes[i].checked = false;
 						}
@@ -288,8 +285,8 @@ export class List extends BaseList{
 }
 
 export class ReloadList extends BaseList{
-	static block = '#items';
-	static limit = parseInt(window.screen.availHeight / 1.80 / 49);
+	container = '#items';
+	limit = parseInt(window.screen.availHeight / 1.80 / 49);
 
 	constructor(context){
 		super(context);

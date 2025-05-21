@@ -11,18 +11,26 @@ try:
 except:
     EMAIL = 'info@miracles.digital'
 
+class Status(models.Model): 
+    name = models.CharField(max_length = 255)
+    image = models.CharField(max_length = 255)
+
+    class Meta:
+        verbose_name = _("Order status")
+
 class Order(models.Model): 
     user = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
-    name = models.CharField(verbose_name=_("Ім'я"),max_length=80,null=True)
-    lname = models.CharField(max_length=255,verbose_name=_('Призвище'),null=True)
-    sname = models.CharField(max_length=255,verbose_name=_('По батькові'),null=True)
+    name = models.CharField(verbose_name=_("Name"),max_length=80,null=True)
+    lname = models.CharField(max_length=255,verbose_name=_('Lastname'),null=True)
+    sname = models.CharField(max_length=255,verbose_name=_('Surename'),null=True)
     email = models.CharField(max_length=50,verbose_name="Email",null=True)
-    phone = models.CharField(max_length=16,verbose_name=_("Телефон"),null=True)
-    cart = models.ForeignKey(Cart,verbose_name = _('Кошик'), on_delete = models.CASCADE)
+    phone = models.CharField(max_length=16,verbose_name=_("Phone"),null=True)
+    cart = models.ForeignKey(Cart,verbose_name = _('Cart'), on_delete = models.CASCADE)
     delivery = models.ForeignKey(Delivery,on_delete = models.SET_NULL, null=True)
     payment = models.ForeignKey(Payment, on_delete = models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True,verbose_name=_('Дата додання'))
-    comment = models.CharField(max_length=1000,null=True,verbose_name=_('Коментар до замовлення'))
+    created_at = models.DateTimeField(auto_now_add=True,verbose_name=_('Date added'))
+    comment = models.CharField(max_length=1000,null=True,verbose_name=_('Comment for order'))
+    status = models.ForeignKey(Status, null=True, on_delete=models.SET_NULL)
 
     @property
     def total(self):
@@ -74,7 +82,7 @@ class Order(models.Model):
 
         to = self.email
         add_email = EMAIL
-        subject = _(f"Інформація за замовленням №{self.id}")
+        subject = _(f"Information to order №{self.id}")
         from_email = _(f"{BASE_URL} <mail@{BASE_URL}>")
 
         context = {
@@ -94,8 +102,8 @@ class Order(models.Model):
         msg.send()
 
     class Meta:
-        verbose_name = _('Замовлення')
-        verbose_name_plural = _('Замовлення')
+        verbose_name = _('Order')
+        verbose_name_plural = _('Order')
         ordering = ['-created_at']
 
     def __str__(self):
@@ -103,16 +111,16 @@ class Order(models.Model):
 
 class Seat(models.Model): 
     order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='seats')
-    weight = models.FloatField(verbose_name=_("Вага"))
-    volumetricHeight = models.PositiveIntegerField(verbose_name=_("Висота"))
-    volumetricWidth = models.PositiveIntegerField(verbose_name=_("Ширина"))
-    volumetricLength = models.PositiveIntegerField(verbose_name=_("Довжина"))
-    cost = models.FloatField(verbose_name=_("Оціночна вартість"))
-    description = models.CharField(max_length=255,verbose_name=_("Опис"))
+    weight = models.FloatField(verbose_name=_("Weight"))
+    volumetricHeight = models.PositiveIntegerField(verbose_name=_("Height"))
+    volumetricWidth = models.PositiveIntegerField(verbose_name=_("Width"))
+    volumetricLength = models.PositiveIntegerField(verbose_name=_("Length"))
+    cost = models.FloatField(verbose_name=_("Cost"))
+    description = models.CharField(max_length=255,verbose_name=_("Description"))
 
     cargo_choices = (
-        (0,_('Ні')),
-        (1,_('Так'))
+        (0,_('No')),
+        (1,_('Yes'))
     )
 
     specialCargo = models.BooleanField(choices=cargo_choices,default=1)
@@ -129,5 +137,5 @@ class Seat(models.Model):
         }
 
     class Meta:
-        verbose_name = _('Займаємий простір')
-        verbose_name_plural = _('Займаємий простір')
+        verbose_name = _('Delivery Seat')
+        verbose_name_plural = _('Delivery Seats')

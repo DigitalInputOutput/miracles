@@ -6,7 +6,7 @@ export class Cookie{
 	
 	static get = function (cname) {
 		let name = cname + "=";
-		let decodedCookie = decodeURIComponent(cookie);
+		let decodedCookie = decodeURIComponent(this);
 		let ca = decodedCookie.split(';');
 	
 		for(let i = 0; i < ca.length; i++) {

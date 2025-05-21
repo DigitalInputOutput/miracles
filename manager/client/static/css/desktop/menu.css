@@ -1,3 +1,4 @@
+/* depends on: main.css */
 menu{
     right: 0px;
     width: 100%;
@@ -29,7 +30,7 @@ menu a{
 menu .parent{
     cursor: pointer;
     padding: 17px 0 10px 0px;
-    padding-left: 6%;
+    padding-left: 10px;
 }
 menu a:hover,menu .parent:hover{
     background-color: #eee;
@@ -38,17 +39,17 @@ menu a{
     padding: 17px 0 10px;
 }
 menu i{
-    width: 19%;
-    font-size: 17px;
+    font-size: 21px;
 }
 menu a.active{
     background-color: #ccc;
 }
 #menu{
-    height: 85%;
+    height: 72%;
     overflow-y: auto;
     position: relative;
     overflow-x: hidden;
+    padding: 0px 6px 0px 3px;
 }
 #menu > a{
     padding-left: 10px;
@@ -64,7 +65,7 @@ menu .sub{
     overflow-x: hidden;
     box-sizing: content-box;
     padding-right: 17px;
-    width: 100%;
+    width: 87%;
     position: absolute;
     left: 100%;
     transition: left 0.2s ease;
@@ -75,9 +76,9 @@ menu .sub{
     height: 0;
 }
 menu .sub.open{
-    left: 0;
+    left: 2px;
     z-index: 2;
-    height: 100%;
+    height: 81%;
 }
 menu .sub a{
     color: #333;
@@ -99,9 +100,9 @@ menu #menuPrev{
 menu #prev {
     display: none;
     cursor: pointer;
-}
-menu #prev i{
-    width: 37%;
+    grid-template-columns: 1fr 3fr;
+    font-size: 14px;
+    align-items: center;
 }
 menu #menuPrev {
     left: 15px;
@@ -128,12 +129,17 @@ menu #menuPrev {
     text-align: center;
     padding: 12px 0;
 }
-menu a,menu .branch,#menu-title-text {
-    display: block;
+#menu .menu-root, .sub > a{
+    display: grid;
     font-size: 15px;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    border: 1px solid #58515154;
+    border-radius: 3px;
+    margin-top: 7px;
 }
 #menu-mini .icon{
-    font-size: 20px;
+    font-size: 26px;
     text-align: center;
     padding: 17% 0;
     cursor: pointer;

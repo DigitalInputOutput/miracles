@@ -1,3 +1,5 @@
+{%load url_filters%}
+{%load i18n%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +19,13 @@
         <div id="http-alert-message"></div>
     </div>
 </template>
+<template id="variants">
+    {?for item in items?}
+        <div class="variant" value="{~item.id~}">
+            {~item.name~}
+        </div>
+    {?endfor?}
+</template>
 {%block body%}
     <template id="selectTemplate">
         <div class="select-selected"></div>
@@ -27,7 +36,7 @@
     <template id="autocompleteItem">
         <div class="value">
             <div class="remove" value="{~value~}">
-                <i class="fas fa-times"></i>
+                <i class="ti ti-x"></i>
             </div>
             {~text~}
         </div>
@@ -36,7 +45,7 @@
         <div id="left">
             <div id="menu-mini">
                 <div class="burger">
-                    <i class="fas fa-hamburger"></i>
+                    <i class="ti ti-menu"></i>
                 </div>
                 {%include 'main/menu-mini.html'%}
             </div>
@@ -44,7 +53,7 @@
             <div class="change-database">
                 <div class="custom-select">
                     <select name="database">
-                        <option value="" disabled="">Сайт</option>
+                        <option value="" disabled="">{% trans 'Website' %}</option>
                         {%for site in sites%}
                             <option {%if site.database == request.session.database%}selected {%endif%}value="{{site.database}}" url="{{site.url}}">
                                 {{site.name}}
@@ -60,21 +69,30 @@
         </main>
     </div>
 {%endblock%}
-<div id="bigPhoto"><div class="close"><i class="fas fa-times"></i></div><img src=""></div>
+<!-- <div id="bigPhoto"><div class="close"><i class="fas fa-times"></i></div><img src=""></div> -->
 <div id="bg"></div>
-<script>BASE_URL = "{{BASE_URL}}";</script>
+<script>
+    window.BASE_URL = "{{BASE_URL}}";
+    window.DJANGO_LANG = "{{ request.LANGUAGE_CODE }}";
+</script>
 <script type="module" src="/static/js/desktop/vanilla/ui/prototype/index.js"></script>
 <script type="module" src="/static/js/desktop/app/views_register.js"></script>
+<script type="module" src="/static/js/desktop/modules/index.js"></script>
+<script type="module" src="/static/js/desktop/vanilla/ui/utils.js"></script>
 <script type="module">
     import { Navigation } from "/static/js/desktop/vanilla/http/navigation.js";
+    import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 
-    const page_context = JSON.parse({{context|safe|default:"\"{}\""}});
+    Navigation.page_context = {{context|safe|default:'{}'}};
 
     const urlpatterns = {
-        "^login/$": { "GET": "Login" },
+        "^/login(\\?(?<next>[\\s\\S]*))?$": { "GET": "Login" },
+        "^/logout$": { "GET": "Logout" },
     };
 
-    window.navigation = new Navigation(page_context, urlpatterns);
+    Navigation.init(urlpatterns);
+    window.Navigation = Navigation;
+    window.Dom = Dom;
 </script>
 {%block JS%}
 {%endblock%}

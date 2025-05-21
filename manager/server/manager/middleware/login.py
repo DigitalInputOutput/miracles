@@ -1,4 +1,5 @@
-from manager.views.login import SigninView
+from django.http import HttpResponsePermanentRedirect
+from urllib.parse import quote
 
 class Login: 
     def __init__(self, get_response):
@@ -16,11 +17,12 @@ class Login:
         return response
 
     def process_view(self,request,view,*args,**kwargs):
-        if request.GET.get('username') and request.GET.get('password'):
-            return None
-
         request.folder = 'desktop'
+        print(request.session.items())
+
         if request.user.is_anonymous or not request.user.is_admin:
-            return SigninView.as_view()(request)
+            if not request.path.startswith('/login') and not request.path.startswith('/logout'):
+                next_url = quote(request.path)
+                return HttpResponsePermanentRedirect(f'/login?next={next_url}')
 
         return None

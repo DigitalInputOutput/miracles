@@ -1,5 +1,6 @@
 {%extends extends%}
 {%load value%}
+{%load i18n%}
 {%block main%}
     <div id="reload">
         <div class="container">
@@ -27,27 +28,26 @@
     <div id="panel-wrapper">
         <div>
             <div class="toggle-panel panel-icon action">
-                <i class="fas fa-hamburger"></i>
+                <i class="ti ti-menu"></i>
             </div>
         </div>
         <div id="panel-shortcuts" class="active">
-            <a class="button load" href="/{{Model}}/"><i class="fas fa-plus"></i></a>
+            <a class="button load" href="/{{AdminModel}}/"><i class="ti ti-plus"></i></a>
             <div id="delete" class="delete-list">
-                <i class="fas fa-trash-alt"></i>
+                <i class="ti ti-trash"></i>
             </div>
         </div>
     </div>
     <div id="panel-menu">
         <div id="search">
-            <input type="text" id="search-text" placeholder='Поиск' value="{{value}}">
+            <input type="text" id="search-text" placeholder='{% trans "Search" %}' value="{{value}}">
             <div class="toggle-panel panel-icon action">
-                <i class="fas fa-hamburger"></i>
+                <i class="ti ti-menu"></i>
             </div>
         </div>
         {%include panel%}
     </div>
     <script>
-        window.PAGE_CONTEXT = JSON.parse({{context|safe|default:"{}"}});
         if(!document.querySelector('menu')) location.reload();
     </script>
 {%endblock%}

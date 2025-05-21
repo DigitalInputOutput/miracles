@@ -4,94 +4,64 @@
     <div id="home">
         <div id="reload">
             <div class="container">
-                Память сервера:
+                {% trans "Servers memory" %}:
                 <br>
-                Всего: {{memory_total}} Использовано: {{memory_used}} Осталось: {{memory_left}}
+                Total: {{memory_total}} Used: {{memory_used}} Left: {{memory_left}}
             </div>
             <div class="container">
                 <div id="merchant">
                     <!-- {%include nav%} -->
                     <h2>Google Merchant Center</h2>
                     <div>
-                        <span>Статус: </span>
+                        <span>{% trans "Status" %}: </span>
                         <span>{{merchant.get_task_status_display}}</span>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Мин. цена" id="merchant_min_price">
+                        <input type="text" placeholder="Min. price" id="merchant_min_price">
                         <div></div>
                     </div>
-                    <button>Создать</button>
+                    <button>{% trans "Create" %}</button>
                     <div>
-                        <a href="/static/google_feed.txt" target="_blank">Посмотреть</a>
+                        <a href="/static/google_feed.txt" target="_blank">{% trans "Look" %}</a>
                     </div>
                 </div>
                 <div id="facebook_merchant">
                     <h2>Facebook Merchant</h2>
                     <div>
-                        <span>Статус: </span>
+                        <span>{% trans "Status" %}: </span>
                         <span>{{facebook_merchant.get_task_status_display}}</span>
                     </div>
                     <div class="field">
-                        <input type="text" placeholder="Мин. цена" id="facebook_merchant_min_price">
+                        <input type="text" placeholder="{% trans 'Min' %}. {% trans 'price' %}" id="facebook_merchant_min_price">
                         <div></div>
                     </div>
-                    <button>Создать</button>
+                    <button>{% trans "Create" %}</button>
                 </div>
                 <div id="sync_prices">
-                    <h2>Синхронизация цен</h2>
+                    <h2>{% trans "Price synchronisation" %}</h2>
                     <div>
-                        <span>Статус: </span>
+                        <span>{% trans "Status" %}: </span>
                         <span>{{sync_stock.get_task_status_display}}</span>
                     </div>
-                    <button>Создать</button>
+                    <button>{% trans "Create" %}</button>
                 </div>
                 <div id="stock">
-                    <h2>Синхронизация наличия</h2>
+                    <h2>{% trans "Sync availability" %}</h2>
                     <div>
-                        <span>Статус: </span>
+                        <span>{% trans "Status" %}: </span>
                         <span>{{stock.get_task_status_display}}</span>
                     </div>
-                    <button>Создать</button>
-                </div>
-                <div id="rozetka">
-                    <h2>Rozetka.ua</h2>
-                    <div>
-                        <span>Статус: </span>
-                        <span>{{rozetka.get_task_status_display}}</span>
-                    </div>
-                    <button>Создать</button>
-                    <a href="/static/export.xml" target="_blank">Посмотреть</a>
-                </div>
-                <div id="hotline">
-                    <h2>hotline</h2>
-                    <div>
-                        <span>Статус: </span>
-                        <span>{{hotline.get_task_status_display}}</span>
-                    </div>
-                    <button>Создать</button>
-                    <a href="/static/export1.xml" target="_blank">Посмотреть</a>
+                    <button>{% trans "Create" %}</button>
                 </div>
                 <div id="cache">
-                    <h2>Кэш</h2>
-                    <i class="fas fa-trash-alt click"></i>
+                    <h2>{% trans "Cache" %}</h2>
+                    <i class="ti ti-trash click"></i>
                 </div>
                 <div id="calculate_prices">
-                    <h2>Пересчет цен</h2>
-                    <span>Статус: </span>
+                    <h2>{% trans "Price sync" %}</h2>
+                    <span>{% trans "Status" %}: </span>
                     <span>{{calculate_prices.get_task_status_display}}</span>
                 </div>
-                <!-- <div id="stock_by_brand">
-                    {%csrf_token%}
-                    <h2>Синх цен и наличия</h2>
-                    <div class="field">
-                        <input type="text" placeholder="id" id="stock_brand" autocomplete="off">
-                    </div>
-                    <div>
-                        <span>Статус: </span>
-                        <span>{{stock_by_brand.get_task_status_display}}</span>
-                    </div>
-                    <button>Создать</button>
-                </div> -->
             </div>
         </div>
     </div>

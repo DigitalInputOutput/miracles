@@ -1,5 +1,6 @@
 from django.forms import TextInput,Select,CheckboxSelectMultiple,CheckboxInput
 from catalog.models import Attribute
+from system.settings import DOMAIN
 
 __all__ = ['SwitcherWidget','AttributesWidget','GalleryWidget','ImageWidget','FgkWidget','StorageWidget','CustomSelectWidget']
 
@@ -65,8 +66,8 @@ class GalleryWidget(TextInput):
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
         # context['widget']['type'] = self.input_type
-        if hasattr(self.model,'gallery'):
-            context['gallery'] = self.model.gallery.all()
+        if self.instance.pk and hasattr(self.instance, 'gallery'):
+            context['gallery'] = self.instance.gallery.all()
         return context
 
 class ImageWidget(TextInput): 
@@ -77,6 +78,7 @@ class ImageWidget(TextInput):
         # context['widget']['type'] = self.input_type
         if hasattr(self.model,'image'):
             context['model'] = self.model
+            context['DOMAIN'] = DOMAIN
         return context
 
 class FgkWidget(TextInput): 
@@ -84,10 +86,13 @@ class FgkWidget(TextInput):
 
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
-        if hasattr(self.instance,self.related_name):
-            context['instance'] = eval("self.instance.%s.all()" % self.related_name)
+
+        if self.instance.pk and hasattr(self.instance, self.related_name):
+            context['instance'] = self.instance.related_name.all()
+
         context['model'] = self.model
         context['field'] = self.field
+
         return context
 
 class StorageWidget(TextInput): 

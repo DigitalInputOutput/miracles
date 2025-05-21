@@ -1,123 +1,81 @@
 from django.shortcuts import render
-from django.http import JsonResponse,Http404
+from django.http import JsonResponse
 from django.views.generic import View
 from json import loads,dumps
-from shop.models import Language,DefaultMetaData
 from transliterate import slugify
-from system.settings import COMPANY_NAME, PHONES
+from django.utils.translation import gettext as _
+from .meta import MetaView
 
 __all__ = ['AddView']
 
-class AddViewSimple(View): 
+class AddView(View, MetaView): 
     def get(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        form = Model.form()
+        AdminModel = request.AdminModel
+        form = AdminModel.form()
 
         context = {
             'form':form,
-            'view':str(Model),
-            'model':Model,
+            'view':str(AdminModel),
+            'AdminModel':AdminModel,
             'context':dumps({})
         }
 
-        return render(request,Model.editTemplate,context)
+        if AdminModel.uses_slug():
+            self.add_meta_forms(context, AdminModel)
+
+        return render(request, AdminModel.editTemplate, context) 
 
     def put(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        json = loads(request.body.decode('utf8'))
-        form = Model.form(json)
+        AdminModel = request.AdminModel
+        form = AdminModel.form(json)
+
+        try:
+            json = loads(request.body.decode('utf8'))
+        except Exception:
+            return JsonResponse({'result': False, 'error': 'Invalid JSON'}, status=400)
 
         image_file = json.get('image')
         if image_file:
             del json['image']
 
-        if form.is_valid():
-            item = form.save(commit=False)
+        if AdminModel.uses_slug():
+            metaM2M = []
 
-            item.save()
-            form.save_m2m()
-            Model.saveExtras(json,item)
-
-            return JsonResponse({'result':True,'href':'/%s/%s' % (Model,item.id),'view':str(Model),'id':item.id})
-
-        context = {
-            'form':form,
-            'view':str(Model)
+        form_kwargs = {
+            'data': json,
         }
 
-        return JsonResponse({'errors':form.errors,'nonferrs':form.non_field_errors()})
+        if AdminModel.uses_slug():
+            metaM2M = self.validate_meta(json, str(AdminModel), item)
 
-class AddView(AddViewSimple): 
-    def get(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        if Model.editTemplate != 'main/slug.html':
-            return super().get(request,*args,**kwargs)
+            if (not item.title or not item.meta_description) and not metaM2M:
+                return JsonResponse({'nonferrs':_('Set title or fill <a href="/meta/list">Meta</a>-template.')})
 
-        form = Model.form()
+            form_kwargs['name'] = metaM2M[0].name
 
-        context = {
-            'form':form,
-            'view':str(Model),
-            'model':Model,
-            'meta':[Model.meta(initial={'lang':lang}) for lang in Language.objects.all()],
-            'context':dumps({})
-        }
+        form = AdminModel.form(**form_kwargs)
 
-        return render(request,Model.editTemplate,context) 
+        if not form.is_valid():
+            return JsonResponse({'errors':form.errors,'nonferrs':form.non_field_errors()})
 
-    def put(self,request,*args,**kwargs):
-        Model = kwargs.get('Model')
-        if Model.editTemplate != 'main/slug.html':
-            return super().put(request,*args,**kwargs)
+        item = form.save(commit=False)
 
-        json = loads(request.body.decode('utf8'))
+        if not item.slug:
+            item.slug = slugify(metaM2M[0].name) or metaM2M[0].name
 
-        metaM2M = []
+        item.save()
 
-        for lang in Language.objects.all():
-            metaForm = Model.meta(json,prefix=lang.code)
-            if metaForm.is_valid():
-                meta = metaForm.save(commit=False)
+        form.save_m2m()
+        AdminModel.saveExtras(json,item)
 
-                template = Meta.objects.filter(language=meta.language,model=list(dict(Meta.model_choices).values()).index(Model.form._meta.model.__name__)).first()
-                if template:
-                    meta.title = meta.title or template.title.format(**{'obj':meta,'COMPANY_NAME':COMPANY_NAME})
-                    meta.meta_description = meta.meta_description or template.meta_description.format(**{'obj':meta,'COMPANY_NAME':COMPANY_NAME,'PHONES':''.join(PHONES)})[:255]
-                    meta.meta_keywords = meta.meta_keywords or template.meta_keywords.format(**{'obj':meta,'COMPANY_NAME':COMPANY_NAME,'PHONES':''.join(PHONES)})[:255]
-
-                if not meta.title and not template:
-                    return JsonResponse({'nonferrs':'Укажите title или заполните <a href="/meta/list">Meta</a>-шаблон.'})
-
-                if not meta.meta_description and not template:
-                    return JsonResponse({'nonferrs':'Укажите meta_description или заполните <a href="/meta/list">Meta</a>-шаблон.'})
-
-                metaM2M.append(meta)
-            else:
-                return JsonResponse({'errors':metaForm.errors,'nonferrs':metaForm.non_field_errors()})
-
-        form = Model.form(json,name=metaM2M[0].name)
-        if form.is_valid():
-            item = form.save(commit=False)
-
-            if not item.slug:
-                item.slug = slugify(metaM2M[0].name) or metaM2M[0].name
-
-            if item.view == 'City':
-                item.view = 'Home'
-
-            item.save()
-            form.save_m2m()
-            Model.saveExtras(json,item)
-
+        if AdminModel.uses_slug():
             for meta in metaM2M:
                 meta.save()
                 item.description.add(meta)
 
-            return JsonResponse({'result':True,'href':'/%s/%s' % (Model,item.id),'view':str(Model),'id':item.id})
-
-        context = {
-            'form':form,
-            'view':str(Model)
-        }
-
-        return JsonResponse({'errors':form.errors,'nonferrs':form.non_field_errors()})
+        return JsonResponse({
+            'result':True,
+            'href':f'/{AdminModel}/{item.id}',
+            'view':str(AdminModel),
+            'id':item.id
+        })

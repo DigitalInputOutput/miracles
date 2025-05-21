@@ -1,41 +1,53 @@
 {%load i18n%}
+{%load url_filters%}
 <div id="cart-icon" class="icon">
-    <a href="/Order/" title="{%trans 'Новый заказ'%}">
-        <i class="fas fa-cart-plus"></i>
+    <a href="/Order/" title="{%trans 'New Order'%}">
+        <i class="ti ti-shopping-cart-plus"></i>
     </a>
 </div>
 <div id="cart-icon" class="icon">
-    <a href="/Order" title="{%trans 'Заказы'%}">
-        <i class="fas fa-shopping-cart"></i>
+    <a href="/Order" title="{%trans 'Orders'%}">
+        <i class="ti ti-shopping-cart"></i>
     </a>
 </div>
 <div id="products-icon" class="icon">
-    <a href="/Product" title="{%trans 'Товары'%}">
-        <i class="fas fa-gifts"></i>
+    <a href="/Product" title="{%trans 'Products'%}">
+        <i class="ti ti-brand-producthunt"></i>
     </a>
 </div>
 <div class="icon">
-    <a href="/Category" title="{%trans 'Категории'%}">
-        <i class="fa fa-list-alt"></i>
+    <a href="/Category" title="{%trans 'Categories'%}">
+        <i class="ti ti-category"></i>
     </a>
 </div>
 <div class="icon">
-    <a href="/Page" title="{%trans 'Страницы'%}">
-        <i class="fas fa-store-alt"></i>
+    <a href="/Page" title="{%trans 'Pages'%}">
+        <i class="ti ti-page-break"></i>
     </a>
 </div>
 <div class="icon">
-    <a href="/User" title="{%trans 'Пользователи'%}">
-        <i class="fas fa-users"></i>
+    <a href="/User" title="{%trans 'Users'%}">
+        <i class="ti ti-users"></i>
     </a>
 </div>
 <div id="settings-icon" class="icon">
-    <a href="/" title="{%trans 'Домой'%}">
-        <i class="fas fa-home"></i>
+    <a href="/" title="{%trans 'Home'%}">
+        <i class="ti ti-home"></i>
     </a>
 </div>
+<div id="lang-button">
+    <i class="ti ti-world-cog"></i>
+
+    <div id="lang">
+        {%for language in supported_languages%}
+            <a {%if lang_code == language.code%}class="active"{%else%} href="?{% query_transform request lang=language.code %}" title="?lang={{language.code}}{% if request.GET %}&{{ request.GET.urlencode }}{% endif %}"{%endif%}>
+                <img src="/media/miracles.site/{{language.image}}">
+            </a>
+        {%endfor%}
+    </div>
+</div>
 <div id="logout">
-    <a id="signout" href="/user/signout">
-        <i class="fas fa-sign-out-alt"></i>
+    <a id="signout" href="/logout">
+        <i class="ti ti-logout"></i>
     </a>
 </div>

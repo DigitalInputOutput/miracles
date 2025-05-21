@@ -3,7 +3,7 @@
 <header>
 	<div class='main container'>
 		<div id="logo">
-			<a href="{{language}}/" title="{% trans 'Игрушки от'%} {{BASE_URL}}">
+			<a href="{{language}}/" title="{% trans 'Іграшки від'%} {{BASE_URL}}">
 				<svg><use xlink:href="#logo"></use></svg>
 			</a>
 		</div>
@@ -29,8 +29,9 @@
 			<div id="autocomplete"></div>
 		</div>
 		<div id="lang" class='noselect'>
-			<a {%if lang == 'ua'%}class="active"{%else%} href="/ua/{{url|default_if_none:''}}" title="/ua/{{url|default_if_none:''}}"{%endif%}>мова</a>
-			<a {%if lang == 'ru'%}class="active"{%else%} href="/{{url|default_if_none:''}}" title="/{{url|default_if_none:''}}"{%endif%}>язык</a>
+			{%for language in supported_languages%}
+				<a {%if lang == language.code%}class="active"{%else%} href="/{{language.code}}/{{url|default_if_none:''}}" title="/{{language.code}}/{{url|default_if_none:''}}"{%endif%}>{{language.name}}</a>
+			{%endfor%}
 		</div>
 	</div>
 	<div class='nav container'>

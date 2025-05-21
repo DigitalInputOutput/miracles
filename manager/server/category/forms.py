@@ -1,13 +1,13 @@
 from django import forms
-from manager.forms import UrlForm
+from manager.forms import PageForm
 from manager.fields import AutocompleteSelectField
 from catalog.models import Category
 from manager.widgets import ImageWidget
 from manager.fields import ImageField
 from django.utils.translation import gettext_lazy as _
 
-class CategoryForm(UrlForm): 
-    parent = AutocompleteSelectField(model=Category,help_text=None,label=_('Родительская'),required=False)
+class CategoryForm(PageForm): 
+    parent = AutocompleteSelectField(model=Category,help_text=None,label=_('Parent'),required=False)
     image = ImageField(
         widget=ImageWidget(),
         label='Logo',
@@ -24,6 +24,6 @@ class CategoryForm(UrlForm):
         model = Category
         fields = '__all__'
         fieldsets = [
-                    ('main', {'fields':['slug','bgcolor','active','image'],'legend':'Общее'}),
-                    ('related', {'fields':['parent'],'legend':'Связи'})
+                    ('main', {'fields':['url','bgcolor','active','image'],'legend':_('General')}),
+                    ('related', {'fields':['parent'],'legend':_('Relations')})
                 ]

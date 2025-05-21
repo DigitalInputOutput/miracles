@@ -514,7 +514,7 @@ button,input[type='submit']{
 	position: fixed;
 	left: 0;
 	top:0;
-	background: url(/static/image/igroteka/loading_bar.gif) repeat-x;
+	background: url(/static/image/miracles/loading_bar.gif) repeat-x;
 	display: none;
 	z-index:7;
 }
@@ -538,7 +538,7 @@ article .bg{
 	position: absolute;
 	width: 100%;
 	height: 70px;
-	background: rgba(0, 0, 0, 0) url(/static/image/igroteka/textGradient.png) repeat-x scroll center bottom;
+	background: rgba(0, 0, 0, 0) url(/static/image/miracles/textGradient.png) repeat-x scroll center bottom;
 	bottom: 0;
 }
 article.useful_article{

@@ -5,7 +5,7 @@ import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { View } from "/static/js/desktop/vanilla/http/view.js";
 
 export class BaseScreen {
-    static block = "main";
+    static container = "main";
 
     constructor(context) {
         this.context = context;
@@ -15,22 +15,23 @@ export class BaseScreen {
             this.setupGlobalListeners();
             this.initializeMenu();
             this.setupBurgerMenu();
+            this.setupLangButton();
         });
 
         this.setupContextSpecificListeners();
     }
 
+    setupLangButton(){
+        Dom.query('#lang-button').on('click',(e)=>{
+            Dom.query('#lang').active();
+            e.stopPropagation();
+            return false;
+        });
+    }
+
     // Setup global listeners
     setupGlobalListeners() {
         Dom.query("a").on("click", Navigation.click);
-
-        Dom.query("#shop").on("click", () => {
-            location.href = this.href;
-        });
-
-        Dom.query("#signout").on("click", () => {
-            location.href = this.href;
-        });
     }
 
     // Initialize the menu
@@ -94,7 +95,9 @@ export class Screen extends BaseScreen {
         super(context);
         this.initializeTheme();
         this.setupThemeListeners();
-        this.setupGlobalBodyClickHandler();
+        document.ready(() => {
+            this.setupGlobalBodyClickHandler();
+        });
     }
 
     // Initialize theme
@@ -125,7 +128,7 @@ export class Screen extends BaseScreen {
             return false;
         });
 
-        Dom.query("body").on("click", () => {
+        Dom.query("#content").on("click", () => {
             this.resetActiveStates();
         });
     }
@@ -139,6 +142,7 @@ export class Screen extends BaseScreen {
         Dom.query("#product-info").removeClass("active");
         Dom.query("#right").removeClass("full");
         Dom.query("#filters").removeClass("active");
+        Dom.query("#lang").removeClass("active");
     }
 
     // Get class name as string

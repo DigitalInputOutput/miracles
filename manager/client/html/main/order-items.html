@@ -3,7 +3,7 @@
         <div class="item" product-id={{item.product.id}}>
             <div class="remove-wrap">
                 <div class="remove" item-id="{{item.id}}">
-                    <i class="fas fa-times"></i>
+                    <i class="ti ti-x"></i>
                 </div>
             </div>
             <div class="image">
@@ -18,13 +18,13 @@
             </div>
             <div class="total">
                 <div>
-                    <span class="title">{{item.total}}</span> грн.
+                    <span class="title">{{item.total}}</span> {% trans 'грн'%}.
                 </div>
                 <div class="icon">
                     <img src="/static/icon/{{item.product.get_storage_display}}.jpg" alt="{{item.product.get_storage_display}}">
                 </div>
                 <div>
-                    <span class="title">{{item.product.qty}}</span> шт.
+                    <span class="title">{{item.product.qty}}</span> {% trans 'шт'%}.
                 </div>
             </div>
         </div>

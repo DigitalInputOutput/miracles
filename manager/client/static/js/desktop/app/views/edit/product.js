@@ -1,11 +1,10 @@
 import { Gallery } from "./gallery.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
-import { POST } from "/static/js/desktop/vanilla/http/method.js";
+import { POST } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
-// import { Sortable } from "/static/js/desktop/modules/sortable.js";
 
 export class ProductEdit extends Gallery{
-	static block = 'main';
+	static container = 'main';
 
 	constructor(context){
 		super(context);
@@ -41,8 +40,8 @@ export class ProductEdit extends Gallery{
 
 				POST(`/gallery/${that.model}/${that.id}/ordering`,{
 					View:function(response){
-						if(response.json && response.json.result)
-							response.alert('Ok.');
+						if(response && response.result)
+							Alert.popMessage('Ok.');
 					},
 					history:false,
 					data:ordering

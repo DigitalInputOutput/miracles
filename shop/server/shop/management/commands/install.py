@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from shop.models import Setup
 from django.core.management import call_command
+from system.settings import HOME_DIR
 
 class Command(BaseCommand): 
     help = 'Create Static'
@@ -16,13 +17,18 @@ class Command(BaseCommand):
         else:
             self.load_fixtures()
 
+        call_command('minify', 'manager')
+        # call_command('minify', 'shop')
+
     def load_fixtures(self):
         self.stdout.write(self.style.WARNING('Loading fixtures...'))
-        call_command('loaddata', 'shop/fixtures/language.json')
-        call_command('loaddata', 'shop/fixtures/urls.json')
-        call_command('loaddata', 'shop/fixtures/info.json')
-        call_command('loaddata', 'catalog/fixtures/description.json')
-        call_command('loaddata', 'catalog/fixtures/categories.json')
+        print(HOME_DIR / 'shop/server/shop/fixtures/language.json')
+        call_command('loaddata', HOME_DIR / 'shop/server/shop/fixtures/language.json')
+        call_command('loaddata', HOME_DIR / 'shop/server/shop/fixtures/urls.json')
+        call_command('loaddata', HOME_DIR / 'shop/server/shop/fixtures/info.json')
+        call_command('loaddata', HOME_DIR / 'shop/server/shop/fixtures/default_meta.json')
+        call_command('loaddata', HOME_DIR / 'shop/server/catalog/fixtures/description.json')
+        call_command('loaddata', HOME_DIR / 'shop/server/catalog/fixtures/categories.json')
 
         call_command('rebuild_tree')
 

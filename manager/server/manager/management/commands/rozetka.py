@@ -12,11 +12,11 @@ class Command(BaseCommand):
         y = ET.Element('yml_catalog')
         y.attrib = {'date':timezone.now().strftime('%Y-%b-%d %H:%M')}
         s = ET.SubElement(y, 'shop')
-        s.text = 'Igroteka'
+        s.text = 'miracles'
         c = ET.SubElement(y, 'company')
         c.text = 'ФОП Шинаков Виталий Александрович'
         u = ET.SubElement(y, 'url')
-        u.text = 'http://igroteka.ua'
+        u.text = 'http://miracles.site'
         cur = ET.SubElement(y, 'currencies')
         curr = ET.SubElement(cur,'currency')
         curr.attrib = {'id':"UAH", 'rate':"1"}
@@ -35,7 +35,7 @@ class Command(BaseCommand):
             offer = ET.SubElement(offers,'offer')
             offer.attrib = {'id':str(product.id), 'available':"true"}
             url = ET.SubElement(offer, 'url')
-            url.text = 'http://igroteka.ua%s' % product.slug
+            url.text = 'http://miracles.site%s' % product.slug
             price = ET.SubElement(offer, 'price')
             price.text = str(product.retail_price)
             currencyId = ET.SubElement(offer, 'currencyId')
@@ -44,7 +44,7 @@ class Command(BaseCommand):
             categoryId.text = str(product.get_category().id)
             for image in product.gallery.all():
                 picture = ET.SubElement(offer, 'picture')
-                picture.text = "http://igroteka.ua%s" % image.image.url
+                picture.text = "http://miracles.site%s" % image.image.url
 
             print(product.name)
             vendor = ET.SubElement(offer, 'vendor')

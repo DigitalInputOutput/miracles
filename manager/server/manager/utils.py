@@ -10,10 +10,30 @@ from django import forms
 try:
     from django.forms.utils import flatatt, ErrorDict
 except ImportError: # Django < 1.9 compatibility
-    from django.forms.util import flatatt, ErrorDict
+    from django.forms.utils import flatatt, ErrorDict
 import six
 from django.utils.safestring import mark_safe
 
+from django.forms import modelform_factory
+
+def update_object(item, data):
+    FormClass = modelform_factory(item.__class__, fields=data.keys())
+
+    form = FormClass(data, instance=item)
+
+    if not form.is_valid():
+        return 0, form.errors
+
+    changed = 0
+
+    for field in form.changed_data:
+        setattr(item, field, form.cleaned_data[field])
+        changed += 1
+
+    if changed:
+        item.save()
+
+    return changed, None
 
 def with_metaclass(meta, *bases):
     """Create a base class with a metaclass.
@@ -202,7 +222,7 @@ class BetterBaseForm(object):
     ``BoundField``, depending on whether the field is required.
     There is no automatic inheritance of ``row_attrs``.
     The fieldsets declaration is a list of two-tuples very similar to
-    the ``fieldsets`` option on a ModelAdmin class in
+    the ``fieldsets`` option on a AdminModel class in
     ``django.contrib.admin``.
     The first item in each two-tuple is a name for the fieldset, and
     the second is a dictionary of fieldset options.

@@ -8,7 +8,7 @@ from system.settings import BASE_DIR
 from django.core.management import call_command
 
 import getpass
-                    
+
 database_name = DATABASES.get('default').get('NAME')
 database_user = DATABASES.get('default').get('USER')
 database_pass = DATABASES.get('default').get('PASSWORD')
@@ -23,7 +23,7 @@ class Command(BaseCommand):
         if answer == "y":
 
             answer = input("Recreate database? [y/N] ")
-            
+
             if answer == "y":
                 password = getpass.getpass("Enter root password for database server: ")
                 # Connect to MySQL (without specifying a database)

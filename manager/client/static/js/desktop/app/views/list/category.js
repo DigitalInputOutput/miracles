@@ -1,9 +1,8 @@
-import { View } from "/static/js/desktop/vanilla/ui/view/screen.js";
-import { GET } from "/static/js/desktop/vanilla/http/method.js";
+import { GET } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
-import { Sortable } from "/static/js/desktop/vanilla/ui/form/sortable.js";
+import { BaseScreen } from "/static/js/desktop/vanilla/ui/view/screen.js";
 
-export class CategoryList extends View{
+export class CategoryList extends BaseScreen{
 	constructor(context){
 		super(context);
 		Dom.query('.parent-arrow').on('click',function(){

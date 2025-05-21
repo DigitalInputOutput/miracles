@@ -75,9 +75,9 @@ class Cart(models.Model):
 class Item(models.Model): 
     cart = models.ForeignKey(Cart,related_name = 'items', on_delete = models.CASCADE)
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
-    price = models.PositiveIntegerField(default = 0,verbose_name = _('Ціна'))
-    qty = models.PositiveIntegerField(default = 0,verbose_name = _('Кількість'))
-    total = models.PositiveIntegerField(default = 0,verbose_name = _('Разом'))
+    price = models.PositiveIntegerField(default = 0,verbose_name = _('Price'))
+    qty = models.PositiveIntegerField(default = 0,verbose_name = _('Count'))
+    total = models.PositiveIntegerField(default = 0,verbose_name = _('Total'))
 
     def dict(self):
 
@@ -98,7 +98,7 @@ class Item(models.Model):
         try:
             return self.product.name
         except Product.DoesNotExist:
-            return str(_('Назва не існує'))
+            return str(_('Name does not exist'))
 
     bestsellers_sql = """select o.id,i.cart_id,i.product_id,COUNT(i.product_id) num,p.is_available 
     FROM checkout_order o LEFT JOIN cart_item i ON o.cart_id = i.cart_id 

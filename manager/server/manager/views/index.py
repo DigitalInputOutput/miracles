@@ -4,7 +4,7 @@ from system.settings import MEDIA_ROOT,BASE_DIR,CACHE_URL,DOMAIN
 from manager.models import Task
 from django.http import JsonResponse
 from tasks import google_merchant,facebook_merchant,prices,stock
-from json import dumps,loads
+from json import dumps
 from user.models import User
 from checkout.models import Order
 from datetime import datetime,timedelta
@@ -12,7 +12,6 @@ from django.db.models import Count
 
 import shutil
 from os.path import isfile
-from json import loads
 from ast import literal_eval
 
 try:
@@ -60,7 +59,7 @@ def index(request):
         # 'memory_used':data[1],
         # 'memory_left':data[2],
         'tasks':Task.objects.all(),
-        'context':dumps(dumps({
+        'context':dumps({
             'users':list(User.objects.filter(created_at__gte=datetime.now() - timedelta(days=7))
                     .extra({'created_at' : "date_format(created_at,'%%a')"})
                     .values('created_at').annotate(users=Count('id'))
@@ -70,7 +69,7 @@ def index(request):
                     .values('created_at').annotate(users=Count('id'))
                 )
             })
-        ),
+        ,
         'panel':'main/panel/settings.html',
         'panel_shortcuts':'main/panel/shortcuts/settings.html'
     }

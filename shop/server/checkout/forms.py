@@ -54,7 +54,7 @@ class CheckoutForm(forms.ModelForm):
 
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
-        phone = re.sub('[^\d]','',phone)
+        phone = re.sub(r'[^\d]','',phone)
         if not re.match(r'[\d]{9,16}',phone):
             raise forms.ValidationError(_('Неправильный телефон(пример 0971112233)'))
 

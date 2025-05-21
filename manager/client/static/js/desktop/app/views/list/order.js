@@ -1,6 +1,6 @@
 import { List } from "/static/js/desktop/vanilla/ui/view/list.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
-import { GET } from "/static/js/desktop/vanilla/http/method.js";
+import { GET } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
 
 export class OrderList extends List{
@@ -14,8 +14,8 @@ export class OrderList extends List{
 		if(confirm('Are you sure?')){
 			GET('/order/mass_sms',{
 				View:function(response){
-					if(response.json.result)
-						response.alert('SMS разошлись успешно.');
+					if(response.result)
+						Alert.popMessage('SMS разошлись успешно.');
 				}
 			});
 		}
@@ -23,8 +23,8 @@ export class OrderList extends List{
 	tracking(){
 		GET('/order/tracking',{
 			View:function(response){
-				if(response.json.items){
-					var items = response.json.items;
+				if(response.items){
+					var items = response.items;
 					for(var i in items){
 						var item = items[i];
 						var ul = create('ul');
@@ -38,7 +38,7 @@ export class OrderList extends List{
 					}
 					Dom.query('#tracking #result')[0].show();
 				}else{
-					response.alert('Нет таких заказов.');
+					Alert.popMessage('Нет таких заказов.');
 				}
 			}
 		});

@@ -1,6 +1,6 @@
 import { List, ReloadList } from "/static/js/desktop/vanilla/ui/view/list.js";
 import { AutocompleteF } from "/static/js/desktop/vanilla/ui/form/autocompletef.js";
-import { POST, GET } from "/static/js/desktop/vanilla/http/method.js";
+import { POST, GET } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
 // import { edjsHTML, EditorJS, toJson, Header,
@@ -26,7 +26,7 @@ export class BaseProductList extends List{
 		POST(`/action/${product_id}/availability`,{
 			data:{'availability':!availability},
 			View:function(response){
-				if(response.json && response.json.result){
+				if(response && response.result){
 					e.target.removeClass(availability.toString());
 					availability = !availability;
 					e.target.addClass(availability.toString());
@@ -176,7 +176,7 @@ export class BaseProductList extends List{
 	}
 	load_editor(response){
 		Dom.query(`.export input[type='radio']`).each((elem) => {elem.checked = false});
-		for(let exp of response.json.export_status){
+		for(let exp of response.export_status){
 			Dom.query(`.export[type='${exp.export_id}'] [value='${exp.load}']`)[0].checked = true;
 			if(exp.meta){
 				let editor = this.editors[exp.export_id];

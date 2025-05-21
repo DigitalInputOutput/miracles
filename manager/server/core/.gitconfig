@@ -1,2 +1,0 @@
-alias gp='git add . && git commit -m 'fixes' && git push'
-alias pull='git pull'

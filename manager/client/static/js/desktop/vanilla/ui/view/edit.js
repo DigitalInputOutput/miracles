@@ -1,15 +1,12 @@
 import { Screen } from "./screen.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { AutocompleteF } from "/static/js/desktop/vanilla/ui/form/autocompletef.js";
-import { DELETE, GET, PUT } from "/static/js/desktop/vanilla/http/method.js";
-// import { edjsHTML, EditorJS, Header, SimpleImage, EditorList,
-// 	Checklist, Quote, Warning, Marker, CodeTool, Delimiter,
-// 	InlineCode, LinkTool, Embed, Table, toJson } from "/static/js/desktop/modules/editor.js";
+import { DELETE, GET, PUT } from "/static/js/desktop/vanilla/http/navigation.js";
 import { storage } from "/static/js/desktop/vanilla/ui/const.js";
-// import { Sortable } from "/static/js/desktop/modules/sortable.js";
+import { Alert } from "/static/js/desktop/vanilla/ui/alert.js";
 
 export class BaseEdit extends Screen{
-	block = 'main';
+	container = 'main';
 
 	constructor(context){
 		super(context);
@@ -21,8 +18,9 @@ export class BaseEdit extends Screen{
 		Dom.query('#save_and_out').on('click',this.save_and_out.bind(this));
 		this.deleteButton.on('click',this.delete.bind(this));
 
-		if(context.context.anchor)
-			this.active = Dom.query(`#item-menu div.menu-item[for=${context.context.anchor}]`)[0];
+		// console.log(context);
+		if(context.anchor)
+			this.active = Dom.query(`#item-menu div.menu-item[data-tab=${context.anchor}]`)[0];
 
 		if(!this.active){
 			this.active = Dom.query('#item-menu .menu-item')[0];
@@ -31,9 +29,9 @@ export class BaseEdit extends Screen{
 		if(this.active){
 			this.active.active();
 
-			Dom.query(`#item #${this.active.get('for')}`).active();
+			Dom.query(`#item #${this.active.get('data-tab')}`).active();
 
-			Dom.query('#item-menu .menu-item').on('click',this.menu.bind(this));
+			Dom.query('#item-menu .menu-item').on('click',this.tabs.bind(this));
 		}
 
 		Dom.query('main form *').on('change select input',function(){
@@ -48,29 +46,29 @@ export class BaseEdit extends Screen{
 		});
 
 		try{
-			this.id = context.id ? context.id : context.context.id;
+			this.id = context.id ? context.id : context.id;
 		}catch(e){}
 	}
-	menu(e){
-		if(!e.target.get('for')){
+	tabs(e){
+		if(!e.target.get('data-tab')){
 			e.target.parent().click();
 			return;
 		}
 		if(this.active){
 			this.active.removeClass('active');
-			Dom.query(`#item #${this.active.get('for')}`).active();
+			Dom.query(`#item #${this.active.get('data-tab')}`).active();
 		}
 		this.active = e.target;
 		e.target.addClass('active');
-		Dom.query(`#item #${e.target.get('for')}`).active();
-		location.replace(location.pathname + location.search + '#' + e.target.get('for'));
+		Dom.query(`#item #${e.target.get('data-tab')}`).active();
+		history.replaceState(null, '', location.pathname + location.search + '#' + e.target.get('data-tab'));
 	}
 	delete(){
 		if(confirm('Удалить?')){
 			var that = this;
 			DELETE(`/${this.Model}/${this.id}`,{
 				View:function(response){
-					if(response.json.result){
+					if(response.result){
 						GET(`/${that.Model}`);
 					}
 				}
@@ -95,26 +93,26 @@ export class BaseEdit extends Screen{
 		this.save('out');
 	}
 	post_save(response){
-		if(response.json.result){
-			response.alert('Сохранено успешно.');
+		if(response.result){
+			Alert.popMessage('Сохранено успешно.');
 
-			if(response.context.action){
-				if(response.context.action == 'more')
+			if(response.action){
+				if(response.action == 'more')
 					GET(`/${this.Model}/`);
-				else if(response.context.action == 'out'){
+				else if(response.action == 'out'){
 					GET(`/${this.Model}`);
 				}
-			}else if(response.json && response.json.href){
-				GET(response.json.href);
+			}else if(response && response.href){
+				GET(response.href);
 			}
 			this.extraAction();
 		}else{
 			var errors = '';
-			for(var error in response.json.errors){
-				errors += error + '<br>' + response.json.errors[error] + '<br>';
+			for(var error in response.errors){
+				errors += error + '<br>' + response.errors[error] + '<br>';
 			}
-			errors += response.json.nonferrs + '<br>';
-			response.alert(errors,7000);
+			errors += response.nonferrs + '<br>';
+			Alert.popMessage(errors,7000);
 		}
 	}
 	extraAction(){
@@ -123,11 +121,10 @@ export class BaseEdit extends Screen{
 }
 
 export class Edit extends BaseEdit{
-	block = 'main';
+	container = 'main';
 
 	constructor(context){
 		super(context);
-
 
 		this.editors = [];
 
@@ -156,7 +153,7 @@ export class Edit extends BaseEdit{
 		that.activeLang = Dom.query('.languages > div')[0];
 		that.activeLang.addClass('active');
 
-		Dom.query(`#description #${that.activeLang.get('for')}`)[0].active();
+		Dom.query(`#description #${that.activeLang.get('data-tab')}`)[0].active();
 		Dom.query('.fieldset.meta .languages > div').on('click',that.langMenu.bind(that));
 
 		Dom.query('textarea').each((elem) => {
@@ -273,24 +270,26 @@ export class Edit extends BaseEdit{
 		});
 	}
 	langMenu(e){
-		if(!e.target.get('for')){
+		if(!e.target.get('data-tab')){
 			e.target.parent().click();
 			return;
 		}
 		if(this.activeLang){
 			this.activeLang.removeClass('active');
-			Dom.query(`#description #${this.activeLang.get('for')}`)[0].active();
+			Dom.query(`#description #${this.activeLang.get('data-tab')}`)[0].active();
 		}
 		this.activeLang = e.target;
 		e.target.addClass('active');
-		Dom.query(`#description #${e.target.get('for')}`)[0].active();
+		Dom.query(`#description #${e.target.get('data-tab')}`)[0].active();
 	}
 }
 export class Image extends Edit{
 	constructor(context){
 		super(context);
 
-		Dom.query('.pic').on('click',function(){this.find('input')[0].click()});
+		Dom.query('.pic').on('click',function(){
+			this.find('input')[0].click();
+		});
 		Dom.query('.pic .remove').on('click',this.removeImage);
 		Dom.query('.pic input').on('change',this.changeImage);
 	}
@@ -303,14 +302,24 @@ export class Image extends Edit{
 			image.src = e.target.result;
 			that.set('value', e.target.result);
 			that.parent().removeClass('active');
+			that.closer('.remove').addClass('active');
+
+			// Store Base64 in a hidden input field
+			let hiddenInput = Dom.create('input');
+			hiddenInput.type = 'hidden';
+			hiddenInput.name = that.name + "_b64";  // e.g., image_b64
+			hiddenInput.value = e.target.result;
+		
+			that.parent().append(hiddenInput);
 		};
 		reader.readAsDataURL(file);
 	}
 	removeImage(event){
 		if(confirm('Точн?')){
-			this.parent().find('img')[0].src = '/media/data/no_image_new.jpg';
+			this.parent().find('img')[0].src = '/media/no_image.jpg';
 			this.parent().find('input')[0].set('value','remove');
 			Dom.query('#save').removeAttr('disabled');
+			this.closer('.remove').removeClass('active');
 		}
 		event.stopPropagation();
 		return false;

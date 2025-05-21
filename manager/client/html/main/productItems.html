@@ -11,8 +11,8 @@
             </div>
             <div class="info-wrap">
                 <div class="name">
-                    <a href="/{{Model}}/{{item.pk}}">{{item.name}}</a>
-                    <a class="link" href="http://{{SITE_URL}}/{{item.slug}}" target="_blank"><i class="fas fa-link clickable"></i></a>
+                    <a href="/{{AdminModel}}/{{item.pk}}">{{item.name}}</a>
+                    <a class="link" href="http://{{SITE_URL}}/{{item.slug}}" target="_blank"><i class="ti ti-link clickable"></i></a>
                 </div>
                 <div class="info">
                     <div>{{item.id}}</div>
@@ -42,7 +42,7 @@
                 <div class="availability">{{item.available|safe}}</div>
             </div>
             <div class="settings-button" product-id="{{item.id}}">
-                <i class="fas fa-cog clickable"></i>
+                <i class="ti ti-settings clickable"></i>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
     <div id="pagination">
         <span class="step-links">
             {% if items.has_previous and items.previous_page_number > 1%}
-                <a class='prevPage' href="?page={{items.previous_page_number}}"> < Пред.</a>
+                <a class='prevPage' href="?page={{items.previous_page_number}}"> < {% trans 'Prev' %}.</a>
             {% endif %}
             {%for page in items.paginator.page_range%}
                 {%if page == items.number%}
@@ -63,18 +63,18 @@
                 {%endif%}
             {%endfor%}
             {% if items.has_next %}
-                <a class='nextPage' href="?page={{items.next_page_number}}"> След. > </a>
+                <a class='nextPage' href="?page={{items.next_page_number}}"> {% trans 'Next' %}. > </a>
             {% endif %}
         </span>
         <div class="pagi-info">
             {%if items.paginator.per_page%}
-                <span class="search-count">{{items.paginator.per_page}} на странице</span>
+                <span class="search-count">{{items.paginator.per_page}} {% trans 'on page' %}</span>
             {%endif%}
             {%if count%}
-                <span class="search-count">{{count}} всего</span>
+                <span class="search-count">{{count}} {% trans 'total' %}</span>
             {%endif%}
             {% if items.has_next %}
-                <a id="list-all">Показать все</a>
+                <a id="list-all">{% trans 'Show all' %}</a>
             {% endif %}
         </div>
     </div>
