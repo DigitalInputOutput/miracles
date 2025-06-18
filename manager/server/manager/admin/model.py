@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.template.loader import get_template
 from manager.forms import ( InfoDescriptionForm,CategoryDescriptionForm, 
 BrandDescriptionForm,TagDescriptionForm,CityDescriptionForm,
-ProductDescriptionForm, StorageDescriptionForm )
+ProductDescriptionForm )
 from django.core.paginator import Paginator
 from ast import literal_eval
 
@@ -12,14 +12,13 @@ FORM_CLASSES = {
     'Brand': BrandDescriptionForm,
     'Tag': TagDescriptionForm,
     'City': CityDescriptionForm,
-    'Product': ProductDescriptionForm,
-    'Storage': StorageDescriptionForm,
+    'Product': ProductDescriptionForm
 }
 
 class AdminModel:
     exclude = {}
     listView = 'List'
-    editTemplate = 'main/slug.html'
+    edit_template = None
     searchHtml = 'main/items.html'
     listHtml = 'main/list.html'
     database = 'default'
@@ -27,6 +26,16 @@ class AdminModel:
     listTemplate = 'main/list.html'
     disabled_paginator = False
     is_slug_based = False
+
+    @classmethod
+    def get_edit_template(self):
+        if self.edit_template:
+            return self.edit_template
+
+        if self.uses_slug():
+            return 'main/slug.html'
+        else:
+            return 'main/edit.html'
 
     @classmethod
     def uses_slug(cls):
@@ -110,7 +119,7 @@ class AdminModel:
             except:
                 context['items'] = paginator.page(1)
 
-    def extraContext(self,context):
+    def extra_context(self,context):
         return context
 
     def __eq__(self,value):
@@ -133,7 +142,7 @@ class AdminModel:
     def list_extra_context(self,context):
         return context
 
-    def saveExtras(self,request,item):
+    def save_extras(self,request,item):
         return
 
     @property

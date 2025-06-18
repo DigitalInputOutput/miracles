@@ -42,8 +42,8 @@ export class Select{
 
             this.wrapper.append(optionTemplate);
         }
-        this.container.append(this.textContainer);
-        this.container.append(this.selectOptions);
+        this.container.before(this.textContainer);
+        this.container.before(this.selectOptions);
 
         this.options = {};
         for(let option of this.container.find('.select-items div')){
@@ -52,7 +52,6 @@ export class Select{
         }
     }
     change(e){
-        console.log(e);
         if(!e.isTrusted)
             return;
 
@@ -67,6 +66,13 @@ export class Select{
 
         if(this.parameters && this.parameters.handler)
             this.parameters.handler();
+
+        this.container.removeClass("invalid");
+        this.container.removeClass("active");
+
+        let errorsBlock = this.container.next();
+        if(errorsBlock.hasClass("errors"))
+            errorsBlock.hide();
 
         e.stopPropagation();
         return false;

@@ -9,12 +9,11 @@ class AttributeAdmin(AdminModel):
     head = (('id','id'),('Название','name'))
     head_search = (('по id','id'),('по названию','name__icontains'))
     list_display = ('id','name')
-    editTemplate = 'main/edit.html'
 
     def get_filters(self,value):
         return Q(name__icontains=value) | Q(values__value__icontains=value)
 
-    def saveExtras(self,json,attribute):
+    def save_extras(self,json,attribute):
         if json.get('value'):
             attribute.values.exclude(value__in=json.get('value')).delete()
 

@@ -20,7 +20,7 @@ export class Alert {
     }
 
 	static popMessage(text, scnds){
-		this.textContainer.text(text);
+		this.textContainer.html(text);
 		this.container.show();
 
 		if(!scnds)

@@ -5,7 +5,7 @@ import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { View } from "/static/js/desktop/vanilla/http/view.js";
 
 export class BaseScreen {
-    static container = "main";
+    container = "main";
 
     constructor(context) {
         this.context = context;
@@ -83,7 +83,7 @@ export class BaseScreen {
         document.title = this.context.title;
 
         try {
-            this.Model = this.context.Model || "";
+            this.AdminModel = this.context.AdminModel || "";
         } catch (e) {
             console.error("Error initializing Model:", e);
         }
@@ -128,7 +128,7 @@ export class Screen extends BaseScreen {
             return false;
         });
 
-        Dom.query("#content").on("click", () => {
+        Dom.query("body").on("click", () => {
             this.resetActiveStates();
         });
     }
@@ -143,6 +143,8 @@ export class Screen extends BaseScreen {
         Dom.query("#right").removeClass("full");
         Dom.query("#filters").removeClass("active");
         Dom.query("#lang").removeClass("active");
+        Dom.query("#bigPhoto").hide();
+        Dom.query("#bg").hide();
     }
 
     // Get class name as string

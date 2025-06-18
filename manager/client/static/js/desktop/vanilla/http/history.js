@@ -3,11 +3,11 @@ export class HistoryManager {
 
     static pushState(context) {
         /* Avoid adding certain context methods to history */
-        if (['PUT', 'DELETE'].includes(context.method)) return;
+        if (['PUT','POST', 'DELETE'].includes(context.method)) return;
 
         const state = {
             href: context.href,
-            Model: context.Model,
+            AdminModel: context.AdminModel,
             View: context.View ? context.View : undefined,
             defaultView: context.defaultView,
             title: context.title,

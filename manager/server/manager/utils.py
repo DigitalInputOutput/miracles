@@ -16,6 +16,10 @@ from django.utils.safestring import mark_safe
 
 from django.forms import modelform_factory
 
+class DictObj:
+    def __init__(self, d):
+        self.__dict__ = d
+
 def update_object(item, data):
     FormClass = modelform_factory(item.__class__, fields=data.keys())
 

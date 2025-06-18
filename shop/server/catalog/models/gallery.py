@@ -15,7 +15,7 @@ except:
 
 class AbstractGallery(models.Model): 
     product = models.ForeignKey(Product, related_name = 'gallery', on_delete=models.CASCADE)
-    image = models.ImageField(max_length=255,upload_to='products/%Y/%m/%d', blank=True,verbose_name=_('Картинка'))
+    image = models.ImageField(max_length=255,upload_to='products/%Y/%m/%d', blank=True,verbose_name=_('Image'))
     position = models.PositiveIntegerField(default=0,verbose_name=_('Порядоковий номер'),blank=True)
     last_modified = models.DateTimeField(auto_now_add=True)
     size = {'list_thumb':260,'mobile_list_thumb':180,'admin_thumb':120,'cart_thumb':100,'mini_thumb':85,
@@ -91,7 +91,7 @@ class AbstractGallery(models.Model):
         return thumb.url
 
     def path(self,size):
-        name = f'{self.product.slug}-{size}x{size}'
+        name = f'{self.product.url}-{size}x{size}'
         if self.position and self.position > 1:
             name = name + '-' + str(self.position)
         path = f'/images/{name[0]}/{name[1]}/'
@@ -141,8 +141,8 @@ class AbstractGallery(models.Model):
 
 class Gallery(AbstractGallery): 
     class Meta:
-        verbose_name = _('Зображення')
-        verbose_name_plural = _('Зображення')
+        verbose_name = _('Image')
+        verbose_name_plural = _('Image')
         ordering = ['position']
 
 class Thumb(models.Model): 

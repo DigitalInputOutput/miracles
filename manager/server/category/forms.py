@@ -1,18 +1,18 @@
 from django import forms
-from manager.forms import PageForm
+from manager.forms import Base64Form
 from manager.fields import AutocompleteSelectField
 from catalog.models import Category
-from manager.widgets import ImageWidget
-from manager.fields import ImageField
+from manager.widgets import SwitcherWidget
 from django.utils.translation import gettext_lazy as _
 
-class CategoryForm(PageForm): 
-    parent = AutocompleteSelectField(model=Category,help_text=None,label=_('Parent'),required=False)
-    image = ImageField(
-        widget=ImageWidget(),
-        label='Logo',
-        required=False
-        )
+class CategoryForm(Base64Form): 
+    parent = AutocompleteSelectField(model=Category,help_text=None,label=_('Parent'), required=False)
+
+    active = forms.BooleanField(label=_("Active"),
+        widget=SwitcherWidget(),
+        required=False,
+        initial=False
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

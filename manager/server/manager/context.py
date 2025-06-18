@@ -24,7 +24,7 @@ def extends(request):
             'JS_VERSION': version.js,
             'sites':Site.objects.filter(active=True),
             'TIGRES_CATEGORIES':TIGRES_CATEGORIES,
-            'supported_languages':Language.objects.all(),
+            'supported_languages':Language.objects.filter(active=True),
             'lang_url': f"/{request.LANGUAGE_CODE if request.LANGUAGE_CODE != DEFAULT_LANGUAGE_CODE else ''}",
             'lang_code': request.LANGUAGE_CODE
         }

@@ -1,0 +1,30 @@
+[
+{
+    "model": "user.user",
+    "pk": 1,
+    "fields": {
+        "is_superuser": false,
+        "email": null,
+        "verified": false,
+        "name": "admin",
+        "lname": null,
+        "sname": null,
+        "phone": null,
+        "password": "pbkdf2_sha256$870000$EPmuhvTfhOFsom0lx2hsUY$c8bVkM9ToRY3GAyrHhVqWiRI0cm8UZmimIPQ2oeQnZc=",
+        "is_active": true,
+        "is_admin": true,
+        "is_staff": true,
+        "subscription": true,
+        "last_login": "2025-05-28T19:10:28.612Z",
+        "created_at": "2025-05-18T21:40:36.943Z",
+        "device_id": "admin",
+        "notifications": true,
+        "fcm_token": null,
+        "update_departaments": false,
+        "social_type": null,
+        "social_id": null,
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

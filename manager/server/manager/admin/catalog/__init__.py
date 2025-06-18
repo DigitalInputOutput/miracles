@@ -10,7 +10,6 @@ from .tag import TagAdmin
 from .gallery import GalleryAdmin
 from .city import CityAdmin
 from .info import InfoAdmin
-from .percent import PercentAdmin
 from .featured import FeaturedAdmin
 from .google import GoogleFeedAdmin
 from .currency import CurrencyAdmin

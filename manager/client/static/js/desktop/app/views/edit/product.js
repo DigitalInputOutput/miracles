@@ -1,4 +1,4 @@
-import { Gallery } from "./gallery.js";
+import { Gallery } from "/static/js/desktop/vanilla/ui/view/gallery.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { POST } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
@@ -95,23 +95,5 @@ export class ProductEdit extends Gallery{
 		});
 
 		return data;
-	}
-}
-
-export class StorageEdit extends ProductEdit{
-	constructor(response){
-		super(response);
-	}
-	save(){
-		super.save();
-	}
-	extraAction(){
-		super.extraAction();
-		this.active.active();
-
-		if(current)
-			current.active();
-
-		current = active;
 	}
 }

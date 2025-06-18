@@ -10,7 +10,7 @@ export class View {
 
     static render(context){
         let requested_view = context.View;
-        let model = context.Model || '';
+        let model = context.AdminModel || '';
 
         if (typeof requested_view === "string") {
             try{

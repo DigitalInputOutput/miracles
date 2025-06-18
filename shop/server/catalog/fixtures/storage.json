@@ -1,0 +1,50 @@
+[
+    {
+        "model": "catalog.storage",
+        "pk": 1,
+        "fields": {
+            "name": "В наявності",
+            "language": 1
+        }
+    },
+    {
+        "model": "catalog.storage",
+        "pk": 2,
+        "fields": {
+            "name": "Під замовлення(1-3 дні)",
+            "language": 1
+        }
+    },
+    {
+        "model": "catalog.storage",
+        "pk": 3,
+        "fields": {
+            "name": "Auf Lager",
+            "language": 2
+        }
+    },
+    {
+        "model": "catalog.storage",
+        "pk": 4,
+        "fields": {
+            "name": "Auf Bestellung gefertigt(1-3 Tage)",
+            "language": 2
+        }
+    },
+    {
+        "model": "catalog.storage",
+        "pk": 5,
+        "fields": {
+            "name": "In stock",
+            "language": 3
+        }
+    },
+    {
+        "model": "catalog.storage",
+        "pk": 6,
+        "fields": {
+            "name": "To order(1-3 days)",
+            "language": 3
+        }
+    }
+]

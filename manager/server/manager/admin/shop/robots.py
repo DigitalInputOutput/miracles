@@ -7,4 +7,3 @@ class RobotsAdmin(AdminModel):
     form = RobotsForm
     head = (('id','id'),('Тело','body'),('Моб.','mobile'))
     list_display = ('id','body','is_mobile')
-    editTemplate = 'main/edit.html'

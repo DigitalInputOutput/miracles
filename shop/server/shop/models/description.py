@@ -2,7 +2,6 @@ from django.db import models
 from shop.models import Language
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from system.settings import COMPANY_NAME, PHONES
 
 __all__ = ['Description','DefaultMetaData']
 
@@ -12,12 +11,15 @@ class DefaultMetaData(models.Model):
     title = models.CharField(max_length=100)
     meta_description = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f"{self.model} {self.language}"
+
     class Meta:
         unique_together = ('language','model')
 
 class Description(models.Model): 
     language = models.ForeignKey(Language, on_delete=models.SET_NULL,null=True)
-    name = models.CharField(max_length=255,verbose_name=_('Назва'))
+    name = models.CharField(max_length=255,verbose_name=_('Name'))
     text = models.TextField(max_length=20000,null=True,verbose_name=_('Опис'))
     json_text = models.TextField(max_length=20000,null=True)
     title = models.CharField(max_length=255,null=True)
@@ -36,30 +38,7 @@ class Description(models.Model):
     def save(self,*args,**kwargs):
         self.last_modified = timezone.now()
 
-        if self.pk:
-            self.format_meta_data()
-
         super().save(*args,**kwargs)
-
-    @classmethod
-    def format_meta_data(obj, model_name, item):
-        template = DefaultMetaData.objects.filter(
-            language=item.language,
-            model=model_name,
-            ).first()
-    
-        if not template:
-            return None
-
-        item.title = item.title or template.title.format(**{
-            'obj':item,'COMPANY_NAME':COMPANY_NAME
-        })
-
-        item.meta_description = item.meta_description or template.meta_description.format(**{
-            'obj':item,'COMPANY_NAME':COMPANY_NAME,'PHONES':' '.join(PHONES)
-        })[:255]
-
-        return item
 
     def __str__(self):
         return self.name or ''

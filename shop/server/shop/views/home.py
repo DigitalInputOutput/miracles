@@ -40,9 +40,6 @@ class HomeView(View):
 
         return render(request, f'main/{request.device}/home.html', context)
 
-class MainView(HomeView): 
-    pass
-
 class InfoView(View): 
     def get(self,request,*args,**kwargs):
         context = {}

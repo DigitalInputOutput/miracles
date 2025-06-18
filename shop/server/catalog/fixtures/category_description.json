@@ -1,0 +1,782 @@
+[
+{
+    "model": "catalog.categorydescription",
+    "pk": 4,
+    "fields": {
+        "language": 1,
+        "name": "Електроніка",
+        "text": "",
+        "json_text": "",
+        "title": "Електроніка title за замовчуванням",
+        "meta_description": "Електроніка meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:16:14.251Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 5,
+    "fields": {
+        "language": 2,
+        "name": "Elektronik",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Elektronik  title",
+        "meta_description": "Standart Elektronik  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:16:14.257Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 6,
+    "fields": {
+        "language": 3,
+        "name": "Electronics",
+        "text": "",
+        "json_text": "",
+        "title": "Default Electronics  title",
+        "meta_description": "Default Electronics  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:16:14.261Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 7,
+    "fields": {
+        "language": 1,
+        "name": "Телевізори",
+        "text": "",
+        "json_text": "",
+        "title": "Телевізори title за замовчуванням",
+        "meta_description": "Телевізори meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:15:49.634Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 8,
+    "fields": {
+        "language": 2,
+        "name": "Fernseher",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Fernseher  title",
+        "meta_description": "Standart Fernseher  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:15:49.639Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 9,
+    "fields": {
+        "language": 3,
+        "name": "Televisors",
+        "text": "",
+        "json_text": "",
+        "title": "Default Televisors  title",
+        "meta_description": "Default Televisors  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:15:49.644Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 10,
+    "fields": {
+        "language": 1,
+        "name": "Консолі",
+        "text": "",
+        "json_text": "",
+        "title": "Консолі title за замовчуванням",
+        "meta_description": "Консолі meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:24:21.683Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 11,
+    "fields": {
+        "language": 2,
+        "name": "Konsolen",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Konsolen  title",
+        "meta_description": "Standart Konsolen  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:24:21.696Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 12,
+    "fields": {
+        "language": 3,
+        "name": "Consoles",
+        "text": "",
+        "json_text": "",
+        "title": "Default Consoles  title",
+        "meta_description": "Default Consoles  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:24:21.706Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 13,
+    "fields": {
+        "language": 1,
+        "name": "Компʼютери",
+        "text": "",
+        "json_text": "",
+        "title": "Комʼютери title за замовчуванням",
+        "meta_description": "Комʼютери meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:39:20.438Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 14,
+    "fields": {
+        "language": 2,
+        "name": "Computers",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Computers  title",
+        "meta_description": "Standart Computers  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:39:20.446Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 15,
+    "fields": {
+        "language": 3,
+        "name": "Computers",
+        "text": "",
+        "json_text": "",
+        "title": "Default Cumputers  title",
+        "meta_description": "Default Cumputers  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:39:20.455Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 16,
+    "fields": {
+        "language": 1,
+        "name": "Побутова техніка",
+        "text": "",
+        "json_text": "",
+        "title": "Побутова техніка title за замовчуванням",
+        "meta_description": "Побутова техніка meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:42:51.483Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 17,
+    "fields": {
+        "language": 2,
+        "name": "Haushaltsgeräte",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Haushaltsgeräte  title",
+        "meta_description": "Standart Haushaltsgeräte  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:42:51.493Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 18,
+    "fields": {
+        "language": 3,
+        "name": "Houshold appliances",
+        "text": "",
+        "json_text": "",
+        "title": "Default Houshold appliances  title",
+        "meta_description": "Default Houshold appliances  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:42:51.505Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 19,
+    "fields": {
+        "language": 1,
+        "name": "Будинок",
+        "text": "",
+        "json_text": "",
+        "title": "Будинок title за замовчуванням",
+        "meta_description": "Будинок meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:45:43.483Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 20,
+    "fields": {
+        "language": 2,
+        "name": "Haus",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Haus  title",
+        "meta_description": "Standart Haus  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:45:43.493Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 21,
+    "fields": {
+        "language": 3,
+        "name": "House",
+        "text": "",
+        "json_text": "",
+        "title": "Default House  title",
+        "meta_description": "Default House  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:45:43.507Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 22,
+    "fields": {
+        "language": 1,
+        "name": "Ванна кімната",
+        "text": "",
+        "json_text": "",
+        "title": "Ванна кімнат title за замовчуванням",
+        "meta_description": "Ванна кімнат meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:48:17.593Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 23,
+    "fields": {
+        "language": 2,
+        "name": "Badezimmer",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Badezimmer  title",
+        "meta_description": "Standart Badezimmer  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:48:17.601Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 24,
+    "fields": {
+        "language": 3,
+        "name": "Bathroom",
+        "text": "",
+        "json_text": "",
+        "title": "Default Bathroom  title",
+        "meta_description": "Default Bathroom  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:48:17.609Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 25,
+    "fields": {
+        "language": 1,
+        "name": "Спальня",
+        "text": "",
+        "json_text": "",
+        "title": "Спальня title за замовчуванням ",
+        "meta_description": "Спальня meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:53:36.491Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 26,
+    "fields": {
+        "language": 2,
+        "name": "Schlafzimmer",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Schlafzimmer  title",
+        "meta_description": "Standart Schlafzimmer  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:53:36.495Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 27,
+    "fields": {
+        "language": 3,
+        "name": "Bedroom",
+        "text": "",
+        "json_text": "",
+        "title": "Default Bedroom  title",
+        "meta_description": "Default Bedroom  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:53:36.499Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 28,
+    "fields": {
+        "language": 1,
+        "name": "Кухна",
+        "text": "",
+        "json_text": "",
+        "title": "Кухна title за замовчуванням ",
+        "meta_description": "Кухна meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:55:09.490Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 29,
+    "fields": {
+        "language": 2,
+        "name": "Kochzimmer",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Kochzimmer  title",
+        "meta_description": "Standart Kochzimmer  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:55:09.496Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 30,
+    "fields": {
+        "language": 3,
+        "name": "Kitchen",
+        "text": "",
+        "json_text": "",
+        "title": "Default Kitchen  title",
+        "meta_description": "Default Kitchen  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:55:09.503Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 31,
+    "fields": {
+        "language": 1,
+        "name": "Їжа",
+        "text": "",
+        "json_text": "",
+        "title": "Їжа title за замовчуванням ",
+        "meta_description": "Їжа meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:56:12.703Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 32,
+    "fields": {
+        "language": 2,
+        "name": "Essen",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Essen  title",
+        "meta_description": "Standart Essen  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:56:12.712Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 33,
+    "fields": {
+        "language": 3,
+        "name": "Food",
+        "text": "",
+        "json_text": "",
+        "title": "Default Food  title",
+        "meta_description": "Default Food  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:56:12.721Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 34,
+    "fields": {
+        "language": 1,
+        "name": "Під замовлення",
+        "text": "",
+        "json_text": "",
+        "title": "Під замовлення title за замовчуванням",
+        "meta_description": "Під замовлення meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:58:23.903Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 35,
+    "fields": {
+        "language": 2,
+        "name": "Auf Bestellung",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Auf Bestellung  title",
+        "meta_description": "Standart Auf Bestellung  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:58:23.912Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 36,
+    "fields": {
+        "language": 3,
+        "name": "To order",
+        "text": "",
+        "json_text": "",
+        "title": "Default To order  title",
+        "meta_description": "Default To order  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T16:58:23.923Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 37,
+    "fields": {
+        "language": 1,
+        "name": "Готова їжа",
+        "text": "",
+        "json_text": "",
+        "title": "Готова їжа title за замовчуванням ",
+        "meta_description": "Готова їжа meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:00:20.600Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 38,
+    "fields": {
+        "language": 2,
+        "name": "Fertiggericht",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Fertiggericht  title",
+        "meta_description": "Standart Fertiggericht  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:00:20.606Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 39,
+    "fields": {
+        "language": 3,
+        "name": "Ready meal",
+        "text": "",
+        "json_text": "",
+        "title": "Default Ready meal  title",
+        "meta_description": "Default Ready meal  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:00:20.612Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 40,
+    "fields": {
+        "language": 1,
+        "name": "Будівництво",
+        "text": "",
+        "json_text": "",
+        "title": "Будівництво title за замовчуванням ",
+        "meta_description": "Будівництво meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:02:05.848Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 41,
+    "fields": {
+        "language": 2,
+        "name": "Baustelle",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Baustelle  title",
+        "meta_description": "Standart Baustelle  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:02:05.854Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 42,
+    "fields": {
+        "language": 3,
+        "name": "Building",
+        "text": "",
+        "json_text": "",
+        "title": "Default Building  title",
+        "meta_description": "Default Building  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:02:05.861Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 43,
+    "fields": {
+        "language": 1,
+        "name": "Суміші",
+        "text": "",
+        "json_text": "",
+        "title": "Суміші title за замовчуванням",
+        "meta_description": "Суміші meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:04:14.303Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 44,
+    "fields": {
+        "language": 2,
+        "name": "Baumischungen",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Baumischungen  title",
+        "meta_description": "Standart Baumischungen  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:04:14.313Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 45,
+    "fields": {
+        "language": 3,
+        "name": "Mixtures",
+        "text": "",
+        "json_text": "",
+        "title": "Default Mixtures  title",
+        "meta_description": "Default Mixtures  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:04:14.322Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 46,
+    "fields": {
+        "language": 1,
+        "name": "Інструменти",
+        "text": "",
+        "json_text": "",
+        "title": "Інструменти title за замовчуванням ",
+        "meta_description": "Інструменти meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:05:31.299Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 47,
+    "fields": {
+        "language": 2,
+        "name": "Werkzeuge",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Werkzeuge  title",
+        "meta_description": "Standart Werkzeuge  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:05:31.305Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 48,
+    "fields": {
+        "language": 3,
+        "name": "Instruments",
+        "text": "",
+        "json_text": "",
+        "title": "Default Instruments  title",
+        "meta_description": "Default Instruments  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:05:31.316Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 49,
+    "fields": {
+        "language": 1,
+        "name": "Електроінструмент",
+        "text": "",
+        "json_text": "",
+        "title": "Електроінструмент title за замовчуванням",
+        "meta_description": "Електроінструмент meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:07:28.000Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 50,
+    "fields": {
+        "language": 2,
+        "name": "Elektrische werkzuege",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Elektrische werkzuege  title",
+        "meta_description": "Standart Elektrische werkzuege  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:07:28.009Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 51,
+    "fields": {
+        "language": 3,
+        "name": "Electrical instruments",
+        "text": "",
+        "json_text": "",
+        "title": "Default Electrical instruments  title",
+        "meta_description": "Default Electrical instruments  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:07:28.019Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 52,
+    "fields": {
+        "language": 1,
+        "name": "Тварини",
+        "text": "",
+        "json_text": "",
+        "title": "Тварини title за замовчуванням ",
+        "meta_description": "Тварини meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:08:51.445Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 53,
+    "fields": {
+        "language": 2,
+        "name": "Tiere",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Tiere  title",
+        "meta_description": "Standart Tiere  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:08:51.454Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 54,
+    "fields": {
+        "language": 3,
+        "name": "Animals",
+        "text": "",
+        "json_text": "",
+        "title": "Default Animals  title",
+        "meta_description": "Default Animals  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:08:51.461Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 55,
+    "fields": {
+        "language": 1,
+        "name": "Транспорт",
+        "text": "",
+        "json_text": "",
+        "title": "Транспорт title за замовчуванням ",
+        "meta_description": "Транспорт meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:10:23.193Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 56,
+    "fields": {
+        "language": 2,
+        "name": "Verkehrsmittel",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Verkehrsmittel  title",
+        "meta_description": "Standart Verkehrsmittel  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:10:23.199Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 57,
+    "fields": {
+        "language": 3,
+        "name": "Transport",
+        "text": "",
+        "json_text": "",
+        "title": "Default Transport  title",
+        "meta_description": "Default Transport  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:10:23.205Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 58,
+    "fields": {
+        "language": 1,
+        "name": "Акції",
+        "text": "",
+        "json_text": "",
+        "title": "Акції title за замовчуванням ",
+        "meta_description": "Акції meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:11:31.212Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 59,
+    "fields": {
+        "language": 2,
+        "name": "Angebote",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Angebote  title",
+        "meta_description": "Standart Angebote  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:11:31.220Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 60,
+    "fields": {
+        "language": 3,
+        "name": "Sale",
+        "text": "",
+        "json_text": "",
+        "title": "Default Sale  title",
+        "meta_description": "Default Sale  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:11:31.226Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 61,
+    "fields": {
+        "language": 1,
+        "name": "Спорт",
+        "text": "",
+        "json_text": "",
+        "title": "Спорт title за замовчуванням ",
+        "meta_description": "Спорт meta_description за замовчуванням  (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:12:13.203Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 62,
+    "fields": {
+        "language": 2,
+        "name": "Sport",
+        "text": "",
+        "json_text": "",
+        "title": "Standart Sport  title",
+        "meta_description": "Standart Sport  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:12:13.211Z"
+    }
+},
+{
+    "model": "catalog.categorydescription",
+    "pk": 63,
+    "fields": {
+        "language": 3,
+        "name": "Sport",
+        "text": "",
+        "json_text": "",
+        "title": "Default Sport  title",
+        "meta_description": "Default Sport  meta_description (099) 999-99-99 (066) 666-66-66 (033) 333-33-33 (077) 777-77-77",
+        "last_modified": "2025-06-15T17:12:13.217Z"
+    }
+}
+]

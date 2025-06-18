@@ -7,4 +7,3 @@ class SettingsAdmin(AdminModel):
     form = SettingsForm
     head = (('id','id'),('API_KEY','api_key'))
     list_display = ('id','api_key')
-    editTemplate = 'main/edit.html'

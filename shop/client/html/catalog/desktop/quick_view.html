@@ -32,7 +32,7 @@
 					<div class="price">{{product.price}} грн.</div>
 				{%endif%}
 			{%if product.is_available%}
-					<div class="opt">{{product.big_opt_price}}</span> <span>грн. <a href="{{language}}/igrushki-optom" class="opt">{% trans '(условия)' %}</a></div>
+					<div class="opt">{{product.wholesale_price}}</span> <span>грн. <a href="{{language}}/igrushki-optom" class="opt">{% trans '(условия)' %}</a></div>
 			{%endif%}
 		</div>
 		{%if product.is_available%}

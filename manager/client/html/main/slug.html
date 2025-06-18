@@ -1,6 +1,5 @@
 {%extends extends%}
 {%load checkbox%}
-{%load translate%}
 {%load i18n%}
 {%load translate%}
 {%block main%}
@@ -12,23 +11,23 @@
         <div class="container">
             <div>ID: {{item.pk}}</div>
             <h1>{% translate item 'translate_name' lang %}</h1>
-            <a href="https://{{SITE_URL}}/{{item.slug}}">{{item.url}}</a>
+            <a href="https://{{SITE_URL}}/{{item.utl}}">{{item.url}}</a>
         </div>
     </div>
     <div id="item-body" class="container">
         <form action="javascript: return false;" enctype="multipart/form-data">
             {%csrf_token%}
-                <div id="description" class="fieldset meta">
+                <div id="description" class="fieldset meta tabMenu">
                     <div class="languages">
-                        {%for form in meta%}
+                        {%for form in meta_forms%}
                             <div data-tab="meta-{{form.lang.code}}" lang-id="{{form.lang.id}}">
                                 <img src="{{form.lang.image_url}}" alt="">
                             </div>
                             <input type="hidden" name="description[]" value="{{form.instance.id|default_if_none:''}}">
                         {%endfor%}
                     </div>
-                    {%for form in meta%}
-                        <div class="fieldset" id="meta-{{form.lang.code}}">
+                    {%for form in meta_forms%}
+                        <div class="fieldset langMenu" id="meta-{{form.lang.code}}">
                             <input id="id_{{form.lang.code}}-language" type="hidden" name="{{form.lang.code}}-language" value="{{form.lang.id}}">
                             {%for fieldset in form.fieldsets%}
                                 {%for field in fieldset%}
@@ -40,6 +39,7 @@
                                             {%endif%}
                                         </div>
                                         {{field}}
+                                        <div class="errors"></div>
                                     </div>
                                 {%endfor%}
                             {%endfor%}
@@ -47,7 +47,7 @@
                     {%endfor%}
                 </div>
                 {%for fieldset in form.fieldsets%}
-                    <div class="fieldset {{fieldset.classes}}" id="{{fieldset.name|default_if_none:'main'}}">
+                    <div class="fieldset {{fieldset.classes}} tabMenu" id="{{fieldset.name|default_if_none:'main'}}">
                         {%for field in fieldset%}
                             {%if not fieldset.description%}
                                 <div class="field{%if field|is_checkbox%} checkbox{%endif%}">
@@ -58,9 +58,11 @@
                                         {%endif%}
                                     </div>
                                     {{field}}
+                                    <div class="errors"></div>
                                 </div>
                             {%else%}
                                 {{field}}
+                                <div class="errors"></div>
                             {%endif%}
                         {%endfor%}
                     </div>
@@ -68,8 +70,8 @@
         </form>
         <div id="item-menu">
             <div class="menu-item noselect" data-tab="description">
-                <i class="fas fa-ruler-combined"></i>
-                META
+                <i class="ti ti-language"></i>
+                {% trans 'By Language' %}
             </div>
             {%for fieldset in form.fieldsets%}
                 <div class="menu-item noselect" data-tab="{{fieldset.name|default_if_none:'main'}}">
@@ -89,8 +91,8 @@
             <a id='browse' href="http://{{SITE_URL}}/{{item.slug}}">
                 <i class="ti ti-external-link"></i>
             </a>
-            {%if Model.editPanel%}
-                {%include Model.editPanel%}
+            {%if AdminModel.editPanel%}
+                {%include AdminModel.editPanel%}
             {%endif%}
             <div id="save" class="edit-panel-icon">
                 <i class="ti ti-device-floppy"></i>
@@ -110,10 +112,10 @@
         </div>
     </div>
 </div>
+<div id="bigPhoto">
+    <img src="" alt="">
+</div>
 <script>
-    // Navigation.page_context = JSON.parse({{context|safe|default:"\"{}\""}});
     if(!document.querySelector('menu')) location.reload();
-
 </script>
-    <!-- <script type="module" defer src="/static/js/views/edit/product.js"></script> -->
 {%endblock%}

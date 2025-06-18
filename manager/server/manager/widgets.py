@@ -2,7 +2,7 @@ from django.forms import TextInput,Select,CheckboxSelectMultiple,CheckboxInput
 from catalog.models import Attribute
 from system.settings import DOMAIN
 
-__all__ = ['SwitcherWidget','AttributesWidget','GalleryWidget','ImageWidget','FgkWidget','StorageWidget','CustomSelectWidget']
+__all__ = ['SwitcherWidget','AttributesWidget','GalleryWidget','ImageWidget','FgkWidget','CustomSelectWidget']
 
 class AutocompleteWidget(TextInput): 
     template_name = 'main/form/autocomplete.html'
@@ -14,7 +14,8 @@ class AutocompleteWidget(TextInput):
         except self.model.DoesNotExist:
             pass
         context['model'] = self.model.__name__.lower()
-        context['Model'] = self.model.__name__
+        context['AdminModel'] = self.model.__name__
+
         return context
 
 class AutocompleteMultipleWidget(TextInput): 
@@ -28,7 +29,7 @@ class AutocompleteMultipleWidget(TextInput):
             context['widget']['value'] = self.model.objects.filter(id__in=value)
             context['widget']['values_list'] = [item.id for item in context['widget']['value']]
         context['model'] = self.model.__name__.lower()
-        context['Model'] = self.model.__name__
+        context['AdminModel'] = self.model.__name__
         return context
 
 class SwitcherWidget(CheckboxInput): 
@@ -38,7 +39,7 @@ class SwitcherWidget(CheckboxInput):
         context = super().get_context(name, value, attrs)
         return context
 
-class CustomSelectWidget(Select): 
+class CustomSelectWidget(Select):
     template_name = "main/form/select.html"
 
 class SelectInputWidget(TextInput): 
@@ -87,18 +88,10 @@ class FgkWidget(TextInput):
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
 
-        if self.instance.pk and hasattr(self.instance, self.related_name):
+        if self.instance.pk and hasattr(self.instance, "related_name") and hasattr(self.instance, self.related_name):
             context['instance'] = self.instance.related_name.all()
 
         context['model'] = self.model
         context['field'] = self.field
 
-        return context
-
-class StorageWidget(TextInput): 
-    template_name = "main/form/storage.html"
-
-    def get_context(self, name, value, attrs):
-        context = super().get_context(name, value, attrs)
-        context['storage'] = self.model.storage
         return context

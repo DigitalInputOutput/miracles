@@ -1,0 +1,68 @@
+[
+    {
+        "model":"shop.url",
+        "pk": 2,
+        "fields":{
+            "string": "elektronika",
+            "model_id": 1,
+            "model_name": "Category",
+            "view": "Category",
+            "language_id": 1
+        }
+    },
+    {
+        "model":"shop.url",
+        "pk": 3,
+        "fields":{
+            "string": "elektronik",
+            "model_id": 1,
+            "model_name": "Category",
+            "view": "Category",
+            "language_id": 2
+        }
+    },
+    {
+        "model":"shop.url",
+        "pk": 4,
+        "fields":{
+            "string": "elecntonics",
+            "model_id": 1,
+            "model_name": "Category",
+            "view": "Category",
+            "language_id": 3
+        }
+    },
+    {
+        "model":"shop.url",
+        "pk": 5,
+        "fields":{
+            "string": "elektroinstrument",
+            "model_id": 20,
+            "model_name": "Category",
+            "view": "Category",
+            "language_id": 1
+        }
+    },
+    {
+        "model":"shop.url",
+        "pk": 6,
+        "fields":{
+            "string": "elektroinstrumente",
+            "model_id": 20,
+            "model_name": "Category",
+            "view": "Category",
+            "language_id": 2
+        }
+    },
+    {
+        "model":"shop.url",
+        "pk": 7,
+        "fields":{
+            "string": "electroinstruments",
+            "model_id": 20,
+            "model_name": "Category",
+            "view": "Category",
+            "language_id": 3
+        }
+    }
+]

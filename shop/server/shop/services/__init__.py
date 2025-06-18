@@ -1,5 +1,4 @@
 from .view import ViewService
-from .path import PathBuilder
 from .cache import CacheService
 from .model import ModelService
 from .url import URLService

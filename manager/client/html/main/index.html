@@ -26,6 +26,12 @@
         </div>
     {?endfor?}
 </template>
+<template id="autocomplete_value">
+    <div class="value">
+        <div class="remove" value="{~id~}"><i class="ti ti-x"></i></div>
+        <a href="/{~AdminModel~}/{~id~}">{~name~}</a>
+    </div>
+</template>
 {%block body%}
     <template id="selectTemplate">
         <div class="select-selected"></div>

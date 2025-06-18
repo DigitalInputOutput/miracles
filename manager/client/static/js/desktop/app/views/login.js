@@ -11,12 +11,12 @@ export class Login extends Form{
 
 		this.form = Dom.query('#login-form form')[0];
 
-		this.validatorRules = {
+		const validatorRules = {
 			'phone':{
-				'required': true,
 				'rules':{
 					'min_length':4,
 					'regex':/[а-яА-Яa-zA-Z0-9\-\_\.]/,
+					'required': true
 				},
 				'errors':{
 					'regex':t('login_regex'),
@@ -24,9 +24,9 @@ export class Login extends Form{
 				}
 			},
 			'password':{
-				'required': true,
 				'rules':{
 					'min_length':6,
+					'required': true
 				},
 				'errors':{
 					'required':t('required_error')
@@ -34,7 +34,7 @@ export class Login extends Form{
 			},
 		};
 
-        this.validator = new Validator(this.form, this.validatorRules);
+        this.validator = new Validator(this.form, validatorRules);
 
 		Dom.query('body').on('keypress', debounce(this.onKeyPress.bind(this), 300));
 		Dom.query('#login-button').on('click', this.signin.bind(this));

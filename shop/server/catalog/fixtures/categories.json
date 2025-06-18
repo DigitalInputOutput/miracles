@@ -1,362 +1,402 @@
 [
-    {
-        "model": "catalog.category",
-        "pk": 1,
-        "fields": {
-            "cached": false,
-            "url": "електроніка",
-            "image": "category_image/електроніка.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": null,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [1]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 9,
-        "fields": {
-            "cached": false,
-            "url": "телевізори",
-            "image": "category_image/телевізори.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 1,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [9]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 10,
-        "fields": {
-            "cached": false,
-            "url": "консолі",
-            "image": "category_image/консолі.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 1,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [10]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 11,
-        "fields": {
-            "cached": false,
-            "url": "комп'ютери",
-            "image": "category_image/комп'ютери.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 1,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [11]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 12,
-        "fields": {
-            "cached": false,
-            "url": "побутова_техніка",
-            "image": "category_image/побутова_техніка.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 1,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [12]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 2,
-        "fields": {
-            "cached": false,
-            "url": "будинок",
-            "image": "category_image/будинок.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": null,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [2]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 13,
-        "fields": {
-            "cached": false,
-            "url": "ванна_кімната",
-            "image": "category_image/ванна_кімната.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 2,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [13]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 14,
-        "fields": {
-            "cached": false,
-            "url": "спальня",
-            "image": "category_image/спальня.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 2,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [14]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 15,
-        "fields": {
-            "cached": false,
-            "url": "кухня",
-            "image": "category_image/кухня.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 2,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [15]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 3,
-        "fields": {
-            "cached": false,
-            "url": "їжа",
-            "image": "category_image/їжа.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": null,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [3]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 16,
-        "fields": {
-            "cached": false,
-            "url": "під_замовлення",
-            "image": "category_image/під_замовлення.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 3,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [16]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 17,
-        "fields": {
-            "cached": false,
-            "url": "готова_їжа",
-            "image": "category_image/готова_їжа.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 3,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [17]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 4,
-        "fields": {
-            "cached": false,
-            "url": "будівництво",
-            "image": "category_image/будівництво.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": null,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [4]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 18,
-        "fields": {
-            "cached": false,
-            "url": "суміші",
-            "image": "category_image/суміші.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 4,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [18]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 19,
-        "fields": {
-            "cached": false,
-            "url": "інструменти",
-            "image": "category_image/інструменти.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 4,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [19]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 20,
-        "fields": {
-            "cached": false,
-            "url": "електроінструмент",
-            "image": "category_image/електроінструмент.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": 19,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [20]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 5,
-        "fields": {
-            "cached": false,
-            "url": "тварини",
-            "image": "category_image/тварини.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": null,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [5]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 6,
-        "fields": {
-            "cached": false,
-            "url": "транспорт",
-            "image": "category_image/транспорт.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": null,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [6]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 7,
-        "fields": {
-            "cached": false,
-            "url": "акції",
-            "image": "category_image/акції.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": null,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [7]
-        }
-    },
-    {
-        "model": "catalog.category",
-        "pk": 8,
-        "fields": {
-            "cached": false,
-            "url": "Спорт",
-            "image": "category_image/спорт.jpg",
-            "last_modified": "2024-08-25T10:30:00Z",
-            "active": true,
-            "bgcolor": "#FFFFFF",
-            "parent": null,
-            "lft": 1,
-            "rght": 10,
-            "tree_id": 1,
-            "level": 0,
-            "description": [8]
-        }
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "parent": null,
+        "image": "category_image/AAAIACAYAAAD0eN.jpg",
+        "last_modified": "2025-06-15T16:16:14.242Z",
+        "active": true,
+        "bgcolor": "#e75a74",
+        "lft": 1,
+        "rght": 10,
+        "tree_id": 1,
+        "level": 0,
+        "description": [
+            4,
+            5,
+            6
+        ]
     }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "parent": 2,
+        "image": "category_image/AAAEACAYAAABccq.jpg",
+        "last_modified": "2025-06-15T16:15:49.627Z",
+        "active": true,
+        "bgcolor": "#8dd191",
+        "lft": 2,
+        "rght": 3,
+        "tree_id": 1,
+        "level": 1,
+        "description": [
+            7,
+            8,
+            9
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "parent": 2,
+        "image": "category_image/AAAIACAYAAAD0eN_GHoH7Ht.jpg",
+        "last_modified": "2025-06-15T16:24:21.662Z",
+        "active": true,
+        "bgcolor": "#e29a7d",
+        "lft": 4,
+        "rght": 5,
+        "tree_id": 1,
+        "level": 1,
+        "description": [
+            10,
+            11,
+            12
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "parent": 2,
+        "image": "category_image/AAAEACAYAAABccq_7CbzIiE.jpg",
+        "last_modified": "2025-06-15T16:39:20.420Z",
+        "active": true,
+        "bgcolor": "#a2dcff",
+        "lft": 6,
+        "rght": 7,
+        "tree_id": 1,
+        "level": 1,
+        "description": [
+            13,
+            14,
+            15
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "parent": 2,
+        "image": "category_image/AAAIACAYAAAD0eN_cojP1jx.jpg",
+        "last_modified": "2025-06-15T16:42:51.466Z",
+        "active": true,
+        "bgcolor": "#ffe083",
+        "lft": 8,
+        "rght": 9,
+        "tree_id": 1,
+        "level": 1,
+        "description": [
+            16,
+            17,
+            18
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+        "parent": null,
+        "image": "category_image/AAAIACAYAAAD0eN_Ks67ggi.jpg",
+        "last_modified": "2025-06-15T16:45:43.463Z",
+        "active": true,
+        "bgcolor": "#91b8d2",
+        "lft": 1,
+        "rght": 8,
+        "tree_id": 2,
+        "level": 0,
+        "description": [
+            19,
+            20,
+            21
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+        "parent": 7,
+        "image": "category_image/AAAIACAYAAAD0eN_23555aX.jpg",
+        "last_modified": "2025-06-15T16:48:17.577Z",
+        "active": true,
+        "bgcolor": "#f28ad3",
+        "lft": 2,
+        "rght": 3,
+        "tree_id": 2,
+        "level": 1,
+        "description": [
+            22,
+            23,
+            24
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 9,
+    "fields": {
+        "parent": 7,
+        "image": "category_image/AAAIACAYAAAD0eN_68CpRlm.jpg",
+        "last_modified": "2025-06-15T16:53:36.485Z",
+        "active": true,
+        "bgcolor": "#b59bda",
+        "lft": 4,
+        "rght": 5,
+        "tree_id": 2,
+        "level": 1,
+        "description": [
+            25,
+            26,
+            27
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 10,
+    "fields": {
+        "parent": 7,
+        "image": "category_image/AAAIACAYAAAD0eN_HLRkN0z.jpg",
+        "last_modified": "2025-06-15T16:55:09.478Z",
+        "active": true,
+        "bgcolor": "#f8e580",
+        "lft": 6,
+        "rght": 7,
+        "tree_id": 2,
+        "level": 1,
+        "description": [
+            28,
+            29,
+            30
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 11,
+    "fields": {
+        "parent": null,
+        "image": "category_image/AAAIACAYAAAD0eN_D9aIrsb.jpg",
+        "last_modified": "2025-06-15T16:56:12.690Z",
+        "active": true,
+        "bgcolor": "#efa5c1",
+        "lft": 1,
+        "rght": 6,
+        "tree_id": 3,
+        "level": 0,
+        "description": [
+            31,
+            32,
+            33
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 12,
+    "fields": {
+        "parent": 11,
+        "image": "category_image/AAAIACAYAAAD0eN_a7aCSrp.jpg",
+        "last_modified": "2025-06-15T16:58:23.885Z",
+        "active": true,
+        "bgcolor": "#92c78e",
+        "lft": 2,
+        "rght": 3,
+        "tree_id": 3,
+        "level": 1,
+        "description": [
+            34,
+            35,
+            36
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 13,
+    "fields": {
+        "parent": 11,
+        "image": "category_image/AAAIACAYAAAD0eN_cuZJnoD.jpg",
+        "last_modified": "2025-06-15T17:00:20.587Z",
+        "active": true,
+        "bgcolor": "#f6cc7b",
+        "lft": 4,
+        "rght": 5,
+        "tree_id": 3,
+        "level": 1,
+        "description": [
+            37,
+            38,
+            39
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 14,
+    "fields": {
+        "parent": null,
+        "image": "category_image/AAAIACAYAAAD0eN_ZeEzedr.jpg",
+        "last_modified": "2025-06-15T17:02:05.835Z",
+        "active": true,
+        "bgcolor": "#a7b3f2",
+        "lft": 1,
+        "rght": 8,
+        "tree_id": 4,
+        "level": 0,
+        "description": [
+            40,
+            41,
+            42
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 15,
+    "fields": {
+        "parent": 14,
+        "image": "category_image/AAAIACAYAAAD0eN_XSUwLIm.jpg",
+        "last_modified": "2025-06-15T17:04:14.290Z",
+        "active": true,
+        "bgcolor": "#b8f2e1",
+        "lft": 2,
+        "rght": 3,
+        "tree_id": 4,
+        "level": 1,
+        "description": [
+            43,
+            44,
+            45
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 16,
+    "fields": {
+        "parent": 14,
+        "image": "category_image/AAAIACAYAAAD0eN_ZIfK9Bn.jpg",
+        "last_modified": "2025-06-15T17:05:31.289Z",
+        "active": true,
+        "bgcolor": "#f2b8b8",
+        "lft": 4,
+        "rght": 5,
+        "tree_id": 4,
+        "level": 1,
+        "description": [
+            46,
+            47,
+            48
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 17,
+    "fields": {
+        "parent": 14,
+        "image": "category_image/AAAIACAYAAAD0eN_RRq9GDZ.jpg",
+        "last_modified": "2025-06-15T17:07:27.988Z",
+        "active": true,
+        "bgcolor": "#cafad4",
+        "lft": 6,
+        "rght": 7,
+        "tree_id": 4,
+        "level": 1,
+        "description": [
+            49,
+            50,
+            51
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 18,
+    "fields": {
+        "parent": null,
+        "image": "category_image/AAAIACAYAAAD0eN_nm5nSH9.jpg",
+        "last_modified": "2025-06-15T17:08:51.435Z",
+        "active": true,
+        "bgcolor": "#cacdfa",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 5,
+        "level": 0,
+        "description": [
+            52,
+            53,
+            54
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 19,
+    "fields": {
+        "parent": null,
+        "image": "category_image/AAAIACAYAAAD0eN_QAg9uTg.jpg",
+        "last_modified": "2025-06-15T17:10:23.179Z",
+        "active": true,
+        "bgcolor": "#facae1",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 6,
+        "level": 0,
+        "description": [
+            55,
+            56,
+            57
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 20,
+    "fields": {
+        "parent": null,
+        "image": "category_image/AAAIACAYAAAD0eN_F2nYy1A.jpg",
+        "last_modified": "2025-06-15T17:11:31.201Z",
+        "active": true,
+        "bgcolor": "#faf3ca",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 7,
+        "level": 0,
+        "description": [
+            58,
+            59,
+            60
+        ]
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 21,
+    "fields": {
+        "parent": null,
+        "image": "category_image/AAAIACAYAAAD0eN_WNBqiYu.jpg",
+        "last_modified": "2025-06-15T17:12:13.192Z",
+        "active": true,
+        "bgcolor": "#8b81a1",
+        "lft": 1,
+        "rght": 2,
+        "tree_id": 8,
+        "level": 0,
+        "description": [
+            61,
+            62,
+            63
+        ]
+    }
+}
 ]

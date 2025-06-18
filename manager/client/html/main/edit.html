@@ -37,9 +37,11 @@
                                     {%endif%}
                                 </div>
                                 {{field}}
+                                <div class="errors"></div>
                             </div>
                         {%else%}
                             {{field}}
+                            <div class="errors"></div>
                         {%endif%}
                     {%endfor%}
                 </div>
@@ -60,7 +62,7 @@
                         <i class="ti ti-device-floppy"></i>
                     </div>
                     <div id="save-more" class="edit-panel-icon">
-                        <i class="ti ti-device-floppy"></i>
+                        <i class="ti ti-copy-check"></i>
                     </div>
                     <div id="save_and_out" class="edit-panel-icon">
                         <i class="ti ti-file"></i>

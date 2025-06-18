@@ -1,7 +1,7 @@
-import { Edit } from "/static/js/desktop/vanilla/ui/view/edit.js";
+import { SlugBasedEdit } from "/static/js/desktop/vanilla/ui/view/edit.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 
-export class OneToOne extends Edit{
+export class OneToOne extends SlugBasedEdit{
 	constructor(context){
 		super(context);
 		Dom.query('#fgk .remove').on('click',this.remove);

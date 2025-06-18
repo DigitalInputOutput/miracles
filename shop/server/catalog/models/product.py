@@ -4,18 +4,25 @@ from system.settings import DOMAIN,CACHE_FOLDER
 from django.db.models import *
 from django.utils.translation import gettext_lazy as _
 from catalog.models import Value,Tag,Category,Brand
-from shop.models import Page,Description,Currency
+from shop.models import Page,Description,Currency,Language
 
-OUT_OF_STOCK_MESSAGE = _("Нема в наявності")
-OUT_OF_STOCK_MESSAGE_HTML = _("<div>Нема в</div>")
+class Storage(Model):
+    name = CharField(max_length=40)
+    language = ForeignKey(Language, on_delete=CASCADE)
 
-class ProductDescription(Description): 
+    def __str__(self):
+        return self.name
+
+class ProductDescription(Description):
+    storage = ForeignKey(Storage, verbose_name=_("Storage"), on_delete=SET_NULL, null=True)
+
     class Meta:
         db_table = 'product_description'
 
 class Product(Page): 
     model = CharField(max_length=50,verbose_name=_('Article'),unique=True)
     retail_price = FloatField(default=0,verbose_name=_('Price'))
+    wholesale_price = FloatField(default=0,verbose_name=_('Wholesale Price'))
     purchase_price = FloatField(default=0,verbose_name=_('Purchase price'))
     length = CharField(max_length=50,null=True,verbose_name=_('Lenght'))
     width = CharField(max_length=50,null=True,verbose_name=_('Width'))
@@ -26,11 +33,6 @@ class Product(Page):
     last_modified = DateTimeField(auto_now_add=True)
     price_fixed = BooleanField(default=0,verbose_name=_('Fixed price'))
     featured = ManyToManyField('self',verbose_name=_('Featured products'),blank=True)
-    storage_choices = (
-        (1, _("Available")),
-        (2, _("To order"))
-    )
-    storage = PositiveIntegerField(choices=storage_choices,null=True,verbose_name=_("Storage"),default=1)
     attributes = ManyToManyField(Value,verbose_name=_("Attributes"),related_name="products")
     tags = ManyToManyField(Tag,verbose_name=_("Tags"),related_name="products")
     rating = PositiveIntegerField(default=5)
@@ -74,25 +76,25 @@ class Product(Page):
         if hasattr(self,'offer') or hasattr(self,'special') or self in Product.objects.filter(is_available=True,slug__isnull=False).order_by('-id')[:6]:
             from catalog.models import Page
 
-            for page in Page.objects.filter(customView='Home'):
+            for page in Page.objects.filter(custom_view='Home'):
                 page.cache()
 
         if hasattr(self,'offer'):
             from catalog.models import Page
 
-            for page in Page.objects.filter(customView='Bestsellers'):
+            for page in Page.objects.filter(custom_view='Bestsellers'):
                 page.cache()
 
         if hasattr(self,'special'):
             from catalog.models import Page
 
-            for page in Page.objects.filter(customView='Sale'):
+            for page in Page.objects.filter(custom_view='Sale'):
                 page.cache()
 
         if self in Product.objects.filter(is_available=True,slug__isnull=False).order_by('-id')[:30]:
             from catalog.models import Page
 
-            for page in Page.objects.filter(customView='New'):
+            for page in Page.objects.filter(custom_view='New'):
                 page.cache()
 
         super().cache()
@@ -110,16 +112,18 @@ class Product(Page):
                     export.save()
 
     def save(self,*args,**kwargs):
-        if not self.big_opt_price:
-            self.big_opt_price = self.retail_price
+        if not self.wholesale_price:
+            self.wholesale_price = self.retail_price
 
         self.check_price()
 
-        for image in self.gallery.all():
-            if not image.position:
-                image.save()
-            for thumb in image.thumb.all():
-                thumb.delete()
+        if self.pk:
+            for image in self.gallery.all():
+                if not image.position:
+                    image.save()
+
+                for thumb in image.thumb.all():
+                    thumb.delete()
 
         super().save(*args,**kwargs)
 
@@ -133,7 +137,7 @@ class Product(Page):
                 'imageHeight':self.imageHeight,
                 'is_available':self.is_available,
                 'retail_price':self.retail_price,
-                'big_opt_price':self.big_opt_price
+                'wholesale_price':self.wholesale_price
             }
 
         data['gallery'] = [DOMAIN + self.image.large_thumb]
@@ -169,7 +173,7 @@ class Product(Page):
                 'retail_price':self.retail_price,
                 'brand':self.brand.name if self.brand else '',
                 'country':self.brand.country if self.brand else '',
-                'big_opt_price':self.big_opt_price,'url':f'{DOMAIN}/{self.slug}'
+                'wholesale_price':self.wholesale_price,'url':f'{DOMAIN}/{self.slug}'
             }
 
         data['gallery'] = [DOMAIN + image.large_thumb for image in self.gallery.order_by('position')]
@@ -198,8 +202,8 @@ class Product(Page):
     def admin_image(self):
         return f"<img src='{self.image.admin_thumb}'>"
 
-    def storage_icon(self):
-        return '<img src="/static/icon/{0}.jpg" alt="{0}">'.format(self.get_storage_display())
+    # def storage_icon(self):
+    #     return '<img src="/static/icon/{0}.jpg" alt="{0}">'.format(self.storage)
 
     @property
     def brand_name(self):
@@ -218,7 +222,7 @@ class Product(Page):
         if gallery:
             return gallery.preview_thumb
         else:
-            return '/media/no_image_new.jpg'
+            return '/media/no_image.jpg'
 
     def cart_name(self):
         return ' '.join(self.name.split(' ')[0:2])
@@ -229,7 +233,7 @@ class Product(Page):
             if self.storage == 1:
                 return _('В наявності')
             else:
-                return OUT_OF_STOCK_MESSAGE
+                return "add in stock message"
         else:
             return _('Відсутній')
 
@@ -239,7 +243,7 @@ class Product(Page):
             if self.storage == 1:
                 return _('<span>В наявності</span>')
             else:
-                return OUT_OF_STOCK_MESSAGE_HTML
+                return "add outofstock message"
         else:
             return _('<span class="notaval">В наявності</span>')
 
@@ -266,10 +270,10 @@ class Product(Page):
     @property
     def price(self):
         if self.user:
-            if hasattr(self, 'special') and self.special.price < self.big_opt_price:
+            if hasattr(self, 'special') and self.special.price < self.wholesale_price:
                 return self.special.price
             else:
-                return int(self.big_opt_price)
+                return int(self.wholesale_price)
         elif hasattr(self, 'special'):
             return self.special.price
         else:
@@ -334,10 +338,10 @@ class Product(Page):
 
 class EmptyImage: 
     def __getattr__(self,name):
-        return '/media/no_image_new.jpg'
+        return '/media/no_image.jpg'
 
     def __str__(self):
-        return '/media/no_image_new.jpg'
+        return '/media/no_image.jpg'
 
 class Add_Model(Model): 
     product = ForeignKey(Product,related_name='add_model', on_delete=CASCADE)

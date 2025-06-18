@@ -41,7 +41,9 @@
     <div id="lang">
         {%for language in supported_languages%}
             <a {%if lang_code == language.code%}class="active"{%else%} href="?{% query_transform request lang=language.code %}" title="?lang={{language.code}}{% if request.GET %}&{{ request.GET.urlencode }}{% endif %}"{%endif%}>
-                <img src="/media/miracles.site/{{language.image}}">
+                {%if language.image%}
+                    <img src="/media/miracles.site/{{language.image}}">
+                {%endif%}
             </a>
         {%endfor%}
     </div>

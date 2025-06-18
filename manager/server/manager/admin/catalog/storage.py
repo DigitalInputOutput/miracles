@@ -1,17 +1,11 @@
-from manager.admin.catalog import ProductAdmin
-from manager.models import Storage
+from manager.admin.model import AdminModel
+from catalog.models import Storage
 from manager.forms import StorageForm
+from django.utils.translation import gettext as _
 
-class StorageAdmin(ProductAdmin): 
-    listView = 'List'
+class StorageAdmin(AdminModel):
     model = Storage
     form = StorageForm
-    head = (('id','id'),('Имя','name'),('Артикул','model'),('',''))
-    head_search = (('по id','id'),('по названию','name__icontains'),('по артикулу','model__icontains'))
-    list_display = ('id','name','model')
-
-    def context(self,item):
-        return {'href':'/Product/%s' % item.id}
-
-    def list_extra_context(self,context):
-        pass
+    head = (('id','id'),(_('Name'),'name'))
+    head_search = ((_('by id'),'id'),(_('by name'),'name__icontains'))
+    list_display = ('id','name')

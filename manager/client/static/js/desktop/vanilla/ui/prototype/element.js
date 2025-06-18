@@ -8,10 +8,16 @@
 			let result = undefined;
 			let parent = this.parent();
 
+			if(!parent)
+				return result;
+
 			if(parent.localName == selector)
 				return parent;
 
 			while(!result){
+				if(parent === null)
+					return result;
+
 				result = parent.find(selector);
 				if(!result || (Array.isArray(result) && !result.length))
 					result = undefined;
@@ -19,10 +25,10 @@
 					return result[0];
 				}
 
-				parent = parent.parent();
-
-				if(!parent)
+				if(!parent || typeof parent.parent !== "function")
 					return undefined;
+
+				parent = parent.parent();
 			}
 
 			return result;
@@ -243,21 +249,6 @@
 		disable(){
 			this.set('disabled','');
 		},
-		triggerError(messages){
-			this.addClass('invalid');
-			let errorBlock = this.next();
-			if(!errorBlock.hasClass('errors')){
-				errorBlock = Dom.query(`.${this.name}.errors`)[0];
-			}
-			if(errorBlock){
-				messages.forEach((message)=>{
-					errorBlock.html(message);
-				});
-				errorBlock.show();
-			}
-			if(this.form)
-				this.form.triggerInvalid();
-		},
 		removeError(){
 			this.removeClass('invalid');
 			let errorBlock = this.next();
@@ -310,8 +301,28 @@
 							if (b64Elem) {
 								data[elem.name] = b64Elem.value;
 							}
+							else if(elem.name.includes('[]') && elem.value){
+								let name = elem.name.replace('[]','');
+								if(!data[name])
+									data[name] = [];
+								data[name].push(elem.value);
+							}else{
+								if(elem.name == 'images'){
+									if(!data['images'])
+										data['images'] = [];
+									data['images'].push(elem.get('value'));
+								}else{
+									data[elem.name] = elem.get('value');
+								}
+							}
+
 							break;
 						case 'hidden':
+							if(elem.name != "image_b64")
+								data[elem.name] = elem.value;
+							break;
+						case 'checkbox':
+							data[elem.name] = elem.checked;
 							break;
 						default:
 							if(elem.value)

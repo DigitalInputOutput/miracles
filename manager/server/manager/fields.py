@@ -1,11 +1,11 @@
 from django.forms import ModelMultipleChoiceField,ModelChoiceField,CharField,ValidationError
-from manager.widgets import AutocompleteWidget,AutocompleteMultipleWidget,ImageWidget
+from manager.widgets import AutocompleteWidget,AutocompleteMultipleWidget
 from base64 import b64decode
-from json import loads
 from django.core.files.base import ContentFile
+from django.utils.translation import gettext as _
 
 class AutocompleteSelectField(ModelChoiceField): 
-    widget = AutocompleteWidget({'attrs':{'placeholder':'Введите первые буквы'}})
+    widget = AutocompleteWidget({'attrs':{'placeholder':_('Enter first letters')}})
 
     def __init__(self,*args,**kwargs):
         self.queryset = kwargs.get('model').objects.all()
@@ -14,7 +14,7 @@ class AutocompleteSelectField(ModelChoiceField):
         super().__init__(self.queryset,*args,**kwargs)
 
 class AutocompleteSelectMultipleField(ModelMultipleChoiceField): 
-    widget = AutocompleteMultipleWidget({'attrs':{'placeholder':'Введите первые буквы'}})
+    widget = AutocompleteMultipleWidget({'attrs':{'placeholder':_('Enter first letters')}})
 
     def __init__(self,*args,**kwargs):
         self.queryset = kwargs.get('model').objects.all()

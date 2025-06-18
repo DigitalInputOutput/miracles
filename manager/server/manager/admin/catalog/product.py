@@ -1,5 +1,5 @@
 from manager.admin.model import AdminModel
-from catalog.models import Product,Gallery,Add_Model
+from catalog.models import Product,Gallery,Add_Model,Storage
 from manager.forms import ProductForm
 from django.db.models import Q
 from base64 import b64decode
@@ -8,13 +8,14 @@ from django.utils.translation import gettext as _
 from re import sub,search
 from manager.models import Export,ExportStatus,ExportMeta
 from django.db.models import Max,Min
+from collections import defaultdict
 
 class ProductAdmin(AdminModel): 
     listView = 'ListProduct'
     is_slug_based = True
     model = Product
     form = ProductForm
-    list_display = ('id','__str__','admin_image','model','price','available','brand_name','get_storage_display')
+    list_display = ('id','__str__','admin_image','model','price','available','brand_name')
     list_search = [
         {
             'name':'id',
@@ -58,21 +59,21 @@ class ProductAdmin(AdminModel):
             'ordering':'brand__description__name',
             'head_text':_('Произ-тель')
         },
-        {
-            'name':'storage',
-            'text':_('по складу'),
-            'query':'storage',
-            'ordering':'storage',
-            'head_text':_('Склад')
-        },
+        # {
+        #     'name':'storage',
+        #     'text':_('по складу'),
+        #     'query':'storage',
+        #     'ordering':'storage',
+        #     'head_text':_('Склад')
+        # },
     ]
     listTemplate = 'main/productList.html'
     itemsTemplate = 'main/productItems.html'
 
-    def extraContext(self,context):
-        context['exports'] = Export.objects.all()
-
-        return context
+    def extra_context(self,context):
+        context.update({
+            'exports': Export.objects.all(),
+        })
 
     def list_extra_context(self,context):
         context['context'].update({
@@ -88,7 +89,7 @@ class ProductAdmin(AdminModel):
         except:
             return Q(model__icontains=value) | Q(description__name__icontains=value)
 
-    def saveExtras(self,json,product):
+    def save_extras(self,json,product):
         if json.get('images'):
             for image in json.get('images'):
                 try:

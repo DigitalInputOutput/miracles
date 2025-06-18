@@ -1,5 +1,6 @@
 import { OneToOne } from "./fgk.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
+import { t } from "/static/js/desktop/app/i18n.js";
 
 export class Gallery extends OneToOne{
 	constructor(context){
@@ -36,6 +37,10 @@ export class Gallery extends OneToOne{
 		this.previewImage.set('src',image.get('original'));
 		this.fullSize.css('display','flex');
 		Dom.query('#bg').show();
+
+		e.stopPropagation();
+
+		return false;
 	}
 	remove(e){
 		if(e.target.tagName == 'I'){
@@ -45,7 +50,7 @@ export class Gallery extends OneToOne{
 		}
 
 		let parent = e.target.parent();
-		let agree = confirm('Видалити картину?');
+		let agree = confirm(t("delete_image"));
 		let target = e.target;
 
 		if(target.get('item-id') && agree){
@@ -75,7 +80,7 @@ export class Gallery extends OneToOne{
 		reader.onload = function(e){
 			let div = Dom.create('div');
 			div.set('class','image ui-sortable-handle');
-			div.html('<div class="remove"><i class="ti ti-cross"></i></div>');
+			div.html('<div class="remove"><i class="ti ti-x"></i></div>');
 			div.find('.remove')[0].on('click',that.remove);
 			let image = Dom.create('img');
 			image.src = e.target.result;

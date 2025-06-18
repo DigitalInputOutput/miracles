@@ -3,11 +3,6 @@ import { AutocompleteF } from "/static/js/desktop/vanilla/ui/form/autocompletef.
 import { POST, GET } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
-// import { edjsHTML, EditorJS, toJson, Header,
-// 	SimpleImage, List as EditorJsList, Checklist, Quote, Warning,
-// 	Marker, CodeTool, Delimiter, InlineCode, LinkTool,
-// 	Embed, Table
-//  } from "/static/js/desktop/modules/editor.js";
 
 export class BaseProductList extends List{
 	constructor(context){

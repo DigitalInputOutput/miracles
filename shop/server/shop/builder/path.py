@@ -3,9 +3,18 @@ from shop.utils import is_ajax
 from system.settings import CACHE_FOLDER,STATIC_SOURCE_ROOT,MINIFIED_ROOT,USER,GROUP
 import pwd
 import grp
+from urllib.parse import unquote
+from system.settings import HOME_DIR
 
-class PathBuilder: 
+class PathBuilder:
     devices = ('desktop','mobile')
+
+    @staticmethod
+    def build_media_path(img_path):
+        try:
+            return str(HOME_DIR) + unquote(img_path)
+        except ValueError:
+            return None
 
     @staticmethod
     def make_root_dirs(path):

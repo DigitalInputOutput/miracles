@@ -11,7 +11,6 @@ class ExportAdmin(AdminModel):
     head = (('id','id'),(_('Цель'),'name'))
     head_search = (('по id','id'),(_('Цель'),'name'))
     list_display = ('id','__str__')
-    editTemplate = 'main/edit.html'
 
     def search(self,value):
         if not value:

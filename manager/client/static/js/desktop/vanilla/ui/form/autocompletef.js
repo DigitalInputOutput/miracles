@@ -1,9 +1,11 @@
+import { GET } from '/static/js/desktop/vanilla/http/navigation.js';
+
 export class AutocompleteF{
 	constructor(context){
 		var container = context.container;
 
 		this.container = container;
-		this.Model = context.Model;
+		this.AdminModel = context.AdminModel;
 		this.variants = container.find('.variants')[0];
 		this.hidden = container.find(`input[type="hidden"]`)[0];
 		this.textInput = container.find('input[type="text"]')[0];
@@ -25,11 +27,11 @@ export class AutocompleteF{
 		if(this.timeout)
 			clearTimeout(this.timeout);
 
-		var that = this;
-		that.timeout = setTimeout(function(){
-			GET(`/autocomplete/${that.Model}/${e.target.value}`,{
-				View:function(response){
-					that.variants.html(templates.autocomplete(response.items));
+		const that = this;
+		that.timeout = setTimeout(() => {
+			GET(`/autocomplete/${that.AdminModel}/${e.target.value}`,{
+				success: (response) => {
+					Dom.render("#variants", that.variants, response);
 					that.container.find(`.variant`).on('click',that.add.bind(that));
 					that.variants.show();
 				}
@@ -57,18 +59,21 @@ export class AutocompleteF{
 		if(Array.isArray(value)){
 			value.push(parseInt(id));
 			value = JSON.stringify(value);
-			this.values.after(templates.autocomplete_value(id,name,this.Model.title()));
-		}
-		else{
+		}else{
 			value = id.toString();
-			this.values.html(templates.autocomplete_value(id,name,this.Model.title()));
 		}
+
+		Dom.render("#autocomplete_value", this.values,{
+			"id": id, 
+			"name": name, 
+			"AdminModel": this.AdminModel.title()
+		});
 
 		this.hidden.value = value;
 		this.variants.hide();
 		this.textInput.value = '';
 
-		Dom.query(`.autocomplete.${this.Model} .remove[value="${id}"]`).on('click',this.remove.bind(this));
+		Dom.query(`.autocomplete.${this.AdminModel} .remove[value="${id}"]`).on('click',this.remove.bind(this));
 	}
 	remove(e){
 		let id = parseInt(e.target.get('value'));

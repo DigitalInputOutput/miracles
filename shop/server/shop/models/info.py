@@ -19,6 +19,6 @@ class Info(Page):
     position = models.PositiveIntegerField(choices=position_choices,null=True)
 
     class Meta:
-        verbose_name = _('Звичайна сторінка')
-        verbose_name_plural = _('Звичайні сторінка')
+        verbose_name = _('Simple page')
+        verbose_name_plural = _('Simple pages')
         ordering = ['-id']

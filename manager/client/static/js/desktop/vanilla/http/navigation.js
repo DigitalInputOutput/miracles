@@ -39,9 +39,9 @@ export class Navigation {
             return;
         }
 
-        context.title = context.title || context.Model;
+        context.title = context.title || context.AdminModel;
 
-        if (!context.history && context.defaultView)
+        if (!context.history)
             HistoryManager.pushState(context);
 
         Navigation.currentPath = context.href;
@@ -52,7 +52,7 @@ export class Navigation {
         if(context.View)
             Navigation.currentView = View.render(context);
         else
-            Navigation.resolveCurrentUrl();
+            [Navigation.currentPath, Navigation.currentView] = Navigation.resolveCurrentUrl();
     }
 
     static resolveCurrentUrl(){
@@ -67,7 +67,7 @@ export class Navigation {
                 href,
                 View: methods.GET,
                 defaultView: methods.GET,
-                Model: params.Model || '',
+                AdminModel: params.AdminModel || '',
                 filters: params.filters,
                 id: params.id,
                 anchor: params.anchor,
@@ -122,10 +122,11 @@ export class Navigation {
         throw new Error(`No matching pattern found for URL: ${url.pathname}`);
     }
 
-    static setDefaultLimit(url, href, method, View) {
-        if (href.match("/(?<Model>[A-Z][a-z]+)($|\\?[\\s\\S])") && !['PUT', 'DELETE'].includes(method)) {
+    static setLimit(url, href, method, View) {
+        if (href.match("/(?<AdminModel>[A-Z][a-z]+)($|\\?[\\s\\S])") && !['PUT', 'DELETE'].includes(method)) {
             url.searchParams.set('limit', View?.limit || 10);
         }
+
         return url;
     }
 }

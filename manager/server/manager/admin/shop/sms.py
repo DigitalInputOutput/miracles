@@ -8,4 +8,3 @@ class SmsAdmin(AdminModel):
     head = (('id','id'),('текст','text'),('тип','type'))
     head_search = (('по id','id'),('по тексту','text__icontains'),('по типу','type__icontains'))
     list_display = ('id','text','type')
-    editTemplate = 'main/edit.html'

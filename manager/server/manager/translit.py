@@ -1,5 +1,5 @@
 from transliterate.base import TranslitLanguagePack, registry
-from transliterate import translit,get_available_language_codes
+from transliterate import translit, get_available_language_codes
 
 class UkrainskiyLanguagePack(TranslitLanguagePack): 
     language_code = "uk"

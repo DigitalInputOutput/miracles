@@ -1,0 +1,26 @@
+[
+    {
+        "model":"shop.currency",
+        "pk":1,
+        "fields":{
+            "code":"UAH",
+            "value":"42.5"
+        }
+    },
+    {
+        "model":"shop.currency",
+        "pk":2,
+        "fields":{
+            "code":"USD",
+            "value":"2"
+        }
+    },
+    {
+        "model":"shop.currency",
+        "pk":3,
+        "fields":{
+            "code":"EUR",
+            "value":"1"
+        }
+    }
+]

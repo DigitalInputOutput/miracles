@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import View
 from json import loads,dumps
-from transliterate import slugify
 from django.utils.translation import gettext as _
 from .meta import MetaView
+from manager.forms import UrlForm
+from django.db import transaction
+from django.core.exceptions import ValidationError
 
 __all__ = ['AddView']
 
@@ -15,67 +17,75 @@ class AddView(View, MetaView):
 
         context = {
             'form':form,
-            'view':str(AdminModel),
+            'View':str(AdminModel),
             'AdminModel':AdminModel,
             'context':dumps({})
         }
 
+        AdminModel.extra_context(context)
+
         if AdminModel.uses_slug():
             self.add_meta_forms(context, AdminModel)
 
-        return render(request, AdminModel.editTemplate, context) 
+        return render(request, AdminModel.get_edit_template(), context) 
 
     def put(self,request,*args,**kwargs):
         AdminModel = request.AdminModel
-        form = AdminModel.form(json)
 
         try:
             json = loads(request.body.decode('utf8'))
+            self.parse_json(json)
         except Exception:
-            return JsonResponse({'result': False, 'error': 'Invalid JSON'}, status=400)
+            return JsonResponse({
+                    'result': False,
+                    'error': 'Invalid JSON'
+                },status=400)
 
-        image_file = json.get('image')
-        if image_file:
-            del json['image']
-
-        if AdminModel.uses_slug():
-            metaM2M = []
-
-        form_kwargs = {
-            'data': json,
-        }
-
-        if AdminModel.uses_slug():
-            metaM2M = self.validate_meta(json, str(AdminModel), item)
-
-            if (not item.title or not item.meta_description) and not metaM2M:
-                return JsonResponse({'nonferrs':_('Set title or fill <a href="/meta/list">Meta</a>-template.')})
-
-            form_kwargs['name'] = metaM2M[0].name
-
-        form = AdminModel.form(**form_kwargs)
+        form = AdminModel.form(data=json)
 
         if not form.is_valid():
-            return JsonResponse({'errors':form.errors,'nonferrs':form.non_field_errors()})
+            return JsonResponse({
+                'errors':form.errors,
+                'nonferrs':form.non_field_errors()
+            })
 
-        item = form.save(commit=False)
-
-        if not item.slug:
-            item.slug = slugify(metaM2M[0].name) or metaM2M[0].name
-
-        item.save()
-
-        form.save_m2m()
-        AdminModel.saveExtras(json,item)
+        form.save(commit=False)
 
         if AdminModel.uses_slug():
-            for meta in metaM2M:
-                meta.save()
-                item.description.add(meta)
+            try:
+                metaM2M = self.validate_meta(json, AdminModel)
+            except ValidationError as e:
+                return JsonResponse({'errors': e.message_dict})
+
+        try:
+            with transaction.atomic():
+                item = form.save()
+
+                form.save_m2m()
+                AdminModel.save_extras(json, item)
+
+                if AdminModel.uses_slug():
+                    for meta_form in metaM2M:
+                        url_form = UrlForm(data={
+                            "string": meta_form.cleaned_data.get('url') or meta_form.cleaned_data.get('name'),
+                            "view": form.cleaned_data.get('view') or item.__class__.__name__,
+                            "model_name": item.__class__.__name__,
+                            "model_id": item.id,
+                            "language": meta_form.cleaned_data.get("language")
+                        })
+
+                        if not url_form.is_valid():
+                            errors = url_form.errors.copy()
+                            errors['nonferrs'] = url_form.non_field_errors()
+                            raise ValidationError(errors)
+
+                        url_form.save()
+                        meta = meta_form.save()
+                        item.description.add(meta)
+        except ValidationError as e:
+            return JsonResponse({"errors":e.message_dict})
 
         return JsonResponse({
             'result':True,
-            'href':f'/{AdminModel}/{item.id}',
-            'view':str(AdminModel),
-            'id':item.id
+            'next':f'/{AdminModel}/{item.id}'
         })

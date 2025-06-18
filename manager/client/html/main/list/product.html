@@ -8,7 +8,7 @@
 					<input type="checkbox" name="all">
 				</div>
 				<div>
-					{%for field in Model.list_search%}
+					{%for field in AdminModel.list_search%}
 						<div>
 							<a ordering="{{field.ordering}}">{{field.head_text}}</a>
 							<div class="search-text">

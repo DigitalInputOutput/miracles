@@ -13,7 +13,7 @@ def localize(pattern):
 
 urlpatterns = [
     *localize('user'),
-    *localize('cart'),
+    # *localize('cart'),
     *localize('checkout'),
     *localize('catalog'),
     # re_path(r'^filter', catalog.filter, name='filter'),

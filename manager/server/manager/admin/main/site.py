@@ -9,4 +9,3 @@ class SiteAdmin(AdminModel):
     head = (('id','id'),('Имя','name'),('URL','url'))
     head_search = ((_('за id'),'id'),(_('за назвою'),'name__icontains'),(_('за URL'),'url__icontains'))
     list_display = ('id','name','url')
-    editTemplate = 'main/edit.html'

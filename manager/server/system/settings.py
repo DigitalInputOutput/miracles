@@ -32,8 +32,6 @@ DOMAIN = 'miracles.site'
 HOST = DOMAIN
 HOME_DIR = BASE_DIR.parent.parent
 
-STORAGE_CHOICES = ((1,'В наявності'),(2,'Під замовлення'))
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -181,16 +179,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-STATIC_ROOT = '/home/core/manager/miracles.site/static/'
+STATIC_ROOT = '/var/cache/miracles.site/manager/static/miracles.site/static/'
 STATIC_URL = '/static/'
 #AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend','user.backends.AuthByPhone')
 AUTH_USER_MODEL = 'user.User'
-WATERMARK = STATIC_ROOT + 'wotermark1.png'
+WATERMARK = HOME_DIR / 'media/watermark.png'
 
-HOME_URL = '/home/core/manager/miracles.site/'
-CACHE_URL = '/home/core/cache/miracles.site/'
 
-CACHE_DIR = '/home/core/manager'
+CACHE_DIR = '/var/cache/miracles.site/manager'
 
 MEDIA_ROOT = HOME_DIR / f'media/{DOMAIN}'
 MEDIA_URL = f'/media/{DOMAIN}/'
@@ -253,14 +249,11 @@ CELERY_TIMEZONE = 'UTC'
 
 from django.utils.translation import gettext_lazy as _
 
-OUT_OF_STOCK_MESSAGE = _('Під замовлення (1-3 дні)')
-OUT_OF_STOCK_MESSAGE_HTML = _('<span class="outstock">Під замовлення (1-3 дні)</span>')
-
 SPRITE_CATEGORIES = True
 
 TIGRES_CATEGORIES = True
 
-PHONES = ["(096) 443-47-58","(066) 176-87-17","(093) 742-90-75","(057) 781-72-90"]
+PHONES = ["(099) 999-99-99","(066) 666-66-66","(033) 333-33-33","(077) 777-77-77"]
 
 ADDRESS = ""
 COMPANY_NAME = ""
@@ -282,7 +275,7 @@ EMAIL = 'ffs@gmail.com'
 EMAIL_TITLE = ''
 EMAIL_HOST = 'gmail.com'
 EMAIL_HOST_USER = 'info'
-EMAIL_HOST_PASSWORD = 'Портал'
+EMAIL_HOST_PASSWORD = _("Portal")
 EMAIL_PORT = 25
 
 YOUTUBE_LINK = "https://youtube.com"

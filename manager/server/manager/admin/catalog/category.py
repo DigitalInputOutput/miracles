@@ -6,6 +6,7 @@ from django.db.models import Q
 class CategoryAdmin(AdminModel): 
     model = Category
     form = CategoryForm
+    is_slug_based = True
     listView = 'CategoryList'
     searchTemplate = 'category/categories.html'
     listTemplate = 'category/categories.html'

@@ -6,11 +6,15 @@ from django.forms.models import model_to_dict
 from django.utils.translation import gettext as _
 from .meta import MetaView
 from manager.utils import update_object
+from django.core.exceptions import ValidationError
+from django.db import transaction
+from manager.forms import UrlForm
+from shop.models import Url
 
 class EditView(View, MetaView): 
     def get(self,request,*args,**kwargs):
         AdminModel = request.AdminModel
-        item = get_object_or_404(AdminModel.objects,pk=kwargs.get('id'))
+        item = get_object_or_404(AdminModel.objects, pk=kwargs.get('id'))
         form = AdminModel.form(initial=model_to_dict(item),instance=item)
 
         context = {
@@ -22,14 +26,14 @@ class EditView(View, MetaView):
                 'title':AdminModel.title(item)
             },
         }
-        AdminModel.extraContext(context)
+        AdminModel.extra_context(context)
 
         context['context'] = dumps(context['context'])
 
         if AdminModel.uses_slug():
             self.add_meta_forms(context, AdminModel, item)
 
-        return render(request, AdminModel.editTemplate, context)
+        return render(request, AdminModel.get_edit_template(), context)
 
     def post(self,request,*args,**kwargs):
         AdminModel = request.AdminModel
@@ -54,6 +58,7 @@ class EditView(View, MetaView):
 
         try:
             json = loads(request.body.decode('utf8'))
+            self.parse_json(json)
         except Exception:
             return JsonResponse({
                     'result': False,
@@ -66,16 +71,6 @@ class EditView(View, MetaView):
             'initial': model_to_dict(item),
         }
 
-        if AdminModel.uses_slug():
-            metaM2M = self.validate_meta(json, str(AdminModel), item)
-
-            if (not item.title or not item.meta_description) and not metaM2M:
-                return JsonResponse({
-                    'nonferrs':_('Set title or fill <a href="/meta/list">Meta</a>-template.')
-                })
-
-            form_kwargs['name'] = metaM2M[0].name
-
         form = AdminModel.form(**form_kwargs)
 
         if not form.is_valid():
@@ -83,28 +78,66 @@ class EditView(View, MetaView):
                 'errors':form.errors,
                 'nonferrs':form.non_field_errors()
             })
-    
-        item = form.save(commit=False)
 
-        item.save()
-
-        form.save_m2m()
-        AdminModel.saveExtras(json,item)
+        form.save(commit=False)
 
         if AdminModel.uses_slug():
-            for meta in metaM2M:
-                meta.save()
-                item.description.add(meta)
+            try:
+                metaM2M = self.validate_meta(json, AdminModel, item)
+            except ValidationError as e:
+                return JsonResponse({'errors': e.message_dict})
+    
+        try:
+            with transaction.atomic():
+                item = form.save()
+
+                form.save_m2m()
+                AdminModel.save_extras(json, item)
+
+                if AdminModel.uses_slug():
+                    for meta_form in metaM2M:
+                        data={
+                            "string": meta_form.cleaned_data.get('url') or meta_form.cleaned_data.get('name'),
+                            "view": form.cleaned_data.get('view') or item.__class__.__name__,
+                            "model_name": item.__class__.__name__,
+                            "model_id": item.id,
+                            "language": meta_form.cleaned_data.get("language")
+                        }
+
+                        current_url = Url.objects.get(
+                            model_id=item.id,
+                            model_name=item.model_name,
+                            language=meta_form.cleaned_data.get("language")
+                        )
+
+                        url_form = UrlForm(
+                            data=data,
+                            instance=current_url,
+                            initial=model_to_dict(current_url)
+                        )
+
+                        if not url_form.is_valid():
+                            errors = url_form.errors.copy()
+                            errors['nonferrs'] = url_form.non_field_errors()
+                            raise ValidationError(errors)
+
+                        url_form.save()
+                        meta = meta_form.save()
+                        item.description.add(meta)
+        except ValidationError as e:
+            return JsonResponse({"errors":e.message_dict})
 
         context = {
             'result':True
         }
+
         context.update(AdminModel.context(item))
 
         return JsonResponse(context)
 
-    def delete(self,request,AdminModel,*args,**kwargs):
-        item = get_object_or_404(AdminModel.objects,pk=kwargs.get('id'))
-        item.delete()
+    def delete(self,request,*args,**kwargs):
+        with transaction.atomic():
+            item = get_object_or_404(request.AdminModel.objects,pk=kwargs.get('id'))
+            item.delete()
 
         return JsonResponse({'result':True})

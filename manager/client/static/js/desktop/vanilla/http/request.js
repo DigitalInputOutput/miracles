@@ -8,13 +8,14 @@ export class Request {
         this.context = context;
         this.title = context.title;
         this.context.method = method;
+        this.context.href = href;
         this.successCallback = successCallback;
     }
 
     async send() {
         let headers = { "X-Requested-With": "XMLHttpRequest" };
 
-        if (['POST', 'PUT'].includes(this.method)) {
+        if (['POST', 'PUT', 'DELETE'].includes(this.method)) {
             headers["X-CSRFToken"] = Cookie.get('csrftoken');
 
             if (typeof this.context.data === 'object') {
@@ -42,7 +43,7 @@ export class Request {
         let data = {};
 
         if (!response.ok) {
-            Alert.popMessage({ status: response.status, responseText: await response.text() });
+            Alert.popMessage(JSON.stringify({ status: response.status }));
             return;
         }
 

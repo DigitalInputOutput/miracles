@@ -377,7 +377,7 @@ def save_items(request,id):
         item = Item.objects.get(id=item_id)
         item.qty = int(items[item_id]['qty'])
         if total >= 2000 and items[item_id]['price'] == item.price:
-            item.price = item.product.big_opt_price
+            item.price = item.product.wholesale_price
         else:
             item.price = int(items[item_id]['price'])
         item.save()

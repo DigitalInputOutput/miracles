@@ -75,22 +75,23 @@ class Command(BaseCommand):
             answer = input("Recreate migrations? [y/N] ")
 
             if answer == "y":
-                # Path to your Django project directory (containing all apps)
-                project_dir = BASE_DIR  # replace this with your actual project directory
+                project_dir = BASE_DIR.parent.parent
 
-                # Iterate over all apps and remove migration files
-                for app in os.listdir(project_dir):
-                    migrations_dir = os.path.join(project_dir, app, 'migrations')
+                for d in [project_dir / 'manager/server', project_dir / 'shop/server']:
 
-                    if os.path.isdir(migrations_dir):
-                        # Find all migration files except __init__.py
-                        migration_files = glob.glob(os.path.join(migrations_dir, '*.py'))
-                        migration_files = [f for f in migration_files if not f.endswith('__init__.py')]
+                    # Iterate over all apps and remove migration files
+                    for app in os.listdir(d):
+                        migrations_dir = os.path.join(d, app, 'migrations')
 
-                        # Delete migration files
-                        for migration_file in migration_files:
-                            print(f"Removing {migration_file}")
-                            os.remove(migration_file)
+                        if os.path.isdir(migrations_dir):
+                            # Find all migration files except __init__.py
+                            migration_files = glob.glob(os.path.join(migrations_dir, '*.py'))
+                            migration_files = [f for f in migration_files if not f.endswith('__init__.py')]
+
+                            # Delete migration files
+                            for migration_file in migration_files:
+                                print(f"Removing {migration_file}")
+                                os.remove(migration_file)
 
                 call_command("makemigrations", "shop")
                 call_command("makemigrations", "user")

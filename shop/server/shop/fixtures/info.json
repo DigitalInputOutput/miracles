@@ -3,7 +3,6 @@
         "model": "shop.info",
         "pk": 1,
         "fields": {
-            "url": "/",
             "description": [1],
             "last_modified": "2024-08-25T10:30:00Z"
         }

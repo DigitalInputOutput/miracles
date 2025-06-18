@@ -4,24 +4,31 @@ export class Dom {
 	 * @param {string} selector - A CSS selector.
 	 * @returns {Element|Element[]} - A single element or an array of elements.
 	*/
-	static var_regex = /{~(?<name>[\w.]+)~}/g;
+	// static var_regex = /{~(?<name>[\w.]+)~}/g;
+	// static var_regex = /{~(\w+)\.(\w+)~}/g;
+	static var_regex = /{~(\w+)(?:\.(\w+))?~}/g;
 	static cond_regex = /{\?if (?<cond>[a-z ]+)\?}(?<exp1>[\S\s]*)(?:{\?else\?})(?<exp2>[\S\s]*)(?:{\?endif\?})/g;
-	static loop_regex = /{\?for (?<item>\w+) in (?<list>\w+)\?}(?<body>[\s\S]*?){\?endfor\?}/g;
+	// static loop_regex = /{\?for (?<item>\w+) in (?<list>\w+)\?}(?<body>[\s\S]*?){\?endfor\?}/g;
+	static loop_regex = /{\?for (\w+) in (\w+)\?}([\s\S]*?){\?endfor\?}/g;
+
+	static id_regex = new RegExp(/^#[\w-]+( #[\w]+)?$/);
 
 	static render(templateName, container, context = {}) {
 		let templateNode = Dom.query(templateName);
 
 		let html = templateNode.innerHTML;
 
+		if(!html)
+			throw new Error("Cant find template with name " + templateName);
+
 		html = Dom.renderLoops(html, context);
 		html = Dom.renderConditions(html, context);
 		html = Dom.renderVariables(html, context);
 
-		if(!context || typeof context !== 'object' || Object.keys(context).length === 0) {
-			return container.append(html);
-		} else {
-			return html;
-		}
+		// console.log(context);
+		// console.log(!context || typeof context !== 'object' || Object.keys(context).length === 0);
+
+		return container.append(html);
 	}
 
 	static renderConditions(html, context) {
@@ -32,15 +39,12 @@ export class Dom {
 	}
 
 	static renderLoops(html, context) {
-		return html.replace(Dom.loop_regex, (_, __, ___, ____, offset, string, groups) => {
-			let { item, list, body } = groups;
-			let arr = context[list];
+		return html.replace(Dom.loop_regex, (full, item, list, body) => {
+			const arr = context[list];
 			if (!Array.isArray(arr)) return '';
-
 			return arr.map(entry => {
-				return body.replace(Dom.var_regex, (__, name) => {
-					if (name.startsWith(item + ".")) {
-						let key = name.split(".")[1];
+				return body.replace(Dom.var_regex, (match, varName, key) => {
+					if (varName === item) {
 						return entry[key] ?? '';
 					}
 					return '';
@@ -50,9 +54,8 @@ export class Dom {
 	}
 
 	static renderVariables(html, context) {
-		return html.replace(Dom.var_regex, (_, name) => {
-			if (name.includes('.')) {
-				const [obj, prop] = name.split('.');
+		return html.replace(Dom.var_regex, (full, name, prop) => {
+			if (prop) {
 				return context[obj]?.[prop] ?? '';
 			}
 			return context[name] ?? '';
@@ -60,10 +63,12 @@ export class Dom {
 	}
 
 	static query (selector) {
-		if (selector.includes('#') && (!selector.includes(' ') || selector.includes(','))) {
+		if (Dom.id_regex.test(selector)) {
+			// console.log(selector + " single");
 			var item = document.querySelector(selector);
 			return item ? item : [];
 		} else {
+			// console.log(selector + " array");
 			return Array.prototype.slice.call(document.querySelectorAll(selector));
 		}
 	}

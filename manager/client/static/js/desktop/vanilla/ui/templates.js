@@ -2,12 +2,6 @@
 // import {BASE_URL} from '/vanilla/js/base.js';
 
 export const templates = {
-	autocomplete_value: function(id,name,Model){
-		return `<div class="value">
-			<div class="remove" value="${id}"><i class="fas fa-times"></i></div>
-			<a href="/${Model}/${id}">${name}</a>
-		</div>`;
-	},
 	address: function(){
 		if(view.address)
 			return `<input type="text" name="address" value="${view.address}" placeholder="Адрес" id="id_address">`;

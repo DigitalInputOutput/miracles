@@ -144,7 +144,7 @@ header .welcome{
 	grid-template-columns: 1fr 2fr;
 }
 #left #nav.active{
-	min-width: 15%;
+	min-width: 160px;
 	max-width: 15%;
 	visibility: visible;
 }

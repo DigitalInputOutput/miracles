@@ -228,12 +228,11 @@ LOCALE_PATHS = (
 )
 LANGUAGE_SESSION_KEY = 'language'
 
-
 MEDIA_ROOT = f"{BASE_DIR}/media"
 
 NO_IMAGE_PLACEHOLDER = "<image='no_image.jpg'>"
 
-WATERMARK = "/static/watermark.png"
+WATERMARK = "/media/watermark.png"
 
 # Define the directories where CSS and JS files are stored
 CSS_DIR = 'css'

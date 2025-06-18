@@ -1,6 +1,7 @@
 import os, glob, shutil, re
 from shop.models import StaticFiles
-from shop.services import PathBuilder, SpriteGeneratorService
+from shop.builder import PathBuilder
+from shop.services import SpriteGeneratorService
 from collections import defaultdict
 from system.settings import MAX_MINIFIED_VERSIONS, STATIC_SOURCE_ROOT, MINIFIED_ROOT
 from csscompressor import compress as css_minify
@@ -8,6 +9,11 @@ from jsmin import jsmin
 
 class MinifyService:
     devices = ["desktop", "mobile"]
+
+    @staticmethod
+    def clear_cache():
+        print(f"removing foldertree {MINIFIED_ROOT}")
+        shutil.rmtree(MINIFIED_ROOT, ignore_errors=True)
 
     @staticmethod
     def get_css_and_js_versions(website="shop"):

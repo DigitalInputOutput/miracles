@@ -5,17 +5,33 @@
 {%load translate%}
 <div id="categories" class="container">
     <div id="root">
+    {%if not items%}
+        <div id="no_items_yet">
+            {%trans 'No items yet. Add.'%}
+        </div>
+    {%endif%}
     {% recursetree items %}
         <div class="wrapper">
             {%if not node.is_child_node%}
                 {%if node.is_leaf_node%}
-                    <a class="leaf" href="/Category/{{node.id}}">{% translate node 'translate_name' lang%}</a>
+                    <div class="category_node">
+                        <div class="category_image">
+                            <img src="{{node.image_url}}" alt="">
+                        </div>
+                        <a class="leaf" href="/Category/{{node.id}}">{% translate node 'translate_name' lang%}</a>
+                    </div>
                 {%else%}
                     <div class="parent-arrow">
                         <i class="ti ti-chevron-right"></i>
                     </div>
-                    <a class="icon parent drag_handle" href="/Category/{{node.id}}">{% translate node 'translate_name' lang%}
-                    </a>
+                    <div class="category_node">
+                        <div class="category_image">
+                            <img src="{{node.image_url}}" alt="">
+                        </div>
+                        <a class="icon parent drag_handle" href="/Category/{{node.id}}">
+                            {% translate node 'translate_name' lang%}
+                        </a>
+                    </div>
                     <div class="sub">
                         {{children}}
                     </div>
@@ -24,9 +40,14 @@
                 {%if not node.is_leaf_node%}
                     <div class="parent-arrow"><i class="fas fa-chevron-right"></i></div>
                 {%endif%}
-                    <a {%if not node.is_leaf_node%}class="icon parent"{%endif%} href="/Category/{{node.id}}">
-                        {% translate node 'translate_name' lang%}
-                    </a>
+                    <div class="category_node">
+                        <div class="category_image">
+                            <img src="{{node.image_url}}" alt="">
+                        </div>
+                        <a {%if not node.is_leaf_node%}class="icon parent"{%endif%} href="/Category/{{node.id}}">
+                            {% translate node 'translate_name' lang%}
+                        </a>
+                    </div>
                 {%if not node.is_leaf_node%}
                     <div class="sub">
                         {{children}}
@@ -37,13 +58,12 @@
     {% endrecursetree %}
     </div>
 </div>
-    </div>
-    <div id="panel-wrapper">
-        <div id="panel-shortcuts" class="active">
-            <a class="button load" href="/Category/"><i class="ti ti-plus"></i></a>
-            <div id="delete" class="delete-list">
-                <i class="ti ti-trash"></i>
-            </div>
+<div id="panel-wrapper">
+    <div id="panel-shortcuts" class="active">
+        <a class="button load" href="/Category/"><i class="ti ti-plus"></i></a>
+        <div id="delete" class="delete-list">
+            <i class="ti ti-trash"></i>
         </div>
     </div>
+</div>
 {%endblock%}

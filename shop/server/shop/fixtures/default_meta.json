@@ -28,5 +28,35 @@
             "title": "{obj.name} title за замовчуванням {COMPANY_NAME}",
             "meta_description": "{obj.name} meta_description за замовчуванням {COMPANY_NAME} {PHONES}"
         }
+    },
+    {
+        "model": "shop.defaultmetadata",
+        "pk": 4,
+        "fields": {
+            "language": 3,
+            "model": "Category",
+            "title": "Default {obj.name} {COMPANY_NAME} title",
+            "meta_description": "Default {obj.name} {COMPANY_NAME} meta_description {PHONES}"
+        }
+    },
+    {
+        "model": "shop.defaultmetadata",
+        "pk": 5,
+        "fields": {
+            "language": 2,
+            "model": "Category",
+            "title": "Standart {obj.name} {COMPANY_NAME} title",
+            "meta_description": "Standart {obj.name} {COMPANY_NAME} meta_description {PHONES}"
+        }
+    },
+    {
+        "model": "shop.defaultmetadata",
+        "pk": 6,
+        "fields": {
+            "language": 1,
+            "model": "Category",
+            "title": "{obj.name} title за замовчуванням {COMPANY_NAME}",
+            "meta_description": "{obj.name} meta_description за замовчуванням {COMPANY_NAME} {PHONES}"
+        }
     }
 ]

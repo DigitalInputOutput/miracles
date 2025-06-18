@@ -1,6 +1,4 @@
 from .index import *
-from .prices import *
-from .stock import *
 from .add import *
 from .edit import EditView
 from .list import List

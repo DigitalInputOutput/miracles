@@ -1,4 +1,29 @@
 export const translation = {
+    "delete_image": {
+        "uk": "Видалити картинку?",
+        "en": "Delete image?",
+        "de": "Das Bild löschen?"
+    },
+    "max_length_error": {
+        "uk": 'Максимальна довжина ',
+        "en": 'Maximum length ',
+        "de": 'Maximal Lange '
+    },
+    "min_length_error": {
+        "uk": 'Мінімальна довжина ',
+        "en": 'Minimum length ',
+        "de": 'Minimal Lange '
+    },
+    "saved_succesfully": {
+        "uk": "Збережено успішно",
+        "en": "Saved successfully",
+        "de": "Hat gespeichert"
+    },
+    "sure_delete": {
+        "uk": "Видалити?",
+        "en": "Delete?",
+        "de": "Löschen?"
+    },
     "login_error": {
         "uk": 'Мінімальна довжина 4 символи.',
         "en": 'Minimum length 4 symbols.',

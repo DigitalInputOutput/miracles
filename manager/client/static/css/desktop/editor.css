@@ -3,10 +3,11 @@
 	background: #fff;
 	border-radius: 3px;
 	border: 1px solid #ccc;
+	font-size: 15px;
 }
-.ce-block__content{
+/* .ce-block__content{
 	margin: 15px;
-}
+} */
 .codex-editor__redactor {
 	padding-bottom: 19px !important;
 }

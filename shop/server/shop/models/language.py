@@ -16,7 +16,7 @@ class Language(models.Model):
         try:
             return self.image.url
         except:
-            return '/media/no_image.jpg_new.jpg'
+            return '/media/no_image.jpg'
 
     @property
     def admin_image(self):

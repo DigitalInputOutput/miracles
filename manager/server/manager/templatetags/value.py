@@ -16,3 +16,7 @@ def value(model,item):
 @register.filter(name='val')
 def val(filters,key):
     return filters.get(key) or ''
+
+@register.filter
+def dict_get(d, key):
+    return d.get(key, [])

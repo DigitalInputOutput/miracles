@@ -9,7 +9,7 @@ export class CategoryList extends BaseScreen{
 			this.active();
 		});
 
-		Dom.query('#add').on('click',function(event){
+		Dom.query('#add').on('click',(e) => {
 			GET(this.get('href'));
 		});
 

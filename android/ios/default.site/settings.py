@@ -38,8 +38,6 @@ ALLOWED_HOSTS = ['m.miracles.site']
 BASE_URL = 'm.miracles.site'
 PROTOCOL = 'https'
 
-sys.path.append('/home/core/shop/core')
-sys.path.append('/home/core/mobile/core')
 # Application definition
 
 INSTALLED_APPS = [
@@ -77,7 +75,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': (
-            '/home/core/shop/core/html/',
         ),
         'APP_DIRS': True,
         'OPTIONS': {

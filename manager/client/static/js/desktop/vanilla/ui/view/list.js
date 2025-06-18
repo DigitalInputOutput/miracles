@@ -269,24 +269,26 @@ export class List extends BaseList{
 				return;
 			else if(confirm('Are U sure?')){
 				let context = {};
-				context.View = function(response){
-					if(response.result){
-						for(i=0;i<checkboxes.length;i++){
-							checkboxes[i].checked = false;
-						}
-						location.reload();
-					}
-				};
+				context.success = this.successDelete;
 				context.data = data;
 				DELETE(`/${this.Model}`,context);
 			}
+		}
+	}
+	successDelete(response){
+		let checkboxes = Dom.query('input[type=checkbox]');
+		if(response.result){
+			for(let i=0;i<checkboxes.length;i++){
+				checkboxes[i].checked = false;
+			}
+			location.reload();
 		}
 	}
 }
 
 export class ReloadList extends BaseList{
 	container = '#items';
-	limit = parseInt(window.screen.availHeight / 1.80 / 49);
+	static limit = parseInt(window.screen.availHeight / 1.80 / 49);
 
 	constructor(context){
 		super(context);

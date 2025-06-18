@@ -32,7 +32,7 @@ class Command(BaseCommand):
                 sheet.write(row, col, product.model)
                 # sheet.write(row, col + 1, product.name)
                 sheet.write_url(row, col + 1, "http://%s/%s" % (BASE_URL,product.slug), url_format, product.names(lang='ru'))
-                sheet.write(row, col + 2, product.big_opt_price)
+                sheet.write(row, col + 2, product.wholesale_price)
                 row += 1
         else:
             for cat in Category.objects.filter(active=True):
@@ -52,7 +52,7 @@ class Command(BaseCommand):
                         if not user:
                             sheet.write(row, col + 2, product.retail_price)
                         else:
-                            sheet.write(row, col + 2, product.big_opt_price)
+                            sheet.write(row, col + 2, product.wholesale_price)
                         row += 1
 
         book.close()

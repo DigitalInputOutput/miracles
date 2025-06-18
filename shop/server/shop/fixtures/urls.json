@@ -1,13 +1,734 @@
 [
-    {
-        "model": "shop.url",
-        "pk": 1,
-        "fields": {
-            "string": "/",
-            "model_id": 1,
-            "model": "Info",
-            "view": "main.views.home.HomeView",
-            "language_id": 1
-        }
+{
+    "model": "shop.url",
+    "pk": 1,
+    "fields": {
+        "model_name": "Info",
+        "model_id": 1,
+        "string": "/",
+        "view": "Home",
+        "language": 1,
+        "cached": false
     }
+},
+{
+    "model": "shop.url",
+    "pk": 6,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 2,
+        "string": "elektronika",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 7,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 2,
+        "string": "elektronik",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 8,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 2,
+        "string": "electronics",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 9,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 3,
+        "string": "televizori",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 10,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 3,
+        "string": "fernseher",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 11,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 3,
+        "string": "televisors",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 12,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 4,
+        "string": "konsoli",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 13,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 4,
+        "string": "konsolen",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 14,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 4,
+        "string": "consoles",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 15,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 5,
+        "string": "kompyuteri",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 16,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 5,
+        "string": "computers",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 17,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 5,
+        "string": "computers",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 18,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 6,
+        "string": "pobutova-tehnika",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 19,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 6,
+        "string": "haushaltsgerte",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 20,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 6,
+        "string": "houshold-appliances",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 21,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 7,
+        "string": "budinok",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 22,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 7,
+        "string": "haus",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 23,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 7,
+        "string": "house",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 24,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 8,
+        "string": "vanna-kimnata",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 25,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 8,
+        "string": "badezimmer",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 26,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 8,
+        "string": "bathroom",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 27,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 9,
+        "string": "spalnya",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 28,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 9,
+        "string": "schlafzimmer",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 29,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 9,
+        "string": "bedroom",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 30,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 10,
+        "string": "kuhna",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 31,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 10,
+        "string": "kochzimmer",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 32,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 10,
+        "string": "kitchen",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 33,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 11,
+        "string": "yija",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 34,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 11,
+        "string": "essen",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 35,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 11,
+        "string": "food",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 36,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 12,
+        "string": "pid-zamovlennya",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 37,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 12,
+        "string": "auf-bestellung",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 38,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 12,
+        "string": "to-order",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 39,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 13,
+        "string": "gotova-yija",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 40,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 13,
+        "string": "fertiggericht",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 41,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 13,
+        "string": "ready-meal",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 42,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 14,
+        "string": "budivnictvo",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 43,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 14,
+        "string": "baustelle",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 44,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 14,
+        "string": "building",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 45,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 15,
+        "string": "sumishi",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 46,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 15,
+        "string": "baumischungen",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 47,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 15,
+        "string": "mixtures",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 48,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 16,
+        "string": "instrumenti",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 49,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 16,
+        "string": "werkzeuge",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 50,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 16,
+        "string": "instruments",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 51,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 17,
+        "string": "elektroinstrument",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 52,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 17,
+        "string": "elektrische-werkzuege",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 53,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 17,
+        "string": "electrical-instruments",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 54,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 18,
+        "string": "tvarini",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 55,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 18,
+        "string": "tiere",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 56,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 18,
+        "string": "animals",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 57,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 19,
+        "string": "transport",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 58,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 19,
+        "string": "verkehrsmittel",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 59,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 19,
+        "string": "transport",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 60,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 20,
+        "string": "akciyi",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 61,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 20,
+        "string": "angebote",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 62,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 20,
+        "string": "sale",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 63,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 21,
+        "string": "sport",
+        "view": "Category",
+        "language": 1,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 64,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 21,
+        "string": "sport",
+        "view": "Category",
+        "language": 2,
+        "cached": false
+    }
+},
+{
+    "model": "shop.url",
+    "pk": 65,
+    "fields": {
+        "model_name": "Category",
+        "model_id": 21,
+        "string": "sport",
+        "view": "Category",
+        "language": 3,
+        "cached": false
+    }
+}
 ]

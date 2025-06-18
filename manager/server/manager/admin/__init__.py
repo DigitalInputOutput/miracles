@@ -7,7 +7,7 @@ from .main import *
 
 __all__ = ['TaskAdmin','ExportAdmin','CurrencyAdmin','SettingsAdmin',
            'DefaultMetaDataAdmin','SiteAdmin','GoogleFeedAdmin',
-           'SmsAdmin','FeaturedAdmin','PercentAdmin',
+           'SmsAdmin','FeaturedAdmin',
            'GalleryAdmin','LanguageAdmin','CategoryAdmin','OfferAdmin',
            'PopularAdmin','ProductAdmin','SpecialAdmin','StorageAdmin',
            'OrderAdmin','InfoAdmin','ReviewAdmin','SliderAdmin','UserAdmin',

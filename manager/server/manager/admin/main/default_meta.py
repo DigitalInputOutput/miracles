@@ -11,5 +11,4 @@ class DefaultMetaDataAdmin(AdminModel):
                         'model__icontains'),(_('by lang'),
                         'language'),(_('by title'),'title')
                     )
-    list_display = ('id','get_model_display','language','title')
-    editTemplate = 'main/edit.html'
+    list_display = ('id','model','language','title')

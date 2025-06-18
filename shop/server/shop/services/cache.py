@@ -1,4 +1,4 @@
-from shop.services import PathBuilder
+from shop.builder import PathBuilder
 from django.utils import timezone
 from django.utils.http import http_date
 from django.http import HttpResponse

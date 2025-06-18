@@ -4,7 +4,7 @@ from manager import admin
 
 ADMIN_MODELS = {model:getattr(admin, model) for model in admin.__all__}
 
-class AdminModelMiddleware: 
+class AdminModelMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
         # One-time configuration and initialization.
@@ -29,7 +29,7 @@ class AdminModelMiddleware:
         model_key = view_kwargs.get('admin_model')
 
         if model_key:
-            class_name = model_key.title() + 'Admin'
+            class_name = model_key + 'Admin'
             AdminModel = ADMIN_MODELS.get(class_name)
 
             if not AdminModel or not isinstance(AdminModel, type):

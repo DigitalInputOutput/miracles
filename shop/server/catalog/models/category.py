@@ -9,47 +9,30 @@ from django.db.models import CASCADE
 from shop.models import Description,Page
 from string import ascii_letters
 from django.db.models import *
-from system.settings import MEDIA_ROOT,CACHE_FOLDER
+from system.settings import CACHE_FOLDER
 from random import choice
-from shop.models import Language
 from django.utils.translation import gettext_lazy as _
-import urllib.parse
+from shop.builder import PathBuilder
 
 class CategoryDescription(Description): 
     class Meta:
         db_table = 'category_description'
 
-class Category(MPTTModel,Page): 
+class Category(MPTTModel,Page):
     description = ManyToManyField(CategoryDescription,related_name="obj")
-    parent = TreeForeignKey('self', blank=True, null=True, verbose_name=_("Батьківська"),related_name="child", on_delete=CASCADE)
-    image = ImageField(upload_to='category_image/', blank=True, null=True,verbose_name=_('Картинка'))
+    parent = TreeForeignKey('self', blank=True, null=True, verbose_name=_("Parent"),related_name="child", on_delete=CASCADE)
+    image = ImageField(upload_to='category_image/', blank=True, null=True,verbose_name=_('Image'))
     last_modified = DateTimeField(auto_now_add=True)
-    active = BooleanField(default=1,verbose_name=_('Активна'))
+    active = BooleanField(default=1,verbose_name=_('Active'))
     bgcolor = CharField(max_length=20,null=True)
 
-    def cache(self):
-        super().cache()
-
-        for device in ['mobile','desktop']:
-            for lang in Language.objects.all():
-                pattern = f'{CACHE_FOLDER}cache/html/{device}/{lang}/static/categories.html'
-                if os.path.isfile(pattern):
-                    os.remove(pattern)
-
-            # from shop.models.info import Static
-
-            # from subprocess import Popen, PIPE
-
-            # proc = Popen(['/home/core/shop/{DOMAIN}/ffs.sh'.format(DOMAIN=DOMAIN)], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-            # output, error = proc.communicate()
-            # with open('process.log','wb') as f:
-            #     f.write(output + error)
-
     def menu_thumb(self,size=70):
-        try:
-            path = MEDIA_ROOT + urllib.parse.unquote(self.image.url).replace('/media/','')
-        except ValueError:
-            return None
+        if not self.image:
+            return
+
+        path = PathBuilder.build_media_path(
+            self.image.url
+        )
         img = Image.open(path)
         img.thumbnail([size,size])
 
@@ -68,19 +51,9 @@ class Category(MPTTModel,Page):
         return count
 
     def save(self,*args,**kwargs):
-        if self.active:
+        if self.pk and self.active:
             for thumb in self.thumb.all():
                 thumb.delete()
-
-        if self.id:
-            for product in self.products.all():
-                product.cache()
-
-        for lang in Language.objects.all():
-            for device in ['desktop','mobile']:
-                catfile = f'{CACHE_FOLDER}cache/html/{device}/{lang.code}/static/categories.html'
-                if os.path.isfile(catfile):
-                    os.remove(catfile)
 
         super().save(*args,**kwargs)
 
@@ -119,6 +92,7 @@ class Category(MPTTModel,Page):
             image.save(CACHE_FOLDER + path,'JPEG')
 
         thumb = Category_Thumb.objects.create(url = '/' + path,category=self,size=size)
+
         return thumb.url
 
     def path(self,size):
@@ -164,7 +138,7 @@ class Category(MPTTModel,Page):
         if self.parent:
             return self.get_root(self.parent)
         else:
-            return _('Категорії товарів')
+            return _('Product categories')
 
     def ancestors_breadcrumbs(self, parent, breadcrumbs, lang):
         breadcrumbs = breadcrumbs + ((parent.translate_name(lang),parent.url(lang)),)
@@ -188,8 +162,8 @@ class Category(MPTTModel,Page):
             return reversed(breadcrumbs)
 
     class Meta:
-        verbose_name = _('Категорія')
-        verbose_name_plural = _('Категорії')
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
 class Category_Thumb(Model):
     category = ForeignKey(Category,related_name='thumb', on_delete=CASCADE)

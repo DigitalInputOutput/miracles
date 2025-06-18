@@ -7,4 +7,3 @@ class SliderAdmin(AdminModel):
     form = SliderForm
     head = (('id','id'),('Название','name'),('URL','path'),('Картина',''))
     list_display = ('id','name','path','image_preview')
-    editTemplate = 'main/edit.html'
