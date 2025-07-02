@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os,pymysql,sys
+from decouple import config
 
 USER = "dd"
 GROUP = "www-data"
@@ -41,7 +42,7 @@ sys.path.append(HOME_DIR)
 SECRET_KEY = 'django-insecure-vgn&%r%0_q8)i%zj*)vol*3f(ttl4e39)yn(3#2(!jl#*5mxbr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = ['miracles.site']
 HOST = 'miracles.site'
@@ -126,9 +127,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'miracles',
-            'USER': 'miracles',
-            'PASSWORD': 'a9O*757#82SO',
+            'NAME': config["DB_NAME"],
+            'USER': config["DB_USER"],
+            'PASSWORD': config["DB_PASSWORD"],
             'HOST':'localhost'
         }
     }

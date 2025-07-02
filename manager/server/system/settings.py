@@ -15,6 +15,7 @@ GOOGLE_ANALYTICS = ""
 
 import os,pymysql,sys
 from pathlib import Path
+from decouple import config
 
 USER = "dd"
 GROUP = "www-data"
@@ -39,7 +40,7 @@ HOME_DIR = BASE_DIR.parent.parent
 SECRET_KEY = 'ph2$50f%khtwe-dbv_^cykc+(l7lbeg35e^9qf=#d#@s^gtw7p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = ['manager.miracles.site','t.manager.miracles.site']
 
@@ -118,9 +119,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '127.0.0.1',
-        'NAME': 'miracles',
-        'USER': 'manager',
-        'PASSWORD': 'S53zpC9z*HseSK!czw',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD"),
         'OPTIONS': {
             'sql_mode': 'STRICT_TRANS_TABLES',
         }
@@ -128,9 +129,9 @@ DATABASES = {
     'backup': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '127.0.0.1',
-        'NAME': 'miracles_back',
-        'USER': 'manager',
-        'PASSWORD': 'S53zpC9z*HseSK!czw',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD"),
         'OPTIONS': {
             'sql_mode': 'STRICT_TRANS_TABLES',
         }
