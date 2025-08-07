@@ -233,6 +233,10 @@ export class ProductList extends BaseProductList{
 		});
 	}
 	slider(){
+		if(!window.noUiSlider){
+			console.warn("NoUISLider is undefined");
+			return;
+		}
 		if(this.min && this.max && (this.min < this.max)){
 			var slider = Dom.query('#slider-range');
 			var from = Dom.query("#amount-from");

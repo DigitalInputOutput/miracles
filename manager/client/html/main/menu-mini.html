@@ -2,41 +2,41 @@
 {%load url_filters%}
 <div id="cart-icon" class="icon">
     <a href="/Order/" title="{%trans 'New Order'%}">
-        <i class="ti ti-shopping-cart-plus"></i>
+        <i data-lucide="shopping-cart"></i>
     </a>
 </div>
 <div id="cart-icon" class="icon">
     <a href="/Order" title="{%trans 'Orders'%}">
-        <i class="ti ti-shopping-cart"></i>
+        <i data-lucide="tool-case"></i>
     </a>
 </div>
 <div id="products-icon" class="icon">
     <a href="/Product" title="{%trans 'Products'%}">
-        <i class="ti ti-brand-producthunt"></i>
+        <i data-lucide="package-search"></i>
     </a>
 </div>
 <div class="icon">
     <a href="/Category" title="{%trans 'Categories'%}">
-        <i class="ti ti-category"></i>
+        <i data-lucide="chart-bar-stacked"></i>
     </a>
 </div>
 <div class="icon">
     <a href="/Page" title="{%trans 'Pages'%}">
-        <i class="ti ti-page-break"></i>
+        <i data-lucide="book-open-text"></i>
     </a>
 </div>
 <div class="icon">
     <a href="/User" title="{%trans 'Users'%}">
-        <i class="ti ti-users"></i>
+        <i data-lucide="users"></i>
     </a>
 </div>
 <div id="settings-icon" class="icon">
     <a href="/" title="{%trans 'Home'%}">
-        <i class="ti ti-home"></i>
+        <i data-lucide="house"></i>
     </a>
 </div>
 <div id="lang-button">
-    <i class="ti ti-world-cog"></i>
+    <i data-lucide="languages"></i>
 
     <div id="lang">
         {%for language in supported_languages%}
@@ -50,6 +50,6 @@
 </div>
 <div id="logout">
     <a id="signout" href="/logout">
-        <i class="ti ti-logout"></i>
+        <i data-lucide="log-out"></i>
     </a>
 </div>

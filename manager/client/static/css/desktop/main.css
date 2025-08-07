@@ -156,8 +156,7 @@ header .welcome{
 	padding-right: 12px;
 }
 #left svg{
-	max-height: 100%;
-	max-width: 100%;
+	width: 21px;
 }
 #left #nav .burger{
 	margin: auto;
@@ -236,6 +235,7 @@ img{
 	overflow: hidden;
 	display: flex;
 	place-content: center;
+	box-shadow: 1px 1px 3px #ccc;
 }
 main.full{
 	width: 86%;
@@ -357,6 +357,10 @@ main .right{
 }
 #panel-shortcuts a:hover{
 	color: #fff;
+}
+svg {
+	margin: auto;
+	width: 18px;
 }
 #panel-shortcuts svg{
 	width: 33px;
@@ -599,6 +603,8 @@ button:hover,.button{
 }
 .remove{
 	cursor: pointer;
+	width: 22px;
+	height: 22px;
 }
 
 /*.autocomplete {

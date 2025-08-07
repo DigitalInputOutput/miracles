@@ -2,7 +2,7 @@
 <menu class="noselect" id="nav">
     <div id="top">
         <div class="burger">
-            <i class="ti ti-menu"></i>
+            <i data-lucide="menu"></i>
         </div>
         <a href="http://{{SITE_URL}}/" id="shop">
             <img src="/static/image/miracles-logo.png" alt="">
@@ -10,21 +10,21 @@
     </div>
     <div id="menu-title">
         <div id="prev">
-            <i class="ti ti-chevron-left"></i>
+            <i data-lucide="chevron-left"></i>
             <div id="menu-title-text"></div>
         </div>
     </div>
     <div id="menu">
         <a href="/Order/" class="menu-root">
-            <i class="ti ti-shopping-cart-plus"></i>
+            <i data-lucide="shopping-cart"></i>
             {%trans 'Add Order'%}
         </a>
         <a href="/Order" class="menu-root">
-            <i class="ti ti-shopping-cart"></i>
+            <i data-lucide="tool-case"></i>
             {%trans 'Orders'%}
         </a>
         <div class="parent branch menu-root">
-            <i class="ti ti-brand-producthunt"></i>
+            <i data-lucide="package-search"></i>
             <span>{%trans 'Products'%}</span>
             <div class="sub">
                 <a href="/Product">{%trans 'All products'%}</a>
@@ -39,11 +39,11 @@
             </div>
         </div>
         <a href="/Category" class="menu-root">
-            <i class="ti ti-category"></i>
+            <i data-lucide="chart-bar-stacked"></i>
             {%trans 'Categories'%}
         </a>
         <div class="parent branch menu-root">
-            <i class="ti ti-building-store"></i>
+            <i data-lucide="store"></i>
             <span>{%trans 'Shop'%}</span>
             <div class="sub">
                 <a href="/Meta">{%trans 'Meta'%}</a>
@@ -62,19 +62,19 @@
             </div>
         </div>
         <a href="/User" class="menu-root">
-            <i class="ti ti-users"></i>
+            <i data-lucide="users"></i>
             {%trans 'Users'%}
         </a>
         <a href="/" id="home-link" class="menu-root">
-            <i class="ti ti-home"></i>
+            <i data-lucide="house"></i>
             {%trans 'Settings'%}
         </a>
         <a href="/Export" class="menu-root">
-            <i class="ti ti-database-export"></i>
+            <i data-lucide="file-up"></i>
             {%trans 'Export'%}
         </a>
         <a href="/Task" class="menu-root">
-            <i class="ti ti-subtask"></i>
+            <i data-lucide="calendar-check-2"></i>
             {%trans 'Tasks'%}
         </a>
     </div>

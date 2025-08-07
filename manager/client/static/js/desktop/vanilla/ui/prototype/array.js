@@ -186,6 +186,11 @@
 		remove(val) {
 			this.splice(this.indexOf(val),1);
 		},
+		removeFromDom(){
+			this.forEach((elem) => {
+				elem.remove();
+			});
+		},
 		last(){
 			return this[this.length - 1];
 		},

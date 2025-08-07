@@ -14,3 +14,7 @@
 .codex-editor--narrow .ce-toolbar__actions{
 	right: 7px;
 }
+
+.ql-container.ql-snow {
+	background-color: #fff;
+}

@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load translate %}
+<!DOCTYPE html>
+<html lang="{{langISOcode}}">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{title}}</title>
+	<meta content='{{meta_description}}' name="description">
+	<meta content='{{title}}' property="og:title">
+	<meta content="{{image}}" property="og:image">
+	<meta content="{{request.build_absolute_uri}}" property="og:url">
+	<meta content="{{host}}" property="og:site_name">
+	<meta content="website" property="og:type">
+	<meta name="google-site-verification" content="{{GOOGLE_SITE_VERIFICATION}}" />
+	<link rel="icon" type="image/png" href="/static/image/favicon.png" />
+    <!-- {{critical_css}} -->
+	{%for language in languages%}
+		<link rel="alternate" hreflang="{{language.ISOcode}}" href="{{PROTOCOL}}://{{BASE_URL}}{{language.path}}{{url|default_if_none:''}}" />
+	{%endfor%}
+	{%include SVG_CACHE%}
+</head>
+{%block body%}
+<body>
+	<div id="loading"></div>
+	<div id="bg"></div>
+	<div id="form"></div>
+	<div id="add-cart" class="message">
+		<div>
+			{% trans 'You added'%}:
+			<span class="name"></span>
+		</div>
+	</div>
+	{%include 'main/desktop/header.html' with category=category%}
+	<div id="categories-container" class="container"></div>
+	<div id="content" class="container">
+		{%block main%}
+			{{content|safe}}
+		{%endblock%}
+	</div>
+	{%include footer_path%}
+	<div id="token">
+		{%csrf_token%}
+	</div>
+	<!-- {{full_css}} -->
+	<!-- {{scripts}} -->
+	
+{%endblock%}
+</body>
+</html>

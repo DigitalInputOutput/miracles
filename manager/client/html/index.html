@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    
+    <link rel="icon" type="image/png" href="/static/image/favicon.png" />
+    {%include 'main/sprite.svg'%}
+</head>
+</html>
+<body>
+{%block body%}
+{%endblock%}
+<div id="bg"></div>
+<link rel="stylesheet" href="/static/css/desktop/main.css">
+<link rel="stylesheet" href="/static/css/desktop/categories.css">
+<link rel="stylesheet" href="/static/css/desktop/category.css">
+<link rel="stylesheet" href="/static/css/desktop/checkbox.css">
+<link rel="stylesheet" href="/static/css/desktop/edit.css">
+<link rel="stylesheet" href="/static/css/desktop/editor.css">
+<link rel="stylesheet" href="/static/css/desktop/list.css">
+<link rel="stylesheet" href="/static/css/desktop/login.css">
+<link rel="stylesheet" href="/static/css/desktop/menu.css">
+<link rel="stylesheet" href="/static/css/desktop/nouislider.css">
+<link rel="stylesheet" href="/static/css/desktop/order.css">
+<link rel="stylesheet" href="/static/css/desktop/quill.snow.css">
+<link rel="stylesheet" href="/static/css/desktop/radio.css">
+<link rel="stylesheet" href="/static/css/desktop/select.css">
+<link rel="stylesheet" href="/static/css/desktop/settings.css">
+<link rel="stylesheet" href="/static/css/desktop/tabler-icons.min.css">
+<script>
+    window.BASE_URL = "{{BASE_URL}}";
+    window.DJANGO_LANG = "{{ request.LANGUAGE_CODE }}";
+</script>
+<script type="module" src="/static/js/desktop/vanilla/ui/prototype/index.js"></script>
+<script type="module" src="/static/js/desktop/app/views_register.js"></script>
+<script type="module" src="/static/js/desktop/modules/index.js"></script>
+<script type="module" src="/static/js/desktop/vanilla/ui/utils.js"></script>
+<script type="module">
+    import { Navigation } from "/static/js/desktop/vanilla/http/navigation.js";
+    import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
+
+    lucide.createIcons( lucide.icons );
+
+    Navigation.page_context = {{context|safe|default:'{}'}};
+
+    const urlpatterns = {
+        "^/login(\\?(?<next>[\\s\\S]*))?$": { "GET": "Login" },
+        "^/logout$": { "GET": "Logout" },
+    };
+
+    Navigation.init(urlpatterns);
+    window.Navigation = Navigation;
+    window.Dom = Dom;
+</script>
+{%block JS%}
+{%endblock%}
+</body>
+</html>

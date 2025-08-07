@@ -2,6 +2,8 @@ import { Gallery } from "/static/js/desktop/vanilla/ui/view/gallery.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { POST } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
+import { Alert } from "/static/js/desktop/vanilla/ui/alert.js";
+import { t } from "/static/js/desktop/app/i18n.js";
 
 export class ProductEdit extends Gallery{
 	static container = 'main';
@@ -28,10 +30,10 @@ export class ProductEdit extends Gallery{
 		new Sortable(Dom.query('#gallery-items'), {
 			animation: 150,
 			ghostClass: 'blue-background-class',
-			onSort: function(e){
-				var ordering = {};
-				var position = 1;
-				Dom.query('#gallery-items .remove').each(function(elem){
+			onSort: (e) => {
+				let ordering = {};
+				let position = 1;
+				Dom.query('#gallery-items .remove').each((elem) => {
 					if(elem.get('item-id')){
 						ordering[elem.get('item-id')] = position;
 						position++;
@@ -39,12 +41,11 @@ export class ProductEdit extends Gallery{
 				});
 
 				POST(`/gallery/${that.model}/${that.id}/ordering`,{
-					View:function(response){
+					success: (response) => {
 						if(response && response.result)
-							Alert.popMessage('Ok.');
+							Alert.popMessage(t('saved_succesfully'));
 					},
-					history:false,
-					data:ordering
+					data: ordering
 				});
 			}
 		});
@@ -59,8 +60,9 @@ export class ProductEdit extends Gallery{
 		}
 	}
 	get_data(){
-		let data = Dom.query('#item form')[0].serializeJSON();
+		let data = super.get_data();
 
+		// Delete description for export
 		data.export_status = [];
 		Dom.query('.export').each((elem) => {
 			let status = {

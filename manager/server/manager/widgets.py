@@ -1,8 +1,11 @@
-from django.forms import TextInput,Select,CheckboxSelectMultiple,CheckboxInput
+from django.forms import TextInput,Select,CheckboxSelectMultiple,CheckboxInput, HiddenInput
 from catalog.models import Attribute
 from system.settings import DOMAIN
 
-__all__ = ['SwitcherWidget','AttributesWidget','GalleryWidget','ImageWidget','FgkWidget','CustomSelectWidget']
+__all__ = ['SwitcherWidget','AttributesWidget','GalleryWidget','ImageWidget','FgkWidget','CustomSelectWidget','EditorInput']
+
+class EditorInput(HiddenInput):
+    template_name = 'main/form/editor_input.html'
 
 class AutocompleteWidget(TextInput): 
     template_name = 'main/form/autocomplete.html'

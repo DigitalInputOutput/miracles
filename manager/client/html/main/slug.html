@@ -70,16 +70,16 @@
         </form>
         <div id="item-menu">
             <div class="menu-item noselect" data-tab="description">
-                <i class="ti ti-language"></i>
-                {% trans 'By Language' %}
+                <i data-lucide="languages"></i>
+                {% trans 'Meta-data' %}
             </div>
             {%for fieldset in form.fieldsets%}
                 <div class="menu-item noselect" data-tab="{{fieldset.name|default_if_none:'main'}}">
                     {%if not fieldset.legend and forloop.counter == 1%}
-                        <i class="ti ti-mail"></i>
+                        <i data-lucide="newspaper"></i>
                         {% trans "General" %}
                     {%else%}
-                        <i class="ti ti-{{fieldset.icon}}"></i>
+                        <i data-lucide="{{fieldset.icon}}"></i>
                         {{fieldset.legend}}
                     {%endif%}
                 </div>
@@ -89,25 +89,25 @@
     <div id="edit-panel-wrapper">
         <div id="edit-panel" class="active">
             <a id='browse' href="http://{{SITE_URL}}/{{item.slug}}">
-                <i class="ti ti-external-link"></i>
+                <i data-lucide="square-arrow-out-up-right"></i>
             </a>
             {%if AdminModel.editPanel%}
                 {%include AdminModel.editPanel%}
             {%endif%}
             <div id="save" class="edit-panel-icon">
-                <i class="ti ti-device-floppy"></i>
+                <i data-lucide="save"></i>
             </div>
             <div id="save-more" class="edit-panel-icon">
-                <i class="ti ti-file"></i>
+                <i data-lucide="save-all"></i>
             </div>
             <div id="save_and_out" class="edit-panel-icon">
-                <i class="ti ti-folder-share"></i>
+                <i data-lucide="circle-check-big"></i>
             </div>
            <!--  <div id="out" class="edit-panel-icon">
                 <i class="fas fa-share-square"></i>
             </div> -->
             <div id="delete" class="delete-list">
-                <i class="ti ti-trash"></i>
+                <i data-lucide="trash"></i>
             </div>
         </div>
     </div>

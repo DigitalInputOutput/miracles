@@ -88,7 +88,9 @@ export class Navigation {
         e.preventDefault();
         e.stopPropagation();
 
-        GET(target.href, Navigation.parseUrl(target.href));
+        let context = Navigation.parseUrl(target.href);
+
+        GET(context.href, context);
         return false;
     }
 
@@ -111,6 +113,10 @@ export class Navigation {
 
             const params = regex.exec(url.pathname)?.groups || {};
 
+            if (["List","ReloadList"].includes(views[method]) && !['PUT', 'DELETE'].includes(method)) {
+                url = Navigation.setLimit(url);
+            }
+
             return {
                 ...params,
                 href: url.pathname + url.search,
@@ -122,10 +128,16 @@ export class Navigation {
         throw new Error(`No matching pattern found for URL: ${url.pathname}`);
     }
 
-    static setLimit(url, href, method, View) {
-        if (href.match("/(?<AdminModel>[A-Z][a-z]+)($|\\?[\\s\\S])") && !['PUT', 'DELETE'].includes(method)) {
-            url.searchParams.set('limit', View?.limit || 10);
-        }
+    static setLimit(url) {
+        const headHeight = 105;
+        const paginationHeight = 91;
+        const productHeight = 101;
+        const columnsCount = 2;
+	    let limit = parseInt((window.screen.availHeight - (headHeight + paginationHeight)) / (productHeight / columnsCount));
+
+        limit = limit % 2 === 0 ? limit : limit - 1;
+
+        url.searchParams.set('limit', limit || 10);
 
         return url;
     }

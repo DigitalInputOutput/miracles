@@ -2,95 +2,158 @@ import { OneToOne } from "./fgk.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { t } from "/static/js/desktop/app/i18n.js";
 
-export class Gallery extends OneToOne{
-	constructor(context){
+export class Gallery extends OneToOne {
+	constructor(context) {
 		super(context);
 
-		this.previewImage = Dom.query('#bigPhoto img')[0];
-		this.fullSize = Dom.query('#bigPhoto');
-		this.closeButton = Dom.query('#bigPhoto .close');
-		this.stop = false;
-		this.images = Dom.query('#gallery-items');
-		Dom.query('#plus').on('click',this.add.bind(this));
-		Dom.query('#images .remove').on('click',this.remove.bind(this));
-		Dom.query('#images img').on('click',this.preview.bind(this));
+		this.selectors = {
+			previewImage: '#bigPhoto img',
+			fullSize: '#bigPhoto',
+			closeButton: '#bigPhoto .close',
+			images: '#gallery-items',
+			removeListInput: '#images input[name="remove_images"]',
+			imageContainer: '#images',
+			bg: '#bg',
+			dropZone: '#drop-zone',
+		};
 
-		this.removeListInput = Dom.query('#images input[name="remove_images"]')[0];
-		this.removeList = JSON.parse(this.removeListInput.value);
-
-		this.fullSize.on('click',this.next.bind(this));
-		this.closeButton.on('click',this.close.bind(this));
+		this.initElements();
+		this.initListeners();
 	}
-	close(e){
+
+	initElements() {
+		this.previewImage = Dom.query(this.selectors.previewImage)[0];
+		this.fullSize = Dom.query(this.selectors.fullSize);
+		this.closeButton = Dom.query(this.selectors.closeButton);
+		this.images = Dom.query(this.selectors.images);
+		this.removeListInput = Dom.query(this.selectors.removeListInput)[0];
+		this.removeList = JSON.parse(this.removeListInput?.value || '[]');
+		this.dropZone = Dom.query(this.selectors.dropZone);
+	}
+
+	initListeners() {
+		// Existing images
+		Dom.query(`${this.selectors.imageContainer} .remove`).on('click', this.remove.bind(this));
+		Dom.query(`${this.selectors.imageContainer} img`).on('click', this.preview.bind(this));
+
+		this.fullSize.on('click', this.next.bind(this));
+		this.closeButton.on('click', this.close.bind(this));
+		this.dropZone.on('click', this.add.bind(this));
+
+		// Drag & Drop
+		this.dropZone.on('dragover', this.handleDragOver.bind(this));
+		this.dropZone.on('dragleave', this.handleDragLeave.bind(this));
+		this.dropZone.on('drop', this.handleDrop.bind(this));
+	}
+
+	handleDragOver(e) {
+		e.preventDefault();
+		this.dropZone.addClass("dragover");
+	}
+
+	handleDragLeave() {
+		this.dropZone.removeClass("dragover");
+	}
+
+	handleDrop(e) {
+		e.preventDefault();
+		this.dropZone.removeClass("dragover");
+
+		const files = e.dataTransfer.files;
+		if (files.length) {
+			const evnt = { target: e.dataTransfer };
+			const input = Dom.create('input');
+			input.set('type', 'file');
+			input.hide();
+
+			this.input = input;
+			this.images.append(input);
+			this.render(evnt);
+		}
+	}
+
+	close() {
 		this.fullSize.hide();
-		Dom.query('#bg').hide();
+		Dom.query(this.selectors.bg).hide();
 	}
-	next(e){
-		
-	}
-	preview(e){
-		if(this.stop){
-			this.stop = false;
-			return;
-		}
-		let image = e.target;
-		this.previewImage.set('src',image.get('original'));
-		this.fullSize.css('display','flex');
-		Dom.query('#bg').show();
 
+	next() {
+		// Optional: Add carousel functionality
+	}
+
+	preview(e) {
+		const image = e.target;
+		this.previewImage.set('src', image.get('original'));
+		this.fullSize.css('display', 'flex');
+		Dom.query(this.selectors.bg).show();
 		e.stopPropagation();
-
-		return false;
 	}
-	remove(e){
-		if(e.target.tagName == 'I'){
-			e.target.parent().click();
-			e.stopPropagation();
-			return false;
-		}
 
-		let parent = e.target.parent();
-		let agree = confirm(t("delete_image"));
-		let target = e.target;
-
-		if(target.get('item-id') && agree){
-			this.removeList.push(target.get('item-id'));
-			this.removeListInput.value = JSON.stringify(this.removeList);
-			parent.remove();
-		}else if(agree)
-			parent.remove();
-
-		e.stopPropagation();
-		return false
-	}
-	add(){
-		let input = Dom.create('input');
-		input.set('type','file');
+	add() {
+		const input = Dom.create('input');
+		input.set('type', 'file');
+		input.set('data-id', Dom.query('#gallery-items .image').length || 1);
 		input.hide();
+
 		this.input = input;
 		this.images.append(input);
-		input.on('change',this.render.bind(this));
+		input.on('change', this.render.bind(this));
 		input.click();
 	}
-	render(e){
-		let file = e.target.files[0];
-		let reader = new FileReader();
-		let that = this;
 
-		reader.onload = function(e){
-			let div = Dom.create('div');
-			div.set('class','image ui-sortable-handle');
-			div.html('<div class="remove"><i class="ti ti-x"></i></div>');
-			div.find('.remove')[0].on('click',that.remove);
-			let image = Dom.create('img');
-			image.src = e.target.result;
-			image.set('original',e.target.result);
-			image.on('click',that.preview.bind(that));
-			div.append(image);
-			that.input.set('name','images');
-			that.input.set('value',e.target.result);
-			that.images.append(div);
-		};
+	render(e) {
+		const file = e.target.files[0];
+		if (!file) return;
+
+		const reader = new FileReader();
+		reader.onload = (event) => this.appendImage(event.target.result);
 		reader.readAsDataURL(file);
 	}
+
+	appendImage(dataUrl) {
+		const div = Dom.create('div');
+		div.set('class', 'image ui-sortable-handle');
+		div.set('data-id', Dom.query('#gallery-items .image').length || 1);
+		div.html('<div class="remove"><i class="ti ti-x"></i></div>');
+
+		const removeBtn = div.find('.remove')[0];
+		removeBtn.on('click', this.remove.bind(this));
+
+		const image = Dom.create('img');
+		image.src = dataUrl;
+		image.set('original', dataUrl);
+		image.on('click', this.preview.bind(this));
+
+		div.append(image);
+
+		this.input.set('name', 'images');
+		this.input.set('value', dataUrl);
+
+		this.images.append(div);
+	}
+
+	remove(e) {
+		const target = e.target;
+		const parent = target.tagName === 'I' ? target.parent().parent() : target.parent();
+
+		console.log(parent);
+		const id = parent.get('data-id');
+		const itemId = target.get('item-id');
+		const confirmRemove = confirm(t("delete_image"));
+
+		if (!confirmRemove) return;
+
+		const hiddenInput = Dom.query(`#gallery-items input[data-id="${id}"]`);
+
+		if (itemId) {
+			this.removeList.push(itemId);
+			this.removeListInput.value = JSON.stringify(this.removeList);
+		}
+
+		hiddenInput?.removeFromDom();
+		parent.remove();
+
+		e.stopPropagation();
+	}
+
 }

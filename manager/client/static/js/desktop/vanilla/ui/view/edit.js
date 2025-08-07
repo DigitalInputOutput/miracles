@@ -125,7 +125,13 @@ export class BaseEdit extends Screen{
 		}
 	}
 	get_data(){
-		return Dom.query('#item form')[0].serializeJSON();
+		let json = Dom.query('#item form')[0].serializeJSON();
+
+		this.editors.keys().forEach((key) => {
+			json[key] = this.editors.get(key).root.innerHTML;
+		});
+
+		return json;
 	}
 	save(event, action){
 		if(!this.validator.is_valid())
@@ -180,7 +186,7 @@ export class Edit extends BaseEdit{
 	constructor(context){
 		super(context);
 
-		this.editors = [];
+		this.editors = new Map();
 
 		if(!Dom.query('.languages').length)
 			return;
@@ -210,117 +216,123 @@ export class Edit extends BaseEdit{
 		Dom.query(`#description #${that.activeLang.get('data-tab')}`)[0].active();
 		Dom.query('.fieldset.meta .languages > div').on('click',that.langMenu.bind(that));
 
-		Dom.query('textarea').each((elem) => {
-			elem.hide();
-			elem.parent().after(`<div id="${elem.id}-editorjs"></div>`);
+		// Dom.query('textarea').each((elem) => {
+		// 	elem.hide();
+		// 	elem.parent().after(`<div id="${elem.id}-editorjs"></div>`);
 
-			let jsonStorage = Dom.query(`#${elem.id.replace('text','json_text')}`);
-			let textarea = Dom.query(`textarea[name="${elem.name}"]`)[0];
+		// 	let jsonStorage = Dom.query(`#${elem.id.replace('text','json_text')}`);
+		// 	let textarea = Dom.query(`textarea[name="${elem.name}"]`)[0];
 
-			let dummyDiv = Dom.create('div');
-			dummyDiv.html(elem.defaultValue);
+		// 	let dummyDiv = Dom.create('div');
+		// 	dummyDiv.html(elem.defaultValue);
 
-			if((!dummyDiv.children || !dummyDiv.children.length) && elem.innerHTML){
-				let p = Dom.create('p');
-				p.html(elem.innerHTML);
-				dummyDiv.append(p);
-			}
+		// 	if((!dummyDiv.children || !dummyDiv.children.length) && elem.innerHTML){
+		// 		let p = Dom.create('p');
+		// 		p.html(elem.innerHTML);
+		// 		dummyDiv.append(p);
+		// 	}
 
-			let parser = edjsHTML();
+		// 	let parser = edjsHTML();
 
-			let editor = new EditorJS({
-				holder: elem.id + '-editorjs',
-				tools: {
-					header: {
-						class: Header,
-						inlineToolbar: ['marker', 'link'],
-						config: {
-							placeholder: 'Header'
-						},
-						shortcut: 'CMD+SHIFT+H'
-					},
-					image: {
-						class: SimpleImage,
-						inlineToolbar: true,
-					},
+		// 	let editor = new EditorJS({
+		// 		holder: elem.id + '-editorjs',
+		// 		tools: {
+		// 			header: {
+		// 				class: Header,
+		// 				inlineToolbar: ['marker', 'link'],
+		// 				config: {
+		// 					placeholder: 'Header'
+		// 				},
+		// 				shortcut: 'CMD+SHIFT+H'
+		// 			},
+		// 			image: {
+		// 				class: SimpleImage,
+		// 				inlineToolbar: true,
+		// 			},
 
-					list: {
-						class: EditorList,
-						inlineToolbar: true,
-					},
+		// 			list: {
+		// 				class: EditorList,
+		// 				inlineToolbar: true,
+		// 			},
 
-					checklist: {
-						class: Checklist,
-						inlineToolbar: true,
-					},
+		// 			checklist: {
+		// 				class: Checklist,
+		// 				inlineToolbar: true,
+		// 			},
 
-					quote: {
-						class: Quote,
-						inlineToolbar: true,
-						config: {
-							quotePlaceholder: 'Enter a quote',
-							captionPlaceholder: 'Quote\'s author',
-						},
-						shortcut: 'CMD+SHIFT+O'
-					},
+		// 			quote: {
+		// 				class: Quote,
+		// 				inlineToolbar: true,
+		// 				config: {
+		// 					quotePlaceholder: 'Enter a quote',
+		// 					captionPlaceholder: 'Quote\'s author',
+		// 				},
+		// 				shortcut: 'CMD+SHIFT+O'
+		// 			},
 
-					warning: Warning,
+		// 			warning: Warning,
 
-					marker: {
-						class: Marker,
-						shortcut: 'CMD+SHIFT+M'
-					},
+		// 			marker: {
+		// 				class: Marker,
+		// 				shortcut: 'CMD+SHIFT+M'
+		// 			},
 
-					code: {
-						class: CodeTool,
-						shortcut: 'CMD+SHIFT+C'
-					},
+		// 			code: {
+		// 				class: CodeTool,
+		// 				shortcut: 'CMD+SHIFT+C'
+		// 			},
 
-					delimiter: Delimiter,
+		// 			delimiter: Delimiter,
 
-					inlineCode: {
-						class: InlineCode,
-						shortcut: 'CMD+SHIFT+C'
-					},
+		// 			inlineCode: {
+		// 				class: InlineCode,
+		// 				shortcut: 'CMD+SHIFT+C'
+		// 			},
 
-					linkTool: LinkTool,
+		// 			linkTool: LinkTool,
 
-					embed: Embed,
+		// 			embed: Embed,
 
-					table: {
-						class: Table,
-						inlineToolbar: true,
-						shortcut: 'CMD+ALT+T'
-					},
-				},
-				data: {
-					blocks: toJson(dummyDiv),
-				},
-				placeholder: elem.placeholder,
-				onChange: (editor) => {
-					editor.saver.save().then((out) => {
-						jsonStorage.value = JSON.stringify(out);
+		// 			table: {
+		// 				class: Table,
+		// 				inlineToolbar: true,
+		// 				shortcut: 'CMD+ALT+T'
+		// 			},
+		// 		},
+		// 		data: {
+		// 			blocks: toJson(dummyDiv),
+		// 		},
+		// 		placeholder: elem.placeholder,
+		// 		onChange: (editor) => {
+		// 			editor.saver.save().then((out) => {
+		// 				jsonStorage.value = JSON.stringify(out);
 
-						let html = parser.parse(out);
+		// 				let html = parser.parse(out);
 
-						let result = '';
-						if(Array.isArray(html)){
-							for(let i of html){
-								result += i;
-							}
-							html = result;
-						}
+		// 				let result = '';
+		// 				if(Array.isArray(html)){
+		// 					for(let i of html){
+		// 						result += i;
+		// 					}
+		// 					html = result;
+		// 				}
 
-						textarea.innerHTML = html;
-						textarea.value = html;
-					});
-				},
-				onPaste: (event) => {
-					console.log(event);
-				}
-			});
+		// 				textarea.innerHTML = html;
+		// 				textarea.value = html;
+		// 			});
+		// 		},
+		// 		onPaste: (event) => {
+		// 			console.log(event);
+		// 		}
+		// 	});
 
-			this.editors.push(editor);
+		// 	this.editors.push(editor);
+		// });
+		Dom.query('.quill-editor').each((elem) => {
+			let input = elem.next();
+			elem.innerHTML = input.value;
+			let editor = new Quill(elem, {theme: 'snow'});
+			this.editors.set(input.name, editor);
 		});
 	}
 	langMenu(e){

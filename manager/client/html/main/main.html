@@ -1,0 +1,68 @@
+{%extends 'index.html'%}
+{%load url_filters%}
+{%load i18n%}
+{%block body%}
+<template id="http-loading-template">
+    <div id="http-loading"></div>
+</template>
+<template id="http-alert-template">
+    <div id="http-alert">
+        <div class="close"></div>
+        <div id="http-alert-message"></div>
+    </div>
+</template>
+<template id="variants">
+    {?for item in items?}
+        <div class="variant" value="{~item.id~}">
+            {~item.name~}
+        </div>
+    {?endfor?}
+</template>
+<template id="autocomplete_value">
+    <div class="value">
+        <div class="remove" value="{~id~}"><i class="ti ti-x"></i></div>
+        <a href="/{~AdminModel~}/{~id~}">{~name~}</a>
+    </div>
+</template>
+<template id="selectTemplate">
+    <div class="select-selected"></div>
+    <div class="select-items">
+        <div class="sel-items-wrapper"></div>
+    </div>
+</template>
+<template id="autocompleteItem">
+    <div class="value">
+        <div class="remove" value="{~value~}">
+            <i class="ti ti-x"></i>
+        </div>
+        {~text~}
+    </div>
+</template>
+<div id="content">
+    <div id="left">
+        <div id="menu-mini">
+            <div class="burger">
+                <i class="ti ti-menu"></i>
+            </div>
+            {%include 'main/menu-mini.html'%}
+        </div>
+        {%include 'main/menu.html'%}
+        <div class="change-database">
+            <div class="custom-select">
+                <select name="database">
+                    <option value="" disabled="">{% trans 'Website' %}</option>
+                    {%for site in sites%}
+                        <option {%if site.database == request.session.database%}selected {%endif%}value="{{site.database}}" url="{{site.url}}">
+                            {{site.name}}
+                        </option>
+                    {%endfor%}
+                </select>
+            </div>
+        </div>
+    </div>
+    <main id="right">
+    {%block main%}
+    {%endblock%}
+    </main>
+</div>
+{%endblock%}

@@ -55,23 +55,23 @@
                 <div id="edit-panel" class="active">
                     {%if item.slug%}
                         <a class="button" id='browse' href="http://{{SITE_URL}}/{{item.slug}}">
-                            <i class="ti ti-external-link"></i>
+                            <i data-lucide="square-arrow-out-up-right"></i>
                         </a>
                     {%endif%}
                     <div id="save" class="edit-panel-icon">
-                        <i class="ti ti-device-floppy"></i>
+                        <i data-lucide="save"></i>
                     </div>
                     <div id="save-more" class="edit-panel-icon">
-                        <i class="ti ti-copy-check"></i>
+                        <i data-lucide="save-all"></i>
                     </div>
                     <div id="save_and_out" class="edit-panel-icon">
-                        <i class="ti ti-file"></i>
+                        <i data-lucide="circle-check-big"></i>
                     </div>
-                    <div id="out" class="edit-panel-icon">
+                    <!-- <div id="out" class="edit-panel-icon">
                         <i class="ti ti-folder-share"></i>
-                    </div>
+                    </div> -->
                     <div id="delete" class="delete-list">
-                        <i class="ti ti-trash"></i>
+                        <i data-lucide="trash"></i>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ export class BaseList extends BaseScreen{
 		Dom.query('#list-all').on('click',this.showAll.bind(this));
 
 		Dom.query('.search-text input').each((input) => {
-			input.on('input paste keypress focus',this.search.bind(this));
+			input.on('input paste keypress focus',this.headSearch.bind(this));
 			if(input.value)
 				this.showClearButton(input);
 		});
@@ -59,12 +59,13 @@ export class BaseList extends BaseScreen{
 		input.next().show();
 	}
 
-	search(e){
+	headSearch(e){
 		let input = e.target;
 
 		if(input && input.value.length > 2){
 			if(this.timeout)
 				clearTimeout(this.timeout);
+
 			this.timeout = setTimeout(() => {
 				this.showClearButton(input);
 
@@ -88,7 +89,6 @@ export class BaseList extends BaseScreen{
 
 export class List extends BaseList{
 	container = 'main';
-	limit = parseInt((window.screen.availHeight - (105 + 91)) / 58);
 
 	constructor(context){
 		super(context);
@@ -134,8 +134,6 @@ export class List extends BaseList{
 		Dom.query('#panel-menu,#panel-menu *').on('click',(e) => {
 			e.stopPropagation();
 		});
-
-		this.url.searchParams.set('limit',this.limit);
 
 		Dom.query('#search-text').on('input paste keypress',this.searchText.bind(this));
 
@@ -288,7 +286,6 @@ export class List extends BaseList{
 
 export class ReloadList extends BaseList{
 	container = '#items';
-	static limit = parseInt(window.screen.availHeight / 1.80 / 49);
 
 	constructor(context){
 		super(context);

@@ -16,7 +16,7 @@ def extends(request):
         version = StaticFiles.objects.filter(type="manager").first()
 
         return {
-            'extends':'main/index.html',
+            'extends':'main/main.html',
             'BASE_URL':BASE_URL,
             'SITE_URL':SITE_URL,
             'DOMAIN':DOMAIN,

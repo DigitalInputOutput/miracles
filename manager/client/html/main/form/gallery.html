@@ -1,11 +1,7 @@
+{%load i18n%}
+<div id="drop-zone">{% trans 'Drag image here or click'%}</div>
 <div id="images">
 	<input type="hidden" name="remove_images" value="[]" autocomplete="off">
-	<div id="plus" class="circle-plus not">
-		<div class="circle not">
-			<div class="horizontal not"></div>
-			<div class="vertical not"></div>
-		</div>
-	</div>
 	<div id="gallery-items">
 		{%for image in gallery%}
 			<div class="image">

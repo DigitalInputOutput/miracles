@@ -645,9 +645,9 @@ class DescriptionForm(BetterModelForm):
             label='Name:'
         )
     text = forms.CharField(
-            label=_('Опис:'),
+            label=_('Description:'),
             required=False,
-            widget=forms.Textarea(attrs={"placeholder":_("Enter text")})
+            widget=EditorInput(attrs={"placeholder":_("Enter text")})
         )
     json_text = forms.CharField(label="",widget=forms.HiddenInput(),required=False)
     title = forms.CharField(
@@ -742,7 +742,7 @@ class DescriptionForm(BetterModelForm):
     class Meta:
         fieldsets = [
                     ('main',{'fields':['name','title','meta_description','url']}),
-                    ('description', {'fields':['text','json_text'],'legend':_('Опис'),'classes':['description']})
+                    ('description', {'fields':['text'],'legend':_('Опис'),'classes':['description']})
         ]
 
 class CategoryDescriptionForm(DescriptionForm): 
@@ -932,12 +932,12 @@ class ProductForm(PageForm):
                 attrs={'placeholder':_('Retail price')}),
         }
         fieldsets = [
-                    ('main', {'fields':['model','is_available','last_modified'],'legend':_('General'),'icon':'mail'}),
-                    ('prices', {'fields':['retail_price','wholesale_price','special','price_fixed','purchase_price','currency','counter'],'legend':_(_('Prices')),'icon':'adjustments-dollar','classes':['currency']}),
+                    ('main', {'fields':['model','is_available','last_modified'],'legend':_('General'),'icon':'newspaper'}),
+                    ('prices', {'fields':['retail_price','wholesale_price','special','price_fixed','purchase_price','currency','counter'],'legend':_(_('Prices')),'icon':'gem','classes':['currency']}),
                     ('related', {'fields':['category','brand','featured','add_model','tags'],'legend':_("Relations"),'icon':'infinity'}),
                     ('attributes', {'fields':['attributes'],'legend':_('Attributes'),'classes':['attributes'],'description':'dynamic','icon':'align-left'}),
-                    ('parameters', {'fields':['height','width','length'],'legend':_('Parameters'),'classes':['parameters'],'icon':'settings'}),
-                    ('gallery', {'fields':['gallery'],'legend':_('Images'),'classes':['gallery'],'icon':'image-in-picture','description':'dynamic'}),
+                    ('parameters', {'fields':['height','width','length'],'legend':_('Parameters'),'classes':['parameters'],'icon':'pyramid'}),
+                    ('gallery', {'fields':['gallery'],'legend':_('Images'),'classes':['gallery'],'icon':'images','description':'dynamic'}),
                 ]
 
     def __str__(self):
