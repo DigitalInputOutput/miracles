@@ -15,14 +15,14 @@ class Command(BaseCommand):
         scripts = ""
 
         if ENV == "prod":
-            critical_css = Path(HOME_DIR / "manager/client/html/prod/critical_css.html").read_text()
-            full_css = Path(HOME_DIR / "manager/client/html/prod/css.html").read_text()
-            scripts = Path(HOME_DIR / "manager/client/html/prod/js.html").read_text()
+            critical_css = Path(HOME_DIR / "manager/client/html/static_urls/prod/critical_css.html").read_text()
+            full_css = Path(HOME_DIR / "manager/client/html/static_urls/prod/css.html").read_text()
+            scripts = Path(HOME_DIR / "manager/client/html/static_urls/prod/js.html").read_text()
         else:
             critical_css = ''
 
-            full_css = Path(HOME_DIR / "manager/client/html/dev/css.html").read_text()
-            scripts = Path(HOME_DIR / "manager/client/html/dev/js.html").read_text()
+            full_css = Path(HOME_DIR / "manager/client/html/static_urls/dev/css.html").read_text()
+            scripts = Path(HOME_DIR / "manager/client/html/static_urls/dev/js.html").read_text()
 
         # Read template
         template = template_path.read_text()

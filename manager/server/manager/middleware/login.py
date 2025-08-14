@@ -18,7 +18,6 @@ class Login:
 
     def process_view(self,request,view,*args,**kwargs):
         request.folder = 'desktop'
-        print(request.session.items())
 
         if request.user.is_anonymous or not request.user.is_admin:
             if not request.path.startswith('/login') and not request.path.startswith('/logout'):

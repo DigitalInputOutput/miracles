@@ -1,7 +1,0 @@
-import { Image } from '/static/js/desktop/app/view/edit.js';
-
-export class BrandEdit extends Image{
-	constructor(context){
-		super(context);
-	}
-}

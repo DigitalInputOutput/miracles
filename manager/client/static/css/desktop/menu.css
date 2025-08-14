@@ -22,7 +22,7 @@ menu{
 }
 menu a{
     display: block;
-    color: #333;
+    color: #fff;
     text-decoration: none;
     transition: all 0.2s ease;
     padding-left: 5%;
@@ -32,8 +32,8 @@ menu .parent{
     padding: 17px 0 10px 0px;
     padding-left: 10px;
 }
-menu a:hover,menu .parent:hover{
-    background-color: #eee;
+menu a:hover, menu .parent:hover{
+    background-color: #56596c;
 }
 menu a{
     padding: 17px 0 10px;
@@ -55,10 +55,10 @@ menu a.active{
     padding-left: 10px;
 }
 menu .sub{
-    color: #125560;
+    color: #fff;
     font-size: 15px;
     text-transform: capitalize;
-    background-color: #fff;
+    background-color: #2d2f49;
     text-align: left;
     overflow: visible;
     overflow-y: auto;
@@ -71,7 +71,6 @@ menu .sub{
     transition: left 0.2s ease;
     top: 0;
     z-index: 1;
-    background-color: #fdfdfd;
     padding-bottom: 98px;
     height: 0;
 }
@@ -81,7 +80,7 @@ menu .sub.open{
     height: 81%;
 }
 menu .sub a{
-    color: #333;
+    color: #fefefe;
     padding-left: 10%;
     width: 110%;
 }
@@ -148,7 +147,7 @@ menu #menuPrev {
     margin-bottom: 17%;
 }
 #menu-mini .icon a{
-    color: #36454d;
+    color: #ebf3ef;
     width: 100%;
     display: block;
 }

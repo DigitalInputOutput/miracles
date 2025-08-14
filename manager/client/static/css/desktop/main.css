@@ -94,11 +94,12 @@ header .welcome{
 	position: fixed;
 	width: 51px;
 	padding: 0px;
-	background-color: #fff;
+	background-color: #2d2f49;
 	min-height: 100%;
 	box-shadow: 0 2px 5px rgba(0,0,0,.26);
 	transition: all 0.3s ease;
 	z-index: 1;
+	color: #fff;
 }
 #left .burger{
 	cursor: pointer;
@@ -130,13 +131,14 @@ header .welcome{
 	left: 0;
 	top: 0;
 	bottom: 0;
-	background-color: #fff;
+	background-color: #2d2f49;
 	height: 100%;
 	margin: 0;
 	box-shadow: 0 2px 5px rgba(0,0,0,.26);
 	transition: all 0.3s ease;
 	max-width: 0;
 	display: block;
+	color: #fff;
 }
 #left #nav #top{
 	display: grid;

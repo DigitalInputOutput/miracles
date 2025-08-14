@@ -10,3 +10,4 @@ client/html/desktop/index.html
 client/html/mobile/index.html
 release.sh
 .DS_Store
+/static/js/vanilla
