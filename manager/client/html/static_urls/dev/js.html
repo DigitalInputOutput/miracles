@@ -2,13 +2,13 @@
     window.BASE_URL = "{{BASE_URL}}";
     window.DJANGO_LANG = "{{ request.LANGUAGE_CODE }}";
 </script>
-<script type="module" src="/static/js/vanilla/ui/prototype/index.js"></script>
+<script type="module" src="/static/js/vanilla-js/ui/prototype/index.js"></script>
 <script type="module" src="/static/js/manager/desktop/app/views_register.js"></script>
 <script type="module" src="/static/js/modules/index.js"></script>
-<script type="module" src="/static/js/vanilla/ui/utils.js"></script>
+<script type="module" src="/static/js/vanilla-js/ui/utils.js"></script>
 <script type="module">
-    import { Navigation } from "/static/js/vanilla/http/navigation.js";
-    import { Dom } from "/static/js/vanilla/ui/dom.js";
+    import { Navigation } from "/static/js/vanilla-js/http/navigation.js";
+    import { Dom } from "/static/js/vanilla-js/ui/dom.js";
     import { default_urlpatterns } from "/static/js/manager/desktop/app/urls.js";
 
     lucide.createIcons( lucide.icons );

@@ -1,7 +1,7 @@
 import { Gallery } from "/static/js/manager/desktop/app/views/base/gallery.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
-import { POST } from "/static/js/vanilla/http/navigation.js";
-import { Alert } from "/static/js/vanilla/ui/alert.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
+import { POST } from "/static/js/vanilla-js/http/navigation.js";
+import { Alert } from "/static/js/vanilla-js/ui/alert.js";
 import { t } from "/static/js/manager/desktop/app/i18n.js";
 
 export class ProductEdit extends Gallery{

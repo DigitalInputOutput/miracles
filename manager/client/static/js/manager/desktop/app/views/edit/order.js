@@ -1,10 +1,10 @@
 import { Edit } from "/static/js/manager/desktop/app/views/base/edit.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
 import { Cart } from "./cart.js";
-import { GET, POST, PUT } from "/static/js/vanilla/http/navigation.js";
-import { Select } from "/static/js/vanilla/ui/select.js";
+import { GET, POST, PUT } from "/static/js/vanilla-js/http/navigation.js";
+import { Select } from "/static/js/vanilla-js/ui/select.js";
 // import { templates } from "/static/js/manager/desktop/app/form/templates.js";
-import { Alert } from "/static/js/vanilla/ui/alert.js";
+import { Alert } from "/static/js/vanilla-js/ui/alert.js";
 
 var timeout;
 export class OrderEdit extends Edit{

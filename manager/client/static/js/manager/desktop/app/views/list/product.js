@@ -1,8 +1,8 @@
 import { List, ReloadList } from "/static/js/manager/desktop/app/views/base/list.js";
-import { Autocomplete } from "/static/js/vanilla/ui/autocomplete.js";
-import { POST, GET } from "/static/js/vanilla/http/navigation.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
-import { Select } from "/static/js/vanilla/ui/select.js";
+import { Autocomplete } from "/static/js/vanilla-js/ui/autocomplete.js";
+import { POST, GET } from "/static/js/vanilla-js/http/navigation.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
+import { Select } from "/static/js/vanilla-js/ui/select.js";
 
 export class BaseProductList extends List{
 	constructor(context){

@@ -1,7 +1,7 @@
 import { List } from "/static/js/manager/desktop/app/views/base/list.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
-import { GET } from "/static/js/vanilla/http/navigation.js";
-import { Select } from "/static/js/vanilla/ui/select.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
+import { GET } from "/static/js/vanilla-js/http/navigation.js";
+import { Select } from "/static/js/vanilla-js/ui/select.js";
 
 export class OrderList extends List{
 	constructor(context){

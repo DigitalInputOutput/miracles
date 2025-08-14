@@ -1,7 +1,7 @@
 import { User } from './user/user.js';
-import { Dom } from "/static/js/vanilla/ui/dom.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
 import { Cart } from './cart.js';
-import { GET, POST } from "/static/js/vanilla/http/navigation.js";
+import { GET, POST } from "/static/js/vanilla-js/http/navigation.js";
 
 export class Page{
     constructor(){

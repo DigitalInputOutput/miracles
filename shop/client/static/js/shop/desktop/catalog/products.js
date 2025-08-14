@@ -1,5 +1,5 @@
 import { Filter } from './filter.js';
-import { Dom } from "/static/js/vanilla/ui/dom.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
 
 export class Category extends Buy{
 	constructor(){

@@ -1,5 +1,5 @@
-import { Dom } from "/static/js/vanilla/ui/dom.js";
-import { GET, POST } from "/static/js/vanilla/http/navigation.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
+import { GET, POST } from "/static/js/vanilla-js/http/navigation.js";
 
 export class User{
     constructor(){

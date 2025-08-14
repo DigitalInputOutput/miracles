@@ -1,5 +1,5 @@
-import { GET } from "/static/js/vanilla/http/navigation.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
+import { GET } from "/static/js/vanilla-js/http/navigation.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
 import { BaseScreen } from "/static/js/manager/desktop/app/views/base/screen.js";
 
 export class CategoryList extends BaseScreen{

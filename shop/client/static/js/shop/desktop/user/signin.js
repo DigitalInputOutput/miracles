@@ -1,6 +1,6 @@
-import { Dom } from "/static/js/vanilla/ui/dom.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
 import { Signup } from "./signup.js";
-import { POST } from "/static/js/vanilla/http/navigation.js";
+import { POST } from "/static/js/vanilla-js/http/navigation.js";
 
 export class Signin{
     constructor(){

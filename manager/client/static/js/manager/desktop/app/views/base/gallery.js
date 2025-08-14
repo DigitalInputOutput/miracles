@@ -1,5 +1,5 @@
 import { OneToOne } from "./fgk.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
 import { t } from "/static/js/manager/desktop/app/i18n.js";
 
 export class Gallery extends OneToOne {

@@ -1,14 +1,14 @@
 import { Screen } from "./screen.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
-import { Autocomplete } from "/static/js/vanilla/ui/autocomplete.js";
-import { DELETE, GET, PUT } from "/static/js/vanilla/http/navigation.js";
-import { storage } from "/static/js/vanilla/ui/const.js";
-import { Alert } from "/static/js/vanilla/ui/alert.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
+import { Autocomplete } from "/static/js/vanilla-js/ui/autocomplete.js";
+import { DELETE, GET, PUT } from "/static/js/vanilla-js/http/navigation.js";
+import { storage } from "/static/js/vanilla-js/ui/const.js";
+import { Alert } from "/static/js/vanilla-js/ui/alert.js";
 import { t } from "/static/js/manager/desktop/app/i18n.js";
-import { Validator, SlugBasedValidator } from "/static/js/vanilla/ui/validate.js";
-import { Select } from "/static/js/vanilla/ui/select.js";
+import { Validator, SlugBasedValidator } from "/static/js/vanilla-js/ui/validate.js";
+import { Select } from "/static/js/vanilla-js/ui/select.js";
 // import { SimpleImage } from "/static/js/modules/editor/img.js";
-// import { toJson } from "/static/js/vanilla/ui/utils.js";
+// import { toJson } from "/static/js/vanilla-js/ui/utils.js";
 
 export class BaseEdit extends Screen{
 	container = 'main';

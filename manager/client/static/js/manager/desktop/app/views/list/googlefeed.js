@@ -1,6 +1,6 @@
 import { List } from "/static/js/manager/desktop/app/views/base/list.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
-// import { http } from "/static/js/vanilla/http/http.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
+// import { http } from "/static/js/vanilla-js/http/http.js";
 // import { View } from "/static/js/manager/desktop/app/views/base/screen.js";
 
 export class GoogleFeedList extends List{

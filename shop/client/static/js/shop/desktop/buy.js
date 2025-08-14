@@ -1,5 +1,5 @@
-import { Dom } from "/static/js/vanilla/ui/dom.js";
-import { Alert } from "/static/js/vanilla/ui/alert.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
+import { Alert } from "/static/js/vanilla-js/ui/alert.js";
 
 export class Buy{
     constructor(){

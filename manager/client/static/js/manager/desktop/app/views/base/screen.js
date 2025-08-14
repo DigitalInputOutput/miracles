@@ -1,8 +1,8 @@
 import { Menu } from "./menu.js";
-import { Navigation } from "/static/js/vanilla/http/navigation.js";
-import { storage } from "/static/js/vanilla/ui/const.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
-import { View } from "/static/js/vanilla/http/view.js";
+import { Navigation } from "/static/js/vanilla-js/http/navigation.js";
+import { storage } from "/static/js/vanilla-js/ui/const.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
+import { View } from "/static/js/vanilla-js/http/view.js";
 
 export class BaseScreen {
     container = "main";

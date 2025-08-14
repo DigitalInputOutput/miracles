@@ -1,4 +1,4 @@
-import { View } from "/static/js/vanilla/http/view.js";
+import { View } from "/static/js/vanilla-js/http/view.js";
 
 import { Login } from "./views/login.js";
 import { Logout } from "./views/logout.js";

@@ -1,4 +1,4 @@
-import { Dom } from '/static/js/vanilla/ui/dom.js';
+import { Dom } from '/static/js/vanilla-js/ui/dom.js';
 
 export class Menu {
     constructor({ container, titleText, prev, delay = 0, toggleButton, left = 0, choice }) {

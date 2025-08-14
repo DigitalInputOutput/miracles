@@ -1,4 +1,4 @@
-import { gettext } from "/static/js/vanilla/i18n.js";
+import { gettext } from "/static/js/vanilla-js/i18n.js";
 
 export const translation = {
     "delete_image": {

@@ -1,5 +1,5 @@
 import { SlugBasedEdit } from "/static/js/manager/desktop/app/views/base/edit.js";
-import { Dom } from "/static/js/vanilla/ui/dom.js";
+import { Dom } from "/static/js/vanilla-js/ui/dom.js";
 
 export class OneToOne extends SlugBasedEdit{
 	constructor(context){

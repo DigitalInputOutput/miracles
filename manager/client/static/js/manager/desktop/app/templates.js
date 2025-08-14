@@ -1,5 +1,5 @@
 // import {view} from './view.js';
-// import {BASE_URL} from '/vanilla/js/base.js';
+// import {BASE_URL} from '/vanilla-js/js/base.js';
 
 export const templates = {
 	address: function(){
