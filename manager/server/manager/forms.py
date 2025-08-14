@@ -82,9 +82,20 @@ class Base64Form(BetterModelForm):
     class Meta:
         abstract = True
 
-class UrlForm(forms.ModelForm):
+class UrlForm(BetterModelForm):
     model_choices = (tuple(MODELS.items()))
-    model_name = forms.ChoiceField(choices=model_choices,required=False)
+    model_name = forms.ChoiceField(
+        widget=CustomSelectWidget(),
+        choices=model_choices,
+        required=False
+    )
+
+    language = forms.ModelChoiceField(
+        queryset=Language.objects.all(),
+        label=_('Language'),
+        widget=CustomSelectWidget(),
+        required=True
+    )
 
     def clean(self):
         data = super().clean()

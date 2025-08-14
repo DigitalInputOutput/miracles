@@ -1,8 +1,8 @@
 import { GET,POST } from "/static/js/desktop/vanilla/http/navigation.js";
-import { Form } from "/static/js/desktop/vanilla/ui/form/form.js";
+import { Form } from "/static/js/desktop/app/form/form.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { t } from "/static/js/desktop/app/i18n.js";
-import { Validator } from "/static/js/desktop/vanilla/ui/form/validate.js";
+import { Validator } from "/static/js/desktop/modules/validate.js";
 import { debounce } from "/static/js/desktop/vanilla/ui/utils.js";
 
 export class Login extends Form{

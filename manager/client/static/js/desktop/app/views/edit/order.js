@@ -1,9 +1,9 @@
-import { Edit } from "/static/js/desktop/vanilla/ui/view/edit.js";
+import { Edit } from "/static/js/desktop/app/view/edit.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { Cart } from "./cart.js";
 import { GET, POST, PUT } from "/static/js/desktop/vanilla/http/navigation.js";
-import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
-// import { templates } from "/static/js/desktop/vanilla/ui/form/templates.js";
+import { Select } from "/static/js/desktop/modules/select.js";
+// import { templates } from "/static/js/desktop/app/form/templates.js";
 import { Alert } from "/static/js/desktop/vanilla/ui/alert.js";
 
 var timeout;

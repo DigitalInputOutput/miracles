@@ -1,17 +1,16 @@
 import { HistoryManager } from "./history.js";
-import { default_urlpatterns } from "./urls.js";
 import { View } from "./view.js";
 import { Request } from "./request.js";
 import { Alert } from "/static/js/desktop/vanilla/ui/alert.js";
 
 export class Navigation {
-    static urlpatterns = default_urlpatterns;
+    static urlpatterns = {};
     static page_context = {};
     static currentPath = null;
     static currentView = null;
 
     static init(urlpatterns){
-        Object.assign(Navigation.urlpatterns, urlpatterns);
+        Navigation.urlpatterns = urlpatterns;
         window.onpopstate = Navigation.handlePopState;
         [Navigation.currentPath, Navigation.currentView] = Navigation.resolveCurrentUrl();
     }

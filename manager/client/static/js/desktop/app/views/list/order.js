@@ -1,7 +1,7 @@
-import { List } from "/static/js/desktop/vanilla/ui/view/list.js";
+import { List } from "/static/js/desktop/app/view/list.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { GET } from "/static/js/desktop/vanilla/http/navigation.js";
-import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
+import { Select } from "/static/js/desktop/modules/select.js";
 
 export class OrderList extends List{
 	constructor(context){

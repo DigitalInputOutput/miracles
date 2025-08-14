@@ -14,16 +14,16 @@ from pathlib import Path
 import os,pymysql,sys
 from decouple import config
 
-USER = "dd"
-GROUP = "www-data"
+USER = config("USER")
+GROUP = config("GROUP")
 
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-HOME_DIR = BASE_DIR.parent
+HOME_DIR = BASE_DIR.parent.parent
 
-CACHE_FOLDER = "/var/cache/miracles.site/"
+CACHE_FOLDER = config("CACHE_ROOT") + "shop/"
 
 COMPANY_NAME = "Company Name"
 
@@ -39,12 +39,13 @@ sys.path.append(HOME_DIR)
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vgn&%r%0_q8)i%zj*)vol*3f(ttl4e39)yn(3#2(!jl#*5mxbr'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = ['miracles.site']
+
 HOST = 'miracles.site'
 DOMAIN = "miracles.site"
 BASE_URL = "miracles.site"
@@ -110,29 +111,15 @@ WSGI_APPLICATION = 'system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if 'RDS_HOSTNAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD"),
+        'HOST': config("DB_HOST")
     }
-
-else:
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': config["DB_NAME"],
-            'USER': config["DB_USER"],
-            'PASSWORD': config["DB_PASSWORD"],
-            'HOST':'localhost'
-        }
-    }
+}
 
 
 # Password validation
@@ -157,8 +144,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'uk'
-DEFAULT_LANGUAGE_CODE = 'uk'
+LANGUAGE_CODE = 'en'
+DEFAULT_LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -192,17 +179,18 @@ AVAIL_LANGUAGES = {
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_SOURCE_ROOT = HOME_DIR / 'client/static/'
-MINIFIED_ROOT = CACHE_FOLDER + 'static/'
-STATIC_ROOT = ''
-STATICFILES_DIRS = ['/var/cache/miracles.site/static/']
+STATIC_ROOT = HOME_DIR / 'shop/client/static/'
+
+MAX_MINIFIED_VERSIONS = 3
+STATIC_SOURCE_ROOT = HOME_DIR / 'shop/client/static/'
+MINIFIED_ROOT = CACHE_FOLDER + 'shop/static/'
 SVG_CACHE_FOLDER = CACHE_FOLDER + "static/image/svg/"
 
-# Define the output directory
-MINIFIED_OUTPUR_DIR = CACHE_FOLDER + 'min'
+MEDIA_ROOT = f"{BASE_DIR}/media"
 
-# Define the number of versions to keep
-MAX_MINIFIED_VERSIONS = 3
+WATERMARK = "/media/watermark.png"
+
+NO_IMAGE_PLACEHOLDER = "<image='no_image.jpg'>"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -213,14 +201,14 @@ AUTH_USER_MODEL = 'user.User'
 
 from django.utils.translation import gettext as _
 
-DEFAULT_CURRENCY = "UAH"
+DEFAULT_CURRENCY = "EUR"
 
 #SMTP
 EMAIL = 'ffs@gmail.com'
 EMAIL_TITLE = ''
 EMAIL_HOST = 'gmail.com'
 EMAIL_HOST_USER = 'info'
-EMAIL_HOST_PASSWORD = 'Портал'
+EMAIL_HOST_PASSWORD = 'Portal'
 EMAIL_PORT = 25
 
 LOCALE_PATHS = (
@@ -228,16 +216,6 @@ LOCALE_PATHS = (
     HOME_DIR / 'client/locale',
 )
 LANGUAGE_SESSION_KEY = 'language'
-
-MEDIA_ROOT = f"{BASE_DIR}/media"
-
-NO_IMAGE_PLACEHOLDER = "<image='no_image.jpg'>"
-
-WATERMARK = "/media/watermark.png"
-
-# Define the directories where CSS and JS files are stored
-CSS_DIR = 'css'
-JS_DIR = 'js'
 
 YOUTUBE_LINK = "https://youtube.com"
 FACEBOOK_LINK = "https://facebook.com"

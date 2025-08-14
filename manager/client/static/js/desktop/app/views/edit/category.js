@@ -1,4 +1,4 @@
-import { Image } from '/static/js/desktop/vanilla/ui/view/edit.js';
+import { Image } from '/static/js/desktop/app/view/edit.js';
 
 export class CategoryEdit extends Image{
 	static container = 'main';

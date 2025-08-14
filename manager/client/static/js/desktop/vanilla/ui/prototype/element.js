@@ -287,7 +287,7 @@
 					switch(elem.type){
 						case 'select-one':
 							if(elem.value)
-								data[elem.name] = eval(elem.value);
+								data[elem.name] = elem.value;
 							break;
 						case 'select-multiple':
 							data[elem.name] = [];

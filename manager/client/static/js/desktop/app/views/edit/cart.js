@@ -1,6 +1,6 @@
 import { GET } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
-import { Autocomplete } from "/static/js/desktop/vanilla/ui/form/autocomplete.js";
+import { Autocomplete } from "/static/js/desktop/app/form/autocomplete.js";
 
 export class Cart{
 	constructor(context){

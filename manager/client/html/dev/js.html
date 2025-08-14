@@ -9,6 +9,7 @@
 <script type="module">
     import { Navigation } from "/static/js/desktop/vanilla/http/navigation.js";
     import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
+    import { default_urlpatterns } from "/static/js/desktop/app/urls.js";
 
     lucide.createIcons( lucide.icons );
 
@@ -19,7 +20,7 @@
         "^/logout$": { "GET": "Logout" },
     };
 
-    Navigation.init(urlpatterns);
+    Navigation.init(Object.assign(default_urlpatterns, urlpatterns));
     window.Navigation = Navigation;
     window.Dom = Dom;
 </script>

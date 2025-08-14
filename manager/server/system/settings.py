@@ -17,12 +17,12 @@ import os,pymysql,sys
 from pathlib import Path
 from decouple import config
 
-USER = "dd"
-GROUP = "www-data"
+USER = config("USER")
+GROUP = config("GROUP")
 
 pymysql.install_as_MySQLdb()
 
-CACHE_FOLDER = "/var/cache/miracles.site/"
+CACHE_FOLDER = config("CACHE_ROOT") + "manager/"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,12 +37,12 @@ HOME_DIR = BASE_DIR.parent.parent
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ph2$50f%khtwe-dbv_^cykc+(l7lbeg35e^9qf=#d#@s^gtw7p'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = ['manager.miracles.site','t.manager.miracles.site']
+ALLOWED_HOSTS = ['manager.miracles.site']
 
 BASE_URL = 'miracles.site'
 
@@ -118,7 +118,7 @@ WSGI_APPLICATION = 'system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
+        'HOST': config("DB_HOST"),
         'NAME': config("DB_NAME"),
         'USER': config("DB_USER"),
         'PASSWORD': config("DB_PASSWORD"),
@@ -128,7 +128,7 @@ DATABASES = {
     },
     'backup': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
+        'HOST': config("DB_HOST"),
         'NAME': config("DB_NAME"),
         'USER': config("DB_USER"),
         'PASSWORD': config("DB_PASSWORD"),

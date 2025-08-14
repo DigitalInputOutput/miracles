@@ -7,22 +7,22 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         ENV = "prod" if not DEBUG else "dev"
-        template_path = Path(HOME_DIR / "shop/client/html/index.template.html")
-        output_path = Path(HOME_DIR / "shop/client/html/index.html")
+        template_path = Path(HOME_DIR / "shop/client/html/main/desktop/index.template.html")
+        output_path = Path(HOME_DIR / "shop/client/html/main/desktop/index.html")
 
         critical_css = ""
         full_css = ""
         scripts = ""
 
         if ENV == "prod":
-            critical_css = Path(HOME_DIR / "shop/client/html/prod/critical_css.html").read_text()
-            full_css = Path(HOME_DIR / "shop/client/html/prod/css.html").read_text()
-            scripts = Path(HOME_DIR / "shop/client/html/prod/js.html").read_text()
+            critical_css = Path(HOME_DIR / "shop/client/html/main/desktop/prod/critical_css.html").read_text()
+            full_css = Path(HOME_DIR / "shop/client/html/main/desktop/prod/css.html").read_text()
+            scripts = Path(HOME_DIR / "shop/client/html/main/desktop/prod/js.html").read_text()
         else:
             critical_css = ''
 
-            full_css = Path(HOME_DIR / "shop/client/html/dev/css.html").read_text()
-            scripts = Path(HOME_DIR / "shop/client/html/dev/js.html").read_text()
+            full_css = Path(HOME_DIR / "shop/client/html/main/desktop/dev/css.html").read_text()
+            scripts = Path(HOME_DIR / "shop/client/html/main/desktop/dev/js.html").read_text()
 
         # Read template
         template = template_path.read_text()

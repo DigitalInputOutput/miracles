@@ -1,7 +1,6 @@
-import { Gallery } from "/static/js/desktop/vanilla/ui/view/gallery.js";
+import { Gallery } from "/static/js/desktop/app/view/gallery.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 import { POST } from "/static/js/desktop/vanilla/http/navigation.js";
-import { Select } from "/static/js/desktop/vanilla/ui/form/select.js";
 import { Alert } from "/static/js/desktop/vanilla/ui/alert.js";
 import { t } from "/static/js/desktop/app/i18n.js";
 
@@ -49,8 +48,6 @@ export class ProductEdit extends Gallery{
 				});
 			}
 		});
-
-		Select.customize('.custom-select');
 	}
 	extraAction(){
 		if(Dom.query('input[type="file"]').length){

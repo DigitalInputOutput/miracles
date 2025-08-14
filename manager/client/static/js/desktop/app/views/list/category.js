@@ -1,6 +1,6 @@
 import { GET } from "/static/js/desktop/vanilla/http/navigation.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
-import { BaseScreen } from "/static/js/desktop/vanilla/ui/view/screen.js";
+import { BaseScreen } from "/static/js/desktop/app/view/screen.js";
 
 export class CategoryList extends BaseScreen{
 	constructor(context){

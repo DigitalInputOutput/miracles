@@ -1,7 +1,7 @@
-import { List } from "/static/js/desktop/vanilla/ui/view/list.js";
+import { List } from "/static/js/desktop/app/view/list.js";
 import { Dom } from "/static/js/desktop/vanilla/ui/dom.js";
 // import { http } from "/static/js/desktop/vanilla/http/http.js";
-// import { View } from "/static/js/desktop/vanilla/ui/view/screen.js";
+// import { View } from "/static/js/desktop/app/view/screen.js";
 
 export class GoogleFeedList extends List{
     constructor(){

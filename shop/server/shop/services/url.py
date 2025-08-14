@@ -11,7 +11,7 @@ class URLService:
         try:
             return Language.objects.get(code = DEFAULT_LANGUAGE_CODE)
         except:
-            raise Exception(_("Не встановлено мови за замовчуванням. Встановіть командою python manage.py install"))
+            raise Exception(_("Default language is not installed. Install it with command python manage.py install"))
 
     @staticmethod
     def get_url_by_string(string, lang = default_language):

@@ -10,8 +10,8 @@ import { LanguageEdit } from "./views/edit/language.js";
 import { OrderList } from "./views/list/order.js";
 import { OrderEdit } from "./views/edit/order.js";
 import { Settings } from "./views/list/settings.js";
-import { List } from "/static/js/desktop/vanilla/ui/view/list.js";
-import { Edit } from "/static/js/desktop/vanilla/ui/view/edit.js";
+import { List } from "/static/js/desktop/app/view/list.js";
+import { Edit } from "/static/js/desktop/app/view/edit.js";
 
 /* Register views using their class names */
 [
